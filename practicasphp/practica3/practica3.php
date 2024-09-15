@@ -1,5 +1,5 @@
 <?php
-    declare( strict_types=1);
+        declare( strict_types=1);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,10 @@
             //Realizar el código anterior y tomar captura de pantalla del resultado. ¿qué es lo que ha ocurrido ?. 
             //Poner código html antes de la declaración de strict_types y probar de nuevo ¿ qué ocurre ahora ?
 
-            //Primero, lo que pasaba es que
+            //Primero, el código funcionaba correctamente, al abrirlo en el php server, se podía ver la sentencia 
+            //y el resultado sumado (captura 1). Luego de cambiarlo y poner la declaración dentro del html, despues 
+            //de declarar el html, se marca un error que nos especifica que la declaración debe ser declarado lo 
+            //primero de todo (captura 2).
 
         ?>
     </body>
