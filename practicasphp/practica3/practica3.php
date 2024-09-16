@@ -1,5 +1,6 @@
 <?php
         declare( strict_types=1);
+    //La declaración del tipado va siempre al principio, para restringir los tipos
 ?>
 
 <!DOCTYPE html>
@@ -8,11 +9,12 @@
         <meta charset="UTF-8">
         <meta name="author" content="Pedro Martin Escuela" />
         <title>Practica 3</title>
+        <script src="practica3script.php"></script>
     </head>
 
     <body>
         <?php
-            function sum( int $a, int $b): int {
+            function sum($a, $b) : int{
                 return $a + $b;
             }
 
