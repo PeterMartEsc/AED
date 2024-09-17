@@ -4,7 +4,7 @@
     echo "<br>";
     $unavar = (int) $unavar;
     var_dump($unavar);
- ?>
+?>
 
 <!-- 
     Ejecutar el script anterior ¿ hay alguna diferencia antes y después del cast ?
