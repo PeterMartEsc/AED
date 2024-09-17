@@ -2,22 +2,20 @@
 
 //declare( strict_types = 1 );
 
-$numero = 123;
-$numeroStr = "" . $numero;
+$numero = "123";
 $resultado = "";
 $multiplicador = 1;
 
 for ($i = 0; $i < strlen($numeroStr); $i++){
 
-    if($i == 0){
-        $numeroSuelto = substr($numeroStr, $i, ($i+1));
+    if($i == (strlen($numeroStr)-1)){
+        $numeroSuelto = $num[$i] . "*" . $multiplicador;
     } else {
-        $numeroSuelto = substr($numeroStr, $i, $i);
+        $numeroSuelto = $num[$i] . "*" . $multiplicador."+";
+        $multiplicador *= 10;
     }
-
     
-    $resultado .= $numeroSuelto . "*" . $multiplicador." ";
-    $multiplicador *= 10;
+
 }
 
 echo $resultado;
@@ -30,3 +28,4 @@ esté almacenado en la variable: $numero Por ejemplo: $numero = 3102 Se pretende
 se utilicen en el programa los operadores: .= , **
 Para el ejemplo anterior se debe mostrar en pantalla: 2 * 1 + 0 * 10 + 1 * 100 + 3 * 1000
 -->
+
