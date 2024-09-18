@@ -1,7 +1,10 @@
 <?php
-    $array();
+    $array = [];
+    //$array();
     $array[2]="mensaje";
+    var_dump($array);
     $array[7]="lalala!";
+    var_dump($array);
     $array[]="yepa yepa!!";
     var_dump($array);
 ?>
