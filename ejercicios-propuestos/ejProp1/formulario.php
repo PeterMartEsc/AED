@@ -9,8 +9,8 @@
 <body>
     <form action="formularioResolver.php" method="post">
         <label for="">Introduzca el numero:</label>
-        <input type="text" id="texto" name="numero">
-        <input type="submit" id="submit" value="Enviar">
+        <input type="text" id="numero" name="numero"> <!--id cliente, javascript--> <!--name servidor-->
+        <input type="submit" name="enviarformnumero" id="submit" value="Enviar">
     </form>
 </body>
 </html>
