@@ -8,9 +8,9 @@
 </head>
 <body>
     <form action="formularioResolver.php" method="post">
-        <label for="">Introduzca el texto:</label>
-        <input type="text" id="texto">
-        <input type="submit" id="submit">
+        <label for="">Introduzca el numero:</label>
+        <input type="text" id="texto" name="numero">
+        <input type="submit" id="submit" value="Enviar">
     </form>
 </body>
 </html>
