@@ -14,5 +14,5 @@
 Hacer lo anterior, comprobar el resultado. Ahora debiera mostrar todos los
 datos del array. Tomar captura de pantalla.
 
-Vuelve a ser por falor
+Vuelve a ser por valor
 -->

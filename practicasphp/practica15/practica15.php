@@ -26,5 +26,5 @@
 
 
     Con los corchetes, no se muestran las posiciones anteriores al 2 ni entre el 2 y el 7.
-    ¿¿Hay diferencia, dice que no están definidos los valores de cada array???
+    Hay diferencia, dice que no están definidos los valores de cada array
 -->

@@ -15,10 +15,10 @@
             return $b ;
         }
         print fun(1,2);
-        //print fun("e",3);
+        print fun("e",3);
         echo "</p>"
     ?>
- </body>
+</body>
 </html>
 
 <!-- Tomar captura de pantalla de: ( y explicar lo ocurrido )

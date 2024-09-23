@@ -11,7 +11,7 @@ diferencia la llamada de require debiera ser a un nombre de fichero incorrecto. 
 haremos que llame a: vars1.php cuando como sabemos el fichero es vars.php
 Tomar captura de pantalla
 
-EL include debe ir al principio del codigo o no lo detectará la primera linea
+El include debe ir al principio del codigo o no lo detectará la primera linea
 
 
 -->
