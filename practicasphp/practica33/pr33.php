@@ -8,6 +8,7 @@ $conUrlEncode = urlencode($texto);
 
 // Creamos un enlace con los dos parámetros: prueba (sin urlencode) y prueba2 (con urlencode)
 echo "<a href='index.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
+echo "<br><br>";
 echo "<a href='index.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
 
 $recibido = $_GET["prueba"] ?? "nadita";
