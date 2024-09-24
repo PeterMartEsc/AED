@@ -36,14 +36,27 @@
 
         if($numeroIntentado < $numeroAcertar){
             echo "El numero introducido es menor que el ELEGIDO";
+
         } elseif($numeroIntentado > $numeroAcertar){
             echo "El numero introducido es mayor que el ELEGIDO";
+
         } else {
             echo "Has acertado el numero";
+
+            file_put_contents("historial.txt" , "<br><br>" . $numeroAcertar . "\n", FILE_APPEND);
+
             unlink("numero.txt"); // Borra el archivo cuando se acierta
+
             ?>
-            <p>Quiere jugar otra vez?</p>
-            <a href="acertar-numero.php">Si</a>
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"> 
+                <button type="submit">Jugar de nuevo</button>
+            </form>
+            <br>
+            <form action="abrirHistorial.php" method="post"> 
+                <button type="submit">Ver el historial</button>
+            </form>
+
             <?php
         }
 
