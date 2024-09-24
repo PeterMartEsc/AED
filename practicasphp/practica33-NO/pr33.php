@@ -1,16 +1,22 @@
 
 <?php
-echo "<a href=index.php?prueba='Pasando datos diría.. que hay que usar urlencode'>p
-asando datos</a>";
 
-$conUrlEncode = urlencode('Pasando datos diría.. que hay que usar urlencode');
+$texto = 'Pasando datos diría.. que hay que usar urlencode';
+
+// Codificamos el texto con urlencode
+$conUrlEncode = urlencode($texto);
+
+// Creamos un enlace con los dos parámetros: prueba (sin urlencode) y prueba2 (con urlencode)
+echo "<a href='index.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
+echo "<a href='index.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
 
 $recibido = $_GET["prueba"] ?? "nadita";
+$recibido2 = $_GET["prueba2"] ?? "nadita";
 
-echo "<h3>se ha recibido:</h3>";
-
-echo "prueba: ". $recibido . "<br>";
-
+// Mostramos los resultados
+echo "<h3>Se ha recibido:</h3>";
+echo "prueba: " . $recibido . "<br>";
+echo "prueba2: " . $recibido2 . "<br>";
 ?>
 
 
@@ -19,5 +25,4 @@ echo "prueba: ". $recibido . "<br>";
     urlencode y sin urlencode. Así que se propone poner dos parámetros: prueba y prueba2 uno
     de ellos con urlencode y el otro sin él pasando en ambos casos el mismo texto en el value.
     Tomar captura de pantalla de lo obtenido
-
 -->
