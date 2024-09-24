@@ -42,16 +42,28 @@
 
         echo "<br>El numero almacenado es: $numeroAcertar <br><br>";
 
+        if(!file_exists("historial.txt")){
+            file_put_contents("historial.txt" , " ");
+        }
+
         if($numeroIntentado < $numeroAcertar){
-            echo "El numero introducido es menor que el ELEGIDO";
+            $historial = file_get_contents("historial.txt");
+            echo $historial;
+            echo "<br><br>" . $username . " intento ". $numeroIntentado ."< ELEGIDO";
+            file_put_contents("historial.txt" , "<br><br>". $username. " intentó " . $numeroIntentado . "< ELEGIDO" ."\n", FILE_APPEND);
 
         } elseif($numeroIntentado > $numeroAcertar){
-            echo "El numero introducido es mayor que el ELEGIDO";
+            $historial = file_get_contents("historial.txt");
+            echo $historial;
+            echo "<br><br>" . $username . " intento ". $numeroIntentado ."> ELEGIDO";
+            file_put_contents("historial.txt" , "<br><br>". $username. " intentó " . $numeroIntentado . "> ELEGIDO" ."\n", FILE_APPEND);
 
         } else {
+            echo $historial;
             echo "<h3>Has acertado el numero</h3>";
+            
             unlink("numero.txt"); // Borra el archivo cuando se acierta
-
+            unlink("historial.txt"); // Borra el archivo cuando se acierta
             ?>
             <br>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"> 
@@ -60,9 +72,7 @@
 
             <?php
         }
-
-        file_put_contents("historial.txt" , "<br><br>". $username. " intentó con el: " . $numeroIntentado . "\n", FILE_APPEND);
-
+        
     ?>
 </body>
 </html>
