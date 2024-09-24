@@ -41,18 +41,18 @@
             echo "El numero introducido es mayor que el ELEGIDO";
 
         } else {
-            echo "Has acertado el numero";
+            echo "<h3>Has acertado el numero</h3>";
 
             file_put_contents("historial.txt" , "<br><br>" . $numeroAcertar . "\n", FILE_APPEND);
 
             unlink("numero.txt"); // Borra el archivo cuando se acierta
 
             ?>
-
+            <br>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"> 
                 <button type="submit">Jugar de nuevo</button>
             </form>
-            <br>
+            <br><br>
             <form action="abrirHistorial.php" method="post"> 
                 <button type="submit">Ver el historial</button>
             </form>
