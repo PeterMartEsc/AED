@@ -13,7 +13,7 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
             <?php
-                if (isset($_POST['enviar']) && (!isset($_POST['nombre']))) {
+                if (isset($_POST['enviar']) && (empty($_POST['nombre']))) {
                     echo '<p style="color: red;">Debe introducir su nombre.</p>';
                 }
             ?>
@@ -22,7 +22,7 @@
             <br><br>
 
             <?php
-            if (isset($_POST['enviar']) && (!isset($_POST['correo']))) {
+            if (isset($_POST['enviar']) && (empty($_POST['correo']))) {
                     echo '<p style="color: red;">Debe introducir su correo electrónico.</p>';
                 }
             ?>
@@ -31,7 +31,7 @@
             <br><br>
 
             <?php
-            if (isset($_POST['enviar']) && (!isset($_POST['paginaWeb']))) {
+            if (isset($_POST['enviar']) && (empty($_POST['paginaWeb']))) {
                     echo '<p style="color: red;">Debe introducir su dirección de página web.</p>';
                 }
             ?>
@@ -40,9 +40,9 @@
             <br><br>
 
             <?php
-            if (isset($_POST['enviar']) && (!isset($_POST['comentario']))) {
-                    echo '<p style="color: red;">Debe introducir un comentario.</p>';
-                }
+            //if (isset($_POST['enviar']) && (empty($_POST['comentario']))) {
+              //      echo '<p style="color: red;">Debe introducir un comentario.</p>';
+                //}
             ?>
             <label for="comentario">Comentario: </label>
             <textarea name="comentario" id="comentario">
@@ -51,16 +51,16 @@
             
 
             <?php
-            if (isset($_POST['enviar']) && (!isset($_POST['genero']))) {
+            if (isset($_POST['enviar']) && (empty($_POST['genero']))) {
                 echo '<p style="color: red;">Debe seleccionar su género.</p>';
             }
             ?>
             <label for="genero">Genero</label>
-            <input type="radio" id="genero" name="genero" value="mujer">
+            <input type="radio" id="genero-mujer" name="genero" value="mujer">
             Mujer
-            <input type="radio" id="genero" name="genero" value="hombre">
+            <input type="radio" id="genero-hombre" name="genero" value="hombre">
             Hombre
-            <input type="radio" id="genero" name="genero" value="otro">
+            <input type="radio" id="genero-otro" name="genero" value="otro">
             Otro
             <br><br>
 
@@ -72,7 +72,7 @@
 
         if (isset($_POST['enviar'])) {
 
-            if (isset($_POST['nombre'])&&(isset($_POST['correo']))&&(!isset($_POST['paginaWeb']))&&(isset($_POST['genero']))) {
+            if (!empty($_POST['nombre'])&&(!empty($_POST['correo']))&&(!empty($_POST['paginaWeb']))&&(!empty($_POST['genero']))) {
 
                 $nombre = $_POST['nombre'];
 
@@ -84,6 +84,8 @@
 
                 $genero = $_POST['genero'];
 
+                print "<br><br>";
+                print "<h3>Datos ingresados correctamente.</h3><br/>";
                 print "Nombre: ".$nombre."<br/><br/>";
                 print "Correo: ".$correo."<br/><br/>";
                 print "Pagina Web: ".$paginaWeb."<br/><br/>";
