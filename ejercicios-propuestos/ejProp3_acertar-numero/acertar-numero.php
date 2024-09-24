@@ -59,7 +59,6 @@
             file_put_contents("historial.txt" , "<br><br>". $username. " intentó " . $numeroIntentado . "> ELEGIDO" ."\n", FILE_APPEND);
 
         } else {
-            echo $historial;
             echo "<h3>Has acertado el numero</h3>";
             
             unlink("numero.txt"); // Borra el archivo cuando se acierta
