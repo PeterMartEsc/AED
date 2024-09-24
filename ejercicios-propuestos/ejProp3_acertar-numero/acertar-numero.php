@@ -1,22 +1,33 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<meta http-equiv="refresh" content="5" />   Cada 5 seg refresca la ventana-->
+    <link rel="stylesheet" href="acertar-numero.css">
     <title>Acertar Numero</title>
 </head>
 <body>
-    <h1>Numer Secreto</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-        <label for="numero">Introduzca un numero entre 1 y 10:</label>
-        <input type="number" id="numero" name="numero">
-        <input type="submit" value="Comprobar">
-        <p id="mensaje"></p>
-    </form>
+    <div class="contenedorPrincipal">
+        <h1>Numer Secreto</h1>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <label for="numero">Introduzca un numero entre 1 y 100:</label>
+            <input type="number" id="numero" name="numero">
+            <input type="submit" value="Comprobar">
+            <p id="mensaje"></p>
+        </form>
+    </div>
     <?php
 
+        echo "Sesión de: " . $_SESSION["username"]  . "<br><br>";
+        $username = $_SESSION["username"];
+
+
         if(!file_exists("numero.txt")){
-            $numeroRandom = rand(1,10);
+            $numeroRandom = rand(1,100);
             file_put_contents("numero.txt" , $numeroRandom . "\n");
             //echo "El numero $numeroRandom ha sido almacenado";
         }
@@ -25,11 +36,8 @@
             exit();
         }
 
+
         $numeroIntentado = intval($_POST["numero"]);
-
-        //echo "El numero escogido es $numeroIntentado <br><br>";
-
-
         $numeroAcertar = file_get_contents("numero.txt");
 
         echo "<br>El numero almacenado es: $numeroAcertar <br><br>";
@@ -42,9 +50,6 @@
 
         } else {
             echo "<h3>Has acertado el numero</h3>";
-
-            file_put_contents("historial.txt" , "<br><br>" . $numeroAcertar . "\n", FILE_APPEND);
-
             unlink("numero.txt"); // Borra el archivo cuando se acierta
 
             ?>
@@ -52,19 +57,24 @@
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"> 
                 <button type="submit">Jugar de nuevo</button>
             </form>
-            <br><br>
-            <form action="abrirHistorial.php" method="post"> 
-                <button type="submit">Ver el historial</button>
-            </form>
 
             <?php
         }
+
+        file_put_contents("historial.txt" , "<br><br>". $username. " intentó con el: " . $numeroIntentado . "\n", FILE_APPEND);
 
     ?>
 </body>
 </html>
 
-
+<!--
+    Las coockies se guardan en el cliente.
+    El navegador es como un sandbox para que no pueda tocar nada del cilente, solo puede accceder a un almacenamiento, las cookies.
+    
+    Las Cookies es una información que t da el servidor
+    sesid = el token identificativo de la sesión. Conservar el id para conservar la informacion del usuario. 
+    Va en la cabecera y se envía al servidor en cada petición. Este lo comprueba y carga la información.
+-->
 
 <!--
 $fecha_actual = date("Y-M-D H:i:S");
