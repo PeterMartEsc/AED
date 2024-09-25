@@ -1,15 +1,15 @@
 
 <?php
 
-$texto = 'Pasando datos diría.. que hay que usar urlencode';
+$texto = "Pasando datos diría.. que hay que usar urlencode";
 
 // Codificamos el texto con urlencode
 $conUrlEncode = urlencode($texto);
 
 // Creamos un enlace con los dos parámetros: prueba (sin urlencode) y prueba2 (con urlencode)
-echo "<a href='index.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
+echo "<a href='pr33.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
 echo "<br><br>";
-echo "<a href='index.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
+echo "<a href='pr33.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
 
 $recibido = $_GET["prueba"] ?? "nadita";
 $recibido2 = $_GET["prueba2"] ?? "nadita";

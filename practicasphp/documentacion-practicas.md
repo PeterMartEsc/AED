@@ -981,15 +981,15 @@ Tomar captura de pantalla de lo obtenido
 ```
 <?php
 
-$texto = 'Pasando datos diría.. que hay que usar urlencode';
+$texto = "Pasando datos diría.. que hay que usar urlencode";
 
 // Codificamos el texto con urlencode
 $conUrlEncode = urlencode($texto);
 
 // Creamos un enlace con los dos parámetros: prueba (sin urlencode) y prueba2 (con urlencode)
-echo "<a href='index.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
+echo "<a href='pr33.php?prueba={$texto}'>Pasando datos sin urlEnco</a>";
 echo "<br><br>";
-echo "<a href='index.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
+echo "<a href='pr33.php?prueba2={$conUrlEncode}'>Pasando datos con urlencode</a>";
 
 $recibido = $_GET["prueba"] ?? "nadita";
 $recibido2 = $_GET["prueba2"] ?? "nadita";
@@ -1004,11 +1004,11 @@ En la primera captura podemos ver el php lanzado.
 
 <img src = ".\practica33\capturas\1.png">
 
-A continuación podemos ver lo que devuelve al usar el primer enlace, sin urlEncode. Como vemos, los espacios se sustituyen por %
+A continuación podemos ver lo que devuelve al usar el primer enlace, sin urlEncode. Como podemos ver devuelve la cadena entera.
 
 <img src = ".\practica33\capturas\2.png">
 
-Y en esta captura podemos ver lo que devuelve usando el urlEncode. Esta vez los espacios se sustituyen por +
+Y en esta captura podemos ver lo que devuelve usando el urlEncode. Aquí también devuelve la cadena entera.
 
 <img src = ".\practica33\capturas\3.png">
 
