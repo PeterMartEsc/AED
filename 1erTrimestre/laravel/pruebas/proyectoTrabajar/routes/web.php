@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\Controller_Pr12;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
        //any para todas
 Route::get('/', function () {
+    //pr01
     echo "Under Construction";
     //return view('welcome');
 });
@@ -36,3 +40,19 @@ Route::any('/', function () {
     echo "pagina raiz de nuestra aplicacion";
     //return view('welcome');
 });
+
+//Ejercicios de clase
+            //Ruta donde va a mostrar el return
+Route::get('/formNumAleatorio', function(){
+                //Devuelve la vista del archivo dentro de views llamada 'formAleatorios'
+    return view('formAleatorios');
+});
+
+            //Ruta donde se van a mostrar los valores enviados por la funcion 'procesarForm'
+Route::get('/procesarFormulario', [PruebaController::class, 'procesarForm']);
+
+
+Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
+
+
+
