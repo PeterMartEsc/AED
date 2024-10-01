@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//Pr05
+use App\Http\Controllers\ListarProductos;
+
+
+//Ejercicios en Clase
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\Controller_Pr12;
 
@@ -41,6 +46,25 @@ Route::any('/', function () {
     //return view('welcome');
 });
 
+
+//Pr05
+Route::get('/', [ListarProductos::class, 'listarProductosGet']);
+Route::post('/', [ListarProductos::class, 'listarProductosPost']);
+
+//Pr07
+Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
+
+Route::get('/numPrimosResult', function(){
+    
+    return view('numPrimos_Pr07');
+
+});
+
+
+
+//Pr12
+Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
+
 //Ejercicios de clase
             //Ruta donde va a mostrar el return
 Route::get('/formNumAleatorio', function(){
@@ -50,9 +74,3 @@ Route::get('/formNumAleatorio', function(){
 
             //Ruta donde se van a mostrar los valores enviados por la funcion 'procesarForm'
 Route::get('/procesarFormulario', [PruebaController::class, 'procesarForm']);
-
-
-Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
-
-
-
