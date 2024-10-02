@@ -9,11 +9,19 @@
     </head>
     <body class="antialiased">
 
-    @foreach ($coleccion as $primo)
-    <p> primo: {{$primo}} </p>
-    @endforeach
+        @php
+            for($i = 0; $i< 3 ; $i++){
+                $dato = time();
+                sleep(1);
+                Desde el 1-01-1970 han pasado: {{$dato}} segundos
+            }
+        @endphp
 
+            Desde el 1-01-1970 han pasado: {{$dato}} segundos
 
     </body>
 
 </html>
+
+
+

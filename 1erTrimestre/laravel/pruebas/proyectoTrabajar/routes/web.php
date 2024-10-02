@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 //Pr05
 use App\Http\Controllers\ListarProductos;
+use App\Http\Controllers\Controller_Pr07;
+use App\Http\Controllers\Controller_Pr12;
+
 
 
 //Ejercicios en Clase
 use App\Http\Controllers\PruebaController;
-use App\Http\Controllers\Controller_Pr12;
 
 
 /*
@@ -21,45 +23,40 @@ use App\Http\Controllers\Controller_Pr12;
 |
 */
 
+//Pr01
        //any para todas
-Route::get('/', function () {
-    //pr01
-    echo "Under Construction";
-    //return view('welcome');
-});
+Route::get('/', function () {echo "Under Construction";});
 
 //pr02
-Route::post('/pruebita', function () {
-    echo "se ha ejecutado una petición POST a la dirección: /pruebita";
-    //return view('welcome');
-});
+//Route::post('/pruebita', function () {echo "se ha ejecutado una petición POST a la dirección: /pruebita";});
 
 //pr03
-Route::any('/relatos/{numero}', function ($numero) {
-    echo "petición recibida para el parámetro: $numero";
-    //return view('welcome');
-})->where('numero', '[0-9]+');
+//Route::any('/relatos/{numero}', function ($numero) {echo "petición recibida para el parámetro: $numero";})->where('numero', '[0-9]+');
 
 //pr04
-Route::any('/', function () {
-    echo "pagina raiz de nuestra aplicacion";
-    //return view('welcome');
-});
+//Route::any('/', function () {echo "pagina raiz de nuestra aplicacion";});
 
 
 //Pr05
-Route::get('/', [ListarProductos::class, 'listarProductosGet']);
-Route::post('/', [ListarProductos::class, 'listarProductosPost']);
+//Route::get('/', [ListarProductos::class, 'listarProductosGet']);
+//Route::post('/', [ListarProductos::class, 'listarProductosPost']);
 
 //Pr07
 Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
 
-Route::get('/numPrimosResult', function(){
-    
-    return view('numPrimos_Pr07');
+//Route::get('/listarPrimos', function(){return view('listarPrimos_Pr07');});
 
+//Pr09
+Route::get('/time', function(){
+    return view('time_pr09');
 });
 
+//Pr10
+Route::get('/numAleatorios', function(){
+    return view('mostrarNumerosAleatorios_pr10');
+});
+
+//Pr11
 
 
 //Pr12
