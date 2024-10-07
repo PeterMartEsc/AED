@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListarProductos;
 use App\Http\Controllers\Controller_Pr07;
 use App\Http\Controllers\Controller_Pr12;
+use App\Http\Controllers\Controller_Pr17;
+use App\Http\Controllers\Controller_Pr18;
+
 
 
 
@@ -61,6 +64,22 @@ Route::get('/numAleatorios', function(){
 
 //Pr12
 Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
+
+//Pr17
+Route::get('/crearDirectorio', function(){
+    return view('Pr17_formCrearDirectorio');
+});
+
+Route::get('/procesarCrearDirectorio', [Controller_Pr17::class, 'crearDir']);
+
+//Pr18
+Route::get('/crearFichero', function(){
+    return view('Pr18_formCrearFichero');
+});
+
+Route::get('/fileUpload', [Controller_Pr18::class, 'crearFichero']);
+
+//Route::post('/formAleatorios', [PruebaController::class, 'procesarForm']);
 
 //Ejercicios de clase
             //Ruta donde va a mostrar el return
