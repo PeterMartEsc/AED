@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListarProductos;
 use App\Http\Controllers\Controller_Pr07;
 use App\Http\Controllers\Controller_Pr12;
+use App\Http\Controllers\Controller_Pr13;
 use App\Http\Controllers\Controller_Pr17;
 use App\Http\Controllers\Controller_Pr18;
 
@@ -65,6 +66,11 @@ Route::get('/numAleatorios', function(){
 //Pr12
 Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
 
+//Pr13
+Route::get('/mostrarColores', [Controller_Pr13::class,'mostrarColores']);
+
+Route::get('/storeColores', [Controller_Pr13::class,'storeColores']);
+
 //Pr17
 Route::get('/crearDirectorio', function(){
     return view('Pr17_formCrearDirectorio');
@@ -78,6 +84,13 @@ Route::get('/crearFichero', function(){
 });
 
 Route::get('/fileUpload', [Controller_Pr18::class, 'crearFichero']);
+
+
+
+
+
+
+
 
 //Route::post('/formAleatorios', [PruebaController::class, 'procesarForm']);
 
