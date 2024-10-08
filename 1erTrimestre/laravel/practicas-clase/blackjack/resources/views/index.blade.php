@@ -22,6 +22,11 @@
         </div>
 
         <div class="partida">
+            <div class="init">
+                <form action="/start">
+                    <button id="empezar">Empezar</button>
+                </form>
+            </div>
             <div class="manoCuprier">
 
             </div>

@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * @author Pedro Martin Escuela
+ */
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LogIn;
+use App\Http\Controllers\Juego;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +22,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/login', [LogIn::class, 'procesarUsername']);
+Route::get('/login', [Juego::class, 'procesarUsername']);
 
+Route::get('/start', [Juego::class, 'empezarPartida']);
 

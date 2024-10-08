@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\Mazo;
 
-class LogIn
+class Juego
 {
     public function procesarUsername(Request $request){
 
@@ -13,5 +14,11 @@ class LogIn
         }
         session()->put('username', $username);
         return view('index', compact('username'));
+    }
+
+    public function empezarPartida(){
+        $mazo = new Mazo();
+
+        $mazo.barajar();
     }
 }
