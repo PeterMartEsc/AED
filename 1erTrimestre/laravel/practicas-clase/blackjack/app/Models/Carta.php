@@ -10,7 +10,7 @@ class Carta extends Model
 {
     use HasFactory;
 
-    /** @var int */
+    /** @var string */
     public $valor;
 
     /** @var string */
