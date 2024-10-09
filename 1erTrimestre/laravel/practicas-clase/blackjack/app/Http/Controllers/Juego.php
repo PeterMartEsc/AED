@@ -18,7 +18,8 @@ class Juego
 
     public function empezarPartida(){
         $mazo = new Mazo();
+        $mazo->barajar();
 
-        $mazo.barajar();
+        //$manoJugador = array_slice($mazo->getCartas(), rand(0,51), 1);
     }
 }
