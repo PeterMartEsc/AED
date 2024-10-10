@@ -23,8 +23,8 @@
 
         <div class="partida">
             <div class="init">
-                <form action="/start">
-                    <button id="empezar">Empezar</button>
+                <form action="start">
+                    <input type="submit" name="empezar" value="Empezar">
                 </form>
             </div>
             <div class="manoCuprier">

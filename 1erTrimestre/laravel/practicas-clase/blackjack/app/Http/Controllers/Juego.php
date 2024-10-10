@@ -20,6 +20,8 @@ class Juego
         $mazo = new Mazo();
         $mazo->barajar();
 
-        //$manoJugador = array_slice($mazo->getCartas(), rand(0,51), 1);
+        $aux = 0;
+        $manoInicialJugador = $mazo[$aux];
+        $manoInicialCuprier = $mazo[++$aux];
     }
 }
