@@ -10,7 +10,7 @@
     <body class="antialiased">
 
         <div class="mostrarColores">
-            @foreach ($colors as $color)
+            @foreach ($colores as $color)
                 <p>{{$color}}</p>
             @endforeach
         </div>

@@ -13,8 +13,9 @@
     <body class="antialiased">
 
         <h3>Numeros mayores que 50</h3>
+        <p>Lista de numeros: {{print_r($listaAleatorios)}}</p>
         @foreach ($listaAleatorios as $numero)
-            @if( $numero => 50 )
+            @if( $numero >= 50 )
                 <p>{{ $numero }}</p><br>
             @endif
         @endforeach

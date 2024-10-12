@@ -14,6 +14,6 @@ class Controller_Pr10 extends Controller
             //$listaAleatorios[] = rand(0,100);     //Sirve igual
         }
 
-        return view ('mostrarNumerosAleatorios_pr10', compact('listaAleatorios'));
+        return view ('Pr10_mostrarNumerosAleatorios', compact('listaAleatorios'));
     }
 }

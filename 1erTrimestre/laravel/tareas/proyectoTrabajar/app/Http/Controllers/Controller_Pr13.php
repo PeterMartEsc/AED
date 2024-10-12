@@ -10,21 +10,26 @@ class Controller_Pr13 extends Controller
 
         if(!isset($color)){
             $colores = session()->get('colores');
-            array_push($colores, $color);
-            session()->put('colores', $colores);
+            return view('Pr13_mostrarColores', compact('colores'));
         }
+
+        $colores = session()->get('colores');
+
+        array_push($colores, $color);
+        session()->put('colores', $colores);
+
+        return view('Pr13_mostrarColores', compact('colores'));
     }
 
     //Aquí llega el get del formAleatorios y recibe un request de formAleatorios
-    public function mostrarColores(Request $request){
+    public function mostrarColores(){
 
-        $colors = $request->get('colores');
-        if(!isset($colors)){
-            $colors = [];
-            session()->put('colors', $colors);
+        if(!isset($colores)){
+            $colores = [];
+            session()->put('colores', $colores);
         }
 
-        return view('Pr13_mostrarColores', compact('colors'));
+        return view('Pr13_mostrarColores', compact('colores'));
 
     }
 }

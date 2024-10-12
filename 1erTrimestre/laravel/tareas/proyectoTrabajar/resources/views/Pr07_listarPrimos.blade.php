@@ -9,19 +9,17 @@
     </head>
     <body class="antialiased">
 
-        @php
-            for($i = 0; $i< 3 ; $i++){
-                $dato = time();
-                sleep(1);
-                Desde el 1-01-1970 han pasado: {{$dato}} segundos
-            }
-        @endphp
+        <h3>Son las {{$hora}} del dia</h3>
 
-            Desde el 1-01-1970 han pasado: {{$dato}} segundos
+        <table>
+            <th>Números primos</th>
+            @foreach ($coleccion as $primo)
+                <tr>
+                    <td>{{$primo}}</td>
+                </tr>
+            @endforeach
+        </table>
 
     </body>
 
 </html>
-
-
-

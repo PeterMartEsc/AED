@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 //Pr05
-use App\Http\Controllers\ListarProductos;
+use App\Http\Controllers\Controller_Pr05_ListarProductos;
 use App\Http\Controllers\Controller_Pr07;
+use App\Http\Controllers\Controller_Pr10;
+use App\Http\Controllers\Controller_Pr11;
+
 use App\Http\Controllers\Controller_Pr12;
 use App\Http\Controllers\Controller_Pr13;
 use App\Http\Controllers\Controller_Pr17;
@@ -29,7 +32,7 @@ use App\Http\Controllers\PruebaController;
 
 //Pr01
        //any para todas
-Route::get('/', function () {echo "Under Construction";});
+//Route::get('/', function () {echo "Under Construction";});
 
 //pr02
 //Route::post('/pruebita', function () {echo "se ha ejecutado una petición POST a la dirección: /pruebita";});
@@ -42,34 +45,37 @@ Route::get('/', function () {echo "Under Construction";});
 
 
 //Pr05
-//Route::get('/', [ListarProductos::class, 'listarProductosGet']);
-//Route::post('/', [ListarProductos::class, 'listarProductosPost']);
+//Route::get('/', [Controller_Pr05_ListarProductos::class, 'listarProductosGet']);
+//Route::post('/', [Controller_Pr05_ListarProductos::class, 'listarProductosPost']);
 
 //Pr07
-Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
-
-//Route::get('/listarPrimos', function(){return view('listarPrimos_Pr07');});
+//Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
 
 //Pr09
 Route::get('/time', function(){
-    return view('time_pr09');
+    return view('Pr09_time');
 });
 
 //Pr10
-Route::get('/numAleatorios', function(){
-    return view('mostrarNumerosAleatorios_pr10');
-});
+Route::get('/numAleatorios', [Controller_Pr10::class,'numerosAleatorios100']);
 
 //Pr11
-
+Route::get('/listaPalabras', [Controller_Pr11::class,'listaPalabras']);
 
 //Pr12
-Route::get('/imagenes/pr12', [Controller_Pr12::class,'mostrarImagenes']);
+Route::get('/imagenes', [Controller_Pr12::class,'mostrarImagenes']);
 
 //Pr13
 Route::get('/mostrarColores', [Controller_Pr13::class,'mostrarColores']);
-
 Route::get('/storeColores', [Controller_Pr13::class,'storeColores']);
+
+//Pr15
+Route::get('/formularioUsuario', function(){
+    return view('Pr15_formularioUsuario');
+});
+
+Route::get('/almacenarInfo', [Controller_Pr15::class, 'almacenarInfo']);
+
 
 //Pr17
 Route::get('/crearDirectorio', function(){

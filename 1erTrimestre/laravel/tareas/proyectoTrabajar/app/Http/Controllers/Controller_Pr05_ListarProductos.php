@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
-class ListarProductos extends Controller
+class Controller_Pr05_ListarProductos extends Controller
 {
 
     public function listarProductosGet(){

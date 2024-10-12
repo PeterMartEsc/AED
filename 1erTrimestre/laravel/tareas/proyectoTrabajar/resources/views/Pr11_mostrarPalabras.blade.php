@@ -11,13 +11,11 @@
 
         </head>
         <body class="antialiased">
-
-            @php
-                for($i = 0; $i < count($listaPalabras); $i++){
-                    
-                }
-            @endphp
-
+            <ul>
+                @for ($i = 0; $i < count($listaPalabras); $i++)
+                <li>{{$listaPalabras[$i]}}</li>
+                @endfor
+            </ul>
         </body>
 
     </html>
