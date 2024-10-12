@@ -9,7 +9,7 @@ class Controller_Pr18 extends Controller
     public function crearFichero(Request $request){
 
         $dir = "ficheros_pr18";
-        $nombreFichero = $request->get('myfile');
+        $nombreFichero = $request->get('fichero');
         $nombre = $request->get('nombre');
         $correo = $request->get('correo');
 
@@ -19,7 +19,7 @@ class Controller_Pr18 extends Controller
 
         $contentDir = Storage::allFiles("/".$dir);
 
-        /*if (($open = fopen(storage_path() . "/".$dir, "r")) !== FALSE) {
+        if (($open = fopen(storage_path() . "/".$dir, "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $contenido[] = $data;
@@ -27,7 +27,7 @@ class Controller_Pr18 extends Controller
 
             fclose($open);
 
-            return view('mostrarFichero', compact('contenido', 'contentDir'));
-        }*/
+            return view('Pr18_formCrearFichero', compact('contenido', 'contentDir'));
+        }
     }
 }

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller_Pr05_ListarProductos;
 use App\Http\Controllers\Controller_Pr07;
 use App\Http\Controllers\Controller_Pr10;
 use App\Http\Controllers\Controller_Pr11;
-
 use App\Http\Controllers\Controller_Pr12;
 use App\Http\Controllers\Controller_Pr13;
+use App\Http\Controllers\Controller_Pr15;
+use App\Http\Controllers\Controller_Pr16;
+
 use App\Http\Controllers\Controller_Pr17;
 use App\Http\Controllers\Controller_Pr18;
 
@@ -73,9 +75,10 @@ Route::get('/storeColores', [Controller_Pr13::class,'storeColores']);
 Route::get('/formularioUsuario', function(){
     return view('Pr15_formularioUsuario');
 });
-
 Route::get('/almacenarInfo', [Controller_Pr15::class, 'almacenarInfo']);
 
+//Pr16
+Route::get('/leerFichero', [Controller_Pr16::class, 'leerFIchero']);
 
 //Pr17
 Route::get('/crearDirectorio', function(){
@@ -89,7 +92,7 @@ Route::get('/crearFichero', function(){
     return view('Pr18_formCrearFichero');
 });
 
-Route::get('/fileUpload', [Controller_Pr18::class, 'crearFichero']);
+Route::any('/subirFile', [Controller_Pr18::class, 'crearFichero']);
 
 
 

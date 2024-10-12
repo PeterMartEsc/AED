@@ -9,18 +9,27 @@
     </head>
     <body class="antialiased">
 
-        <form action="/almacenarInfo" method="POST">
-            <label for="name">Nombre:</label></br>
-            <input type="text" name="name" id="name">
+        <div class="formulario">
+            <form action="/almacenarInfo">
+                <label for="name">Nombre:</label></br>
+                <input type="text" name="name" id="name"><br><br>
 
-            <label for="edad">Edad:</label></br>
-            <input type="number" name="edad" id="edad">
+                <label for="edad">Edad:</label></br>
+                <input type="number" name="edad" id="edad"><br><br>
 
-            <label for="email">Correo electrónico:</label></br>
-            <input type="text" name="email" id="email"></br>
+                <label for="email">Correo electrónico:</label></br>
+                <input type="text" name="email" id="email"></br><br>
 
-            <input type="submit" value="Enviar">
-        </form>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+
+        <div class="infoUsuario">
+            <p>Nombre: <b>{{session()->get('name');}}</b></p>
+            <p>Edad: <b>{{session()->get('edad')}}</b></p>
+            <p>Email: <b>{{session()->get('email')}}</b></p>
+
+        </div>
 
     </body>
 
