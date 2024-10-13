@@ -16,9 +16,8 @@ class Carta extends Model
     /** @var string */
     public $palo;
 
-    public function __construct($valor, $palo){
-        $this->valor = $valor;
-        $this->palo = $palo;
+    public function __construct(){
+
     }
 
     /**

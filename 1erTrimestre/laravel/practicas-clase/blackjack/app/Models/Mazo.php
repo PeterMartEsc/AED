@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Carta;
+
 
 
 class Mazo extends Model
@@ -11,10 +13,11 @@ class Mazo extends Model
     use HasFactory;
 
     /** @var Carta[] */
-    private $cartas;
+    public $cartas;
 
 
-    public function __construct(){
+    public function __construct() {
+        $this->cartas = [];
         $this->generateMazo();
     }
 
@@ -22,11 +25,15 @@ class Mazo extends Model
     public function generateMazo(){
 
         $palos = ['Corazones', 'Diamantes', 'Picas', 'Tréboles'];
-        $valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+        $valores = ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
         foreach ($palos as $palo) {
             foreach ($valores as $valor) {
-                $this->cartas[] = new Carta($valor, $palo);
+                $carta = new Carta();
+                $carta->setValor($valor);
+                $carta->setPalo($palo);
+                $this->cartas[] = $carta;
+
             }
         }
 
@@ -34,6 +41,10 @@ class Mazo extends Model
 
     public function barajar(){
         shuffle($this->cartas);
+    }
+
+    public function getCartaEspecifica($index){
+        return $this->cartas[$index] ?? null;   //Informarme de esto
     }
 
 

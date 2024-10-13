@@ -4,29 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mazo;
+use App\Models\Jugador;
 
 
-class Mazo extends Model
+class Partida extends Model
 {
     use HasFactory;
 
     /** @var Jugador[] */
-    private $jugador;
+    public $jugador;
 
     /** @var Jugador[]*/
-    private $cuprier;
+    public $cuprier;
 
     /** @var Mazo[] */
-    private $mazo;
+    public $mazo;
 
     public function __construct(){
         $this->jugador = new Jugador();
-        $this->cupier = new Jugador();
+        $this->cuprier = new Jugador();
         $this->mazo = new Mazo();
+        $this->mazo->barajar();
     }
 
-    public function robarCarta(){
-
+    public function robarCarta($puntero){
+        $cartaObtenida = $this->mazo->getCartaEspecifica($puntero);
+        return $cartaObtenida;
     }
 
     /**
@@ -40,7 +44,7 @@ class Mazo extends Model
     /**
      * Set the value of jugador
      */
-    public function setJugador($jugador): self
+    public function setJugador(Jugador $jugador): self
     {
         $this->jugador = $jugador;
 
@@ -58,7 +62,7 @@ class Mazo extends Model
     /**
      * Set the value of cuprier
      */
-    public function setCuprier($cuprier): self
+    public function setCuprier(Jugador $cuprier): self
     {
         $this->cuprier = $cuprier;
 
@@ -76,7 +80,7 @@ class Mazo extends Model
     /**
      * Set the value of mazo
      */
-    public function setMazo($mazo): self
+    public function setMazo(Mazo $mazo): self
     {
         $this->mazo = $mazo;
 

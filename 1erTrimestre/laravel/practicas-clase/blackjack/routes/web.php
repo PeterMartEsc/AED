@@ -5,7 +5,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Juego;
+use App\Http\Controllers\Controller_Juego;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,13 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/login', [Juego::class, 'procesarUsername']);
+Route::get('/login', [Controller_Juego::class, 'procesarUsername']);
 
-Route::get('/start', [Juego::class, 'empezarPartida']);
+Route::get('/start', [Controller_Juego::class, 'empezarPartida']);
+
+Route::get('/robar', [Controller_Juego::class, 'robar']);
+
+Route::get('/plantarse', [Controller_Juego::class, 'plantarse']);
+
+
 
