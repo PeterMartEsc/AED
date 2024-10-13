@@ -70,7 +70,6 @@
 </html>
 
 <!--
-    1.- Que no se borren las cartas al mostrar la puntuación (mostrar las cartas mediante sesión)
-    2.- Que el cuprier no pueda coger más de 16 puntos
+    1.- Que el cuprier no pueda coger más de 16 puntos
     3.-
 -->

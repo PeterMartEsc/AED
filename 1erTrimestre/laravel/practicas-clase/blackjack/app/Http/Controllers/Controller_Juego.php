@@ -68,23 +68,20 @@ class Controller_Juego
         $puntero = session()->get('puntero');
         $partida = session()->get('partida');
 
-        //dd($partida);
-
-        /*// Obtener todos los datos de la sesión
-        $sessionData = session()->all();
-
-        // Mostrar los datos de la sesión (por ejemplo, para depuración)
-        dd($sessionData);*/
-
 
         $carta = $partida->robarCarta($puntero);
-
         $partida->getJugador()->addCarta($carta);
 
         $puntero++;
 
-        $carta = $partida->robarCarta($puntero);
-        $partida->getCuprier()->addCarta($carta);
+
+
+        if(!(($partida->getCuprier()->getPuntuacion()) > 16)){
+
+            $carta = $partida->robarCarta($puntero);
+            $partida->getCuprier()->addCarta($carta);
+            $puntero++;
+        }
 
 
         session()->put('puntero', $puntero);
@@ -97,31 +94,61 @@ class Controller_Juego
 
         $partida = session()->get('partida');
         $puntuacion = $partida->getJugador()->getPuntuacion();
-
-        $ases = 0;
-
         $manoJugador = $partida->getJugador()->getArrayMano();
 
-        if($puntuacion > 21 && (in_array('As', $manoJugador))){
+        $puntuacion = $this->comprobarAses($manoJugador, $puntuacion);
 
-            foreach($partida->getJugador()->getArrayMano() as $carta){
-                if($carta->getValor() == 'As'){
-                    $ases++;
-                }
+        /*$ases = 0;
+        $hayAs = false;
+
+        foreach ($manoJugador as $carta) {
+            if ($carta->getValor() === 'As') {
+                $hayAs = true;
+                $ases++;
             }
+        }
+
+
+        if($puntuacion > 21 && ($hayAs)){
 
             while($ases > 0){
                 $puntuacion -= 10;
                 $ases--;
             }
-        }
+
+        }*/
 
         $resultado = $this->comprobar($puntuacion);
 
         session()->put('resultado', $resultado);
 
-        return view('index');
+        return view('index', compact('partida'));
 
+    }
+
+    public function comprobarAses($mano, $puntuacion){
+
+        $ases = 0;
+        $hayAs = false;
+
+        foreach ($mano as $carta) {
+            if ($carta->getValor() === 'As') {
+                $hayAs = true;
+                $ases++;
+            }
+        }
+
+
+        if($puntuacion > 21 && ($hayAs)){
+
+            while($ases > 0){
+                $puntuacion -= 10;
+                $ases--;
+            }
+
+        }
+
+        return $puntuacion;
     }
 
     public function comprobar($puntuacionJugador){
@@ -130,10 +157,11 @@ class Controller_Juego
             case ($puntuacionJugador > 21):
                 $resultado = "Has perdido, tu puntuación es de: " . $puntuacionJugador;
                 break;
-            case ($puntuacionJugador = 21):
+            case ($puntuacionJugador == 21):
+                //dd($puntuacionJugador);
                 $resultado = "¡Has ganado! , tu puntuación es de: " . $puntuacionJugador;
                 break;
-            case ($puntuación < 21):
+            case ($puntuacionJugador < 21):
                 $resultado = $this->compararConCuprier($puntuacionJugador);
                 break;
         }
@@ -146,7 +174,11 @@ class Controller_Juego
         $partida = session()->get('partida');
         $puntuacionCuprier = $partida->getCuprier()->getPuntuacion();
 
-        if($puntuacionJugador > $puntuacionCuprier){
+        $manoCuprier = $partida->getCuprier()->getArrayMano();
+
+        $puntuacionCuprier = $this->comprobarAses($manoCuprier, $puntuacionCuprier);
+
+        if($puntuacionJugador > $puntuacionCuprier || $puntuacionCuprier > 21){
             return "Has ganado, tu puntuación es de: " . $puntuacionJugador. " y la puntuación del cuprier es de: ". $puntuacionCuprier;
         } else {
             return "Has perdido, tu puntuación es de: " . $puntuacionJugador. " y la puntuación del cuprier es de: ". $puntuacionCuprier;
