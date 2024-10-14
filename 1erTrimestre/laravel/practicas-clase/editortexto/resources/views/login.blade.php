@@ -20,7 +20,7 @@
             <h2>Register</h2>
             <form action="/login">
                 <label for="username">Nombre</label>
-                <input type="text" id="username" name="username" required><br><br>  <!--El required obliga a que introduzcas un valor-->
+                <input type="text" id="username" name="username" required></br></br>  <!--El required obliga a que introduzcas un valor-->
                 <input type="submit" value="Register">
             </form>
         </div>

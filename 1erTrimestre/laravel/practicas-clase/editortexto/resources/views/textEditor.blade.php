@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo editor</title>
+    <title>Editor</title>
 
     <script src="https://cdn.tiny.cloud/1/ulypsoshl6tgzvo86cj5am4dpeaoaoavzxbsc74dcyno87zq/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -24,7 +24,7 @@
             { value: 'First.Name', title: 'First Name' },
             { value: 'Email', title: 'Email' },
         ],
-        
+
         ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
     });
     </script>
