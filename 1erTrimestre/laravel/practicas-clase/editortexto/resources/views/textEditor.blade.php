@@ -31,13 +31,19 @@
 
 </head>
 <body>
+    <!--
+    <form action="/filesearch">
+        <label for="filesearch"><b>Choose file</b></label></br></br>
+        <input type="text" name="filesearch" id="filesearch">
+        <input type="submit" value="Buscar"><br/><br>
+    </form>-->
 
-    <form action="ejemploeditorpost" method="post">
+    <form action="/saveFile" method="post">
         @csrf
 
         <input type="hidden" name="contenido" id="contenido">
 
-        <textarea id="editor" >{{$contenido}}</textarea><br />
+        <textarea id="editor" >{{$directoryName}}</textarea><br />
 
         <input type="submit" value="Probar"><br />
 

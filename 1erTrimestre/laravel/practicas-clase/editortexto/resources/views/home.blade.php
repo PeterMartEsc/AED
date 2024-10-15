@@ -25,8 +25,6 @@
                 width: 250px;
                 margin: auto;
                 padding-top: 5px;
-                padding-bottom: 5px;
-
             }
 
             h2, h4{
@@ -40,6 +38,9 @@
         <div class="dataUser">
             <h2>Wellcome <b>{{session()->get('username')}}</b></h2>
             <h4>Currently number of files <b>0</b></h4>
+            <form action="/logout">
+                <input type="submit" value="Log-Out">
+            </form>
         </div>
         <br>
         <br>
@@ -47,7 +48,7 @@
             <h2>Create new file</h2>
             <form action="/createFile">
                 <input type="text" name="filename" placeholder="file name">
-                <button type="submit">Create</button>
+                <input type="submit" value="Log-In">
             </form>
         </div>
 
@@ -57,9 +58,13 @@
         <div class="listaFicheros">
             <h2>List of files</h2>
             <ul>
-                <li>...</li>
+                @foreach (session()->get('dirList') as $directorio)
+                    <li><a href="{{ route('editor', ['filename' =>$directorio]) }}">{{$directorio}}</a></li>
+                @endforeach
             </ul>
         </div>
     </body>
 </html>
 
+<!--{ { route('editor', ['filename' =>$directorio]) } }-->
+<!--Hay que comprobar que el que pide el enlace sea el usuario X y no cualquiera-->
