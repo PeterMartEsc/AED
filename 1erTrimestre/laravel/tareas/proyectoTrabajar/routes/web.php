@@ -10,9 +10,10 @@ use App\Http\Controllers\Controller_Pr12;
 use App\Http\Controllers\Controller_Pr13;
 use App\Http\Controllers\Controller_Pr15;
 use App\Http\Controllers\Controller_Pr16;
-
 use App\Http\Controllers\Controller_Pr17;
 use App\Http\Controllers\Controller_Pr18;
+use App\Http\Controllers\Controller_Pr19;
+
 
 
 
@@ -94,6 +95,11 @@ Route::get('/crearFichero', function(){
 
 Route::any('/subirFile', [Controller_Pr18::class, 'crearFichero']);
 
+
+//Pr19
+Route::any('/cargarFiles', [Controller_Pr19::class, 'cargarFiles']);
+
+Route::any('/downloadFile', [Controller_Pr19::class, 'descargarFiles']);
 
 
 
