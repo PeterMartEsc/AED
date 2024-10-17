@@ -60,6 +60,7 @@ class Controller_files
         $this->checkLogin();
 
         Storage::makeDirectory("/".$username."/".$directoryName."/" , 700, true);
+        //Coger todos los archivos con el mismo nombre (versiones) y mandarlos como array pa que los liste text editor
 
         return view('textEditor', compact('directoryName'));
     }
@@ -74,11 +75,19 @@ class Controller_files
         //Guardar archivo de la forma especificada
 
         $this->checkLogin();
-
         $username = session()->get('username');
-
         $this->comprobarArchivos($username);
+
+        $contenido = $request->get('contenido');
+
+        //Guardar contenido en archivo con nombre especifico
 
         return view('home');
     }
+
+    //Entrar a editar un archivo con su getContent como value
+    //Al entrar a editar un archivo, mostrar la versión más reciente, y debajo listar las versiones anteriores
+
+
+    /*$content = Storage::get($filename);*/
 }

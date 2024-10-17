@@ -43,12 +43,13 @@
 
         <input type="hidden" name="contenido" id="contenido">
 
-        <textarea id="editor" >{{$directoryName}}</textarea><br />
+        <textarea id="editor" >{{$directoryName}}</textarea><br/>
 
         <input type="submit" value="Probar"><br />
 
     </form>
 
+    <!--Listar versiones del documento que se está editando-->
 
     <script>
 
