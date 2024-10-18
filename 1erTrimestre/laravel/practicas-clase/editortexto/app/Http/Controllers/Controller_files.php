@@ -17,7 +17,7 @@ class Controller_files
 
         $this->checkStorage($username);
 
-        return redirect('/home');
+        return view('/home');
     }
 
     //Va al home
@@ -74,8 +74,11 @@ class Controller_files
         $date = date("y-m-d");
         $time = date("h:i:s");
         $actualDirectory = session()->get('actualDirectory');
+        $actualDirectory = basename($actualDirectory);
         $fileName = $date."_".$time."_".$actualDirectory.".txt";
         session()->forget('actualDirectory');
+
+        //dd(basename($actualDirectory));
 
         Storage::put("/".$username."/".$actualDirectory."/".$fileName, $contenido);
 
@@ -103,15 +106,15 @@ class Controller_files
         $actualDirectory = session()->get('actualDirectory');
         $file = $request->fileGetContent;
 
-        $content = Storage::get("/".$actualDirectory."/".$file);
+        $content = Storage::get("/".$file);
 
-        dd($actualDirectory);
+        //dd($file);
 
         return view('textEditor', compact('content'));
     }
 
-    //Entrar a editar un archivo con su getContent como value
-    //Al entrar a editar un archivo, mostrar la versión más reciente, y debajo listar las versiones anteriores
+    //Queda arreglar el acceso a las páginas sin estar loggeado
+    //Crear carpeta publica
 
     /*$content = Storage::get($filename);*/
 }
