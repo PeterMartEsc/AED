@@ -15,8 +15,7 @@ class Controller_files
         $username = $request->get('username');
         session()->put('username', $username);
 
-        $this->comprobarArchivos($username);
-        //dd(session()->get('dirList'));
+        $this->checkStorage($username);
 
         return redirect('/home');
     }
@@ -43,51 +42,76 @@ class Controller_files
     }
 
     //Comprueba la lista de carpetas existentes para el usuario
-    public function comprobarArchivos($username){
+    public function checkStorage($username){
         $contentUserDir = Storage::allDirectories("/".$username);
-        //dd($contentUserDir);
+
 
         session()->put('dirList', $contentUserDir);
-        //dd(session()->get('dirList'));
     }
 
     //Crear archivos (incompleto)
     public function createFile(Request $request){
 
         $directoryName = $request->get('filename');
+        session()->put('actualDirectory', $directoryName);
 
         $username = session()->get('username');
         $this->checkLogin();
 
         Storage::makeDirectory("/".$username."/".$directoryName."/" , 700, true);
         //Coger todos los archivos con el mismo nombre (versiones) y mandarlos como array pa que los liste text editor
-
-        return view('textEditor', compact('directoryName'));
+        $content = $directoryName;
+        return view('textEditor', compact('content'));
     }
 
-    //Busca y pone a editar la version deseada
-    /*public function filesearch(Request $request){
-        $this->checkLogin();
-        $filename = $request->get('filesearch');
-    }*/
-
     public function saveFile(Request $request){
-        //Guardar archivo de la forma especificada
 
         $this->checkLogin();
         $username = session()->get('username');
-        $this->comprobarArchivos($username);
+        //$this->checkStorage($username);
 
-        $contenido = $request->get('contenido');
+        $contenido = $request->get('textarea-content');
+        $date = date("y-m-d");
+        $time = date("h:i:s");
+        $actualDirectory = session()->get('actualDirectory');
+        $fileName = $date."_".$time."_".$actualDirectory.".txt";
+        session()->forget('actualDirectory');
 
-        //Guardar contenido en archivo con nombre especifico
+        Storage::put("/".$username."/".$actualDirectory."/".$fileName, $contenido);
+
+        $this->checkStorage($username);
 
         return view('home');
     }
 
+    public function listFiles(Request $request){
+
+        $this->checkLogin();
+        $username = session()->get('username');
+        $directorio = $request->dirName;
+        session()->put('actualDirectory', $directorio);
+
+        $contentDir = Storage::allFiles("/".$directorio."/");
+
+        return view('filesEspecific', compact('contentDir'));
+    }
+
+    public function editFile(Request $request){
+
+        $username = session()->get('username');
+        $this->checkLogin();
+        $actualDirectory = session()->get('actualDirectory');
+        $file = $request->fileGetContent;
+
+        $content = Storage::get("/".$actualDirectory."/".$file);
+
+        dd($actualDirectory);
+
+        return view('textEditor', compact('content'));
+    }
+
     //Entrar a editar un archivo con su getContent como value
     //Al entrar a editar un archivo, mostrar la versión más reciente, y debajo listar las versiones anteriores
-
 
     /*$content = Storage::get($filename);*/
 }

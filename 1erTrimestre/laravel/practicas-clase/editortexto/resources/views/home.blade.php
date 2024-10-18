@@ -59,7 +59,7 @@
             <h2>List of files</h2>
             <ul>
                 @foreach (session()->get('dirList') as $directorio)
-                    <li><a href="{{ route('editor', ['filename' =>$directorio]) }}">{{$directorio}}</a></li>
+                    <li><a href="{{ route('listFiles', ['dirName' =>$directorio]) }}">{{$directorio}}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -68,3 +68,4 @@
 
 <!--{ { route('editor', ['filename' =>$directorio]) } }-->
 <!--Hay que comprobar que el que pide el enlace sea el usuario X y no cualquiera-->
+<!--{ { route('editor', ['filename' =>$directorio]) } }-->

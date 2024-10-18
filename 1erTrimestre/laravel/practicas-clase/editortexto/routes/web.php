@@ -23,16 +23,18 @@ Route::get('/', function () {
 
 Route::get('/login', [Controller_files::class, 'login']);
 
+Route::get('/home', [Controller_files::class, 'goHome']);
+
 Route::get('/logout', [Controller_files::class, 'logout']);
 
-Route::get('/home', [Controller_files::class, 'goHome']);
 
 Route::get('/createFile', [Controller_files::class, 'createFile']);
 
 //Route::get('/filesearch', [Controller_files::class, 'filesearch']);
 
-Route::get('/listfiles?', [Controller_files::class, 'createFile']);
+Route::get('/listFiles', [Controller_files::class, 'listFiles'])->name('listFiles');
 
 
 Route::any('/saveFile', [Controller_files::class, 'saveFile']);
 
+Route::get('/editFile', [Controller_files::class, 'editFile'])->name('editFile');

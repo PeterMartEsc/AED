@@ -43,9 +43,9 @@
 
         <input type="hidden" name="contenido" id="contenido">
 
-        <textarea id="editor" >{{$directoryName}}</textarea><br/>
+        <textarea id="editor" name="textarea-content">{{$content}}</textarea><br/>
 
-        <input type="submit" value="Probar"><br />
+        <input type="submit" value="Save"><br/>
 
     </form>
 
@@ -57,7 +57,7 @@
         document.querySelector('form').addEventListener('submit', function(event) {
             event.preventDefault();
             document.getElementById('contenido').value = tinymce.activeEditor.getContent();
-            console.log("dice: "+tinymce.activeEditor.getContent());
+            //console.log("dice: "+tinymce.activeEditor.getContent());
             this.submit();
         });
     </script>
