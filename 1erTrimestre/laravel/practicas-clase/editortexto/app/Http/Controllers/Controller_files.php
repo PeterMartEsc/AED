@@ -44,9 +44,11 @@ class Controller_files
     //Comprueba la lista de carpetas existentes para el usuario
     public function checkStorage($username){
         $contentUserDir = Storage::allDirectories("/".$username);
+        $contentPubicDir = Storage::allDirectories("/public"."/");
 
 
         session()->put('dirList', $contentUserDir);
+        session()->put('publicDirList', $contentPubicDir);
     }
 
     //Crear archivos (incompleto)
@@ -59,12 +61,56 @@ class Controller_files
         $this->checkLogin();
 
         Storage::makeDirectory("/".$username."/".$directoryName."/" , 700, true);
-        //Coger todos los archivos con el mismo nombre (versiones) y mandarlos como array pa que los liste text editor
+        
         $content = $directoryName;
         return view('textEditor', compact('content'));
     }
 
+    public function createPublicFile(Request $request){
+
+        $directoryName = $request->get('filename');
+        session()->put('actualDirectory', $directoryName);
+
+        $username = session()->get('username');
+        $this->checkLogin();
+
+        Storage::makeDirectory("/"."public"."/".$directoryName."/" , 700, true);
+
+        $content = $directoryName;
+
+        session()->put('trabajandoPublico', 'true');
+        return view('textEditor', compact('content'));
+    }
+
     public function saveFile(Request $request){
+
+        $publica = session()->get('trabajandoPublico');
+        if(isset($publica)){
+            return $this->savePublicFile($request);
+        }
+
+        $this->checkLogin();
+        $username = session()->get('username');
+
+        $contenido = $request->get('textarea-content');
+        $date = date("y-m-d");
+        $time = date("h-i-s");
+        $actualDirectory = session()->get('actualDirectory');
+        $actualDirectory = basename($actualDirectory);
+
+        $fileName = $date."_".$time."_".$actualDirectory.".txt";
+
+        session()->forget('actualDirectory');
+        session()->forget('trabajandoPublico');
+
+        Storage::put("/".$username."/".$actualDirectory."/".$fileName, $contenido);
+
+        $this->checkStorage($username);
+
+        return view('home');
+    }
+
+    public function savePublicFile(Request $request){
 
         $this->checkLogin();
         $username = session()->get('username');
@@ -72,15 +118,19 @@ class Controller_files
 
         $contenido = $request->get('textarea-content');
         $date = date("y-m-d");
-        $time = date("h:i:s");
+        $time = date("h-i-s");
         $actualDirectory = session()->get('actualDirectory');
         $actualDirectory = basename($actualDirectory);
+
         $fileName = $date."_".$time."_".$actualDirectory.".txt";
         session()->forget('actualDirectory');
 
-        //dd(basename($actualDirectory));
+        //dd(($actualDirectory));
 
-        Storage::put("/".$username."/".$actualDirectory."/".$fileName, $contenido);
+        Storage::put("/"."public"."/".$actualDirectory."/".$fileName, $contenido);
+        //dd(("/"."public"."/".$actualDirectory."/".$fileName));
+
+        session()->forget('trabajandoPublico');
 
         $this->checkStorage($username);
 
@@ -95,8 +145,22 @@ class Controller_files
         session()->put('actualDirectory', $directorio);
 
         $contentDir = Storage::allFiles("/".$directorio."/");
+        rsort($contentDir);
 
         return view('filesEspecific', compact('contentDir'));
+    }
+
+    public function listPublicFiles(Request $request){
+
+        $this->checkLogin();
+        $username = session()->get('username');
+        $directorio = $request->publicDirList;
+        session()->put('actualDirectory', $directorio);
+
+        $contentDir = Storage::allFiles("/".$directorio."/");
+        rsort($contentDir);
+
+        return view('publicFilesEspecific', compact('contentDir'));
     }
 
     public function editFile(Request $request){
@@ -113,8 +177,21 @@ class Controller_files
         return view('textEditor', compact('content'));
     }
 
-    //Queda arreglar el acceso a las páginas sin estar loggeado
-    //Crear carpeta publica
+    public function editPublicFile(Request $request){
+
+        $username = session()->get('username');
+        $this->checkLogin();
+        $actualDirectory = session()->get('actualDirectory');
+        $file = $request->fileGetContent;
+        session()->put('trabajandoPublico', 'true');
+
+        $content = Storage::get("/".$file);
+
+        //dd($file);
+
+        return view('textEditor', compact('content'));
+    }
+
 
     /*$content = Storage::get($filename);*/
 }

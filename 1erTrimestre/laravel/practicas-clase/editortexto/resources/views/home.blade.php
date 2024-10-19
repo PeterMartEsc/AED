@@ -45,10 +45,16 @@
         <br>
         <br>
         <div class="crearNuevoFichero">
-            <h2>Create new file</h2>
+            <h2>Create new <b>private</b> file</h2>
             <form action="/createFile">
                 <input type="text" name="filename" placeholder="file name">
-                <input type="submit" value="Log-In">
+                <input type="submit" value="Create">
+            </form>
+
+            <h2>Create new <b>public</b> file</h2>
+            <form action="/createPublicFile">
+                <input type="text" name="filename" placeholder="file name">
+                <input type="submit" value="Create">
             </form>
         </div>
 
@@ -56,10 +62,16 @@
         </br>
 
         <div class="listaFicheros">
-            <h2>List of files</h2>
+            <h2>List of <b>private</b> files</h2>
             <ul>
                 @foreach (session()->get('dirList') as $directorio)
                     <li><a href="{{ route('listFiles', ['dirName' =>$directorio]) }}">{{$directorio}}</a></li>
+                @endforeach
+            </ul>
+            <h2>List of <b>public</b> files</h2>
+            <ul>
+                @foreach (session()->get('publicDirList') as $directorio)
+                    <li><a href="{{ route('listPublicFiles', ['publicDirList' =>$directorio]) }}">{{$directorio}}</a></li>
                 @endforeach
             </ul>
         </div>

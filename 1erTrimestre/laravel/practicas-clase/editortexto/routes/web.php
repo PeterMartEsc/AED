@@ -30,11 +30,18 @@ Route::get('/logout', [Controller_files::class, 'logout']);
 
 Route::get('/createFile', [Controller_files::class, 'createFile']);
 
-//Route::get('/filesearch', [Controller_files::class, 'filesearch']);
+Route::get('/createPublicFile', [Controller_files::class, 'createPublicFile']);
+
 
 Route::get('/listFiles', [Controller_files::class, 'listFiles'])->name('listFiles');
 
+Route::get('/listPublicFiles', [Controller_files::class, 'listPublicFiles'])->name('listPublicFiles');
+
 
 Route::any('/saveFile', [Controller_files::class, 'saveFile']);
+Route::any('/savePublicFile', [Controller_files::class, 'savePublicFile']);
+
 
 Route::get('/editFile', [Controller_files::class, 'editFile'])->name('editFile');
+Route::get('/editPublicFile', [Controller_files::class, 'editPublicFile'])->name('editPublicFile');
+
