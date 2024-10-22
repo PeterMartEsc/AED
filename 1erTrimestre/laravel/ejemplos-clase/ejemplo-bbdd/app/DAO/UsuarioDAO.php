@@ -110,12 +110,79 @@ class UsuarioDAO implements ICrud
         return $usuario;
 
     }
-    public function update($dao): bool{
+
+    //Añadir otros atributos de usuarios
+    public function update($usuario): bool{
+
+        $colid = UsuarioContract::COL_ID;
+        $colnombre = UsuarioContract::COL_NOMBRE;
+        $colpassword = UsuarioContract::COL_PASSWORD;
+        $colrol = UsuarioContract::COL_ROL;
+
+        $tablename = UsuarioContract::TABLE_NAME;
+        $myPDO = DB::getPdo();
+        if (!($usuario->getId() > 0)) {
+            return false;
+        }
+        $sql = "UPDATE $tablename ".
+               " SET $colnombre = :nombre " .
+               " SET $colpassword = :password " .
+               " SET $colrol = :rol " .
+               " WHERE $colid = :id";
+
+
+        try {
+            $myPDO->beginTransaction();
+            $stmt = $myPDO->prepare($sql);
+            $stmt->execute(
+                [
+                    ':nombre' => $usuario->getNombre(),
+                    ':id' => $usuario->getId(),
+                    ':password' => $usuario->getPassword(),
+                    ':rol' => $usuario->getRol()
+                ]
+            );
+            //si filasAfectadas > 0 => hubo éxito consulta
+            $filasAfectadas = $stmt->rowCount();
+
+            
+            if ($filasAfectadas > 0) {
+
+                $myPDO->commit();
+            } else {
+                $myPDO->rollback();
+                return false;
+            }
+        } catch (Exception $ex) {
+            echo "ha habido una excepción se lanza rollback";
+            var_dump($ex);
+            $myPDO->rollback();
+            return false;
+        }
+        $stmt = null;
+        return true;
+
 
     }
-    public function delete($id): bool{
 
+    //Comprobar resto de atributos de usuario
+    public function delete($id): bool
+    {
+
+
+        $myPDO = DB::getPdo();
+        $tablename = UsuarioContract::TABLE_NAME;
+        $colid = UsuarioContract::COL_ID;
+        $sql = "DELETE FROM $tablename WHERE $colid  = :id";
+
+        $stmt = $myPDO->prepare($sql);
+        $stmt->execute([':id' => $id]);
+
+        $filasAfectadas = $stmt->rowCount();
+        return $filasAfectadas > 0;
     }
+
+
 
 }
 
