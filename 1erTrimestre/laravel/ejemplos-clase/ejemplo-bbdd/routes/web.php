@@ -1,10 +1,10 @@
 <?php
 
 use App\DAO\RolDAO;
+use App\Models\Rol;
 use App\Http\Controllers\ConstruccionController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\UsuarioController;
-use App\Models\Rol;
 use Illuminate\Support\Facades\Route;
 
 /*

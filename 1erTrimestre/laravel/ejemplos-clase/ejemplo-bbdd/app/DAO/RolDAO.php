@@ -2,8 +2,8 @@
 
 namespace App\DAO;
 
-use App\Contracts\FiguraContract;
 use App\Contracts\RolContract;
+use App\Contracts\FiguraContract;
 use App\Models\Figura;
 use App\Models\Rol;
 use Exception;

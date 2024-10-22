@@ -9,4 +9,3 @@ interface ICrud{
     public function update($dao): bool;
     public function delete($id): bool;
 }
-    
