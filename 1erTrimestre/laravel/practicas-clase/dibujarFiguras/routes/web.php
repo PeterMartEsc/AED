@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Dao\RolDAO;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/roles', function () {
+    $rolDAO = new RolDAO();
+    $roles = $rolDAO->findAll();
+    print_r($roles);
 });
