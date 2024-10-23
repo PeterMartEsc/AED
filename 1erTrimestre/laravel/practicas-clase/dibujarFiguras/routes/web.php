@@ -1,5 +1,11 @@
 <?php
 
+use App\DAO\RolDAO;
+use App\Http\Controllers\ConstruccionController;
+use App\Http\Controllers\Controller_figuras;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\UsuarioController;
+use App\Models\Rol;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +19,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/", function (){
+    return view('');
 });
+
+Route::get("/login", [Controller_figuras::class, 'login']);
+
+Route::get("/register", [Controller_figuras::class, 'register']);
+
+
+
+Route::get("/nuevorol", function (){
+    $rolDAO = new RolDAO();
+    $rol = new Rol();
+    $rol->setNombre("prueba". rand(1,100));
+    $resultado = $rolDAO->save($rol);
+    dd($resultado);
+});
+
+
+Route::get("/allroles", function () {
+    $rolDAO = new RolDAO();
+    $roles = $rolDAO->findAll();
+    dd($roles);
+});
+
+
+Route::get("/editrol", function () {
+    $rolDAO = new RolDAO();
+    $rol = (new Rol())
+    ->setId(3)
+    ->setNombre("modificado");
+    $ok = $rolDAO->update($rol);
+    if( $ok){
+        echo "Rol modificado con éxito";
+    }
+});
+
+
+Route::get("/borrarol", function () {
+    $rolDAO = new RolDAO();
+
+    $ok = $rolDAO->delete(3);
+    if ($ok) {
+        echo "rol borrado";
+    }
+});
+
+
