@@ -34,7 +34,7 @@ class PruebasFicheros extends Controller
 
 
             //ahora como binario
-            $data = pack("i", $i);
+            $data = pack("i", $i); //Le dice como lo empaca, i entero, a string de tamaño que digas, f float, etc
 
             fwrite($fileBinario, $data);
         }
@@ -145,7 +145,7 @@ class PruebasFicheros extends Controller
     public function escribirRegistroBinario(){
         $fichero = '/tmp/personas.dat'; // Nombre del archivo binario
 
-        
+
         $nombres = ["ana", "luisa", "axel", "rita"];
         $apellidos = ["martínez", "lópez", "garcía", "pérez"];
 
@@ -170,8 +170,8 @@ class PruebasFicheros extends Controller
 
             $personas[] = $persona;
         }
-        
-        
+
+
 
         $fp = fopen($fichero, 'ab');
         foreach ($personas as $p) {
@@ -229,13 +229,13 @@ class PruebasFicheros extends Controller
         $sizeRegistro = $mapper->getSizeRegistro();
 
 
-        //calculamos el byte al que hay que desplazarse 
+        //calculamos el byte al que hay que desplazarse
         $offset = ($numeroRegistro - 1) * $sizeRegistro;
 
         // Desplazar el puntero al byte obtenido
         fseek($fp, $offset, SEEK_SET); // SEEK_SET nos posiciona en el principio del fichero así $offset es desde 0
 
-  
+
         $registro = fread($fp, $sizeRegistro);
 
         // Cerrar el archivo
@@ -250,7 +250,7 @@ class PruebasFicheros extends Controller
 
         }
 
-   
+
 
 
     }

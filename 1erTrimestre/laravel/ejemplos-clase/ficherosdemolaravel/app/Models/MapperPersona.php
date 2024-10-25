@@ -53,7 +53,7 @@ class MapperPersona {
         $edad = $persona->getEdad();
         $peso = $persona->getPeso();
 
-        $registro = pack(
+        $registro = pack(   //Le dice como lo empaca, i entero, a string de tamaño que digas, f float, etc
             'ia'.self::bytesNombre.'a'.self::bytesApellidos.'if',
             $id,
             $nombre,
@@ -78,11 +78,11 @@ class MapperPersona {
             return null;
         }
 
-        $persona = new Persona();
+        $persona = new Persona();   //Le dice como lo empaca, i entero, a string de tamaño que digas, f float, etc
         $persona
             ->setId($datos['id'])
-            ->setNombre($datos['nombre'])
-            ->setApellidos($datos['apellidos'])
+            ->setNombre(trim($datos['nombre']))
+            ->setApellidos(trim($datos['apellidos']))
             ->setEdad($datos['edad'])
             ->setPeso(round($datos['peso'],2));
 

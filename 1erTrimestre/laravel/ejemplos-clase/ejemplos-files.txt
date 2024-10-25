@@ -1,0 +1,33 @@
+            $this->filename = env('FILE_USERS');
+            $this->fileUsernameIndex = env('FILE_USER_NAME_INDEX');
+
+
+            try {
+                $myPDO = DB::getPdo();
+                $myPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $dao = new UsuarioDAO();
+            } catch (PDOException $e) {
+                $dao = new UsuarioFileDAO();
+            }
+
+
+
+
+----------------------
+//desplazarse a una posición del fichero binario contando desde cero $offset sería
+//la información que obtenemos del ficheor de índices
+ fseek($fp, $offset, SEEK_SET)
+
+
+----------------------
+//leer fichero
+$fp = fopen($fichero, 'rb');
+
+------------------
+
+-----
+  //ubicarse al final del archivo:
+              fseek($fp, 0, SEEK_END);
+//tomar la posición actual:
+            $posicion = ftell($fp);
+------
