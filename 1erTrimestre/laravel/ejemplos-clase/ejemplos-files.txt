@@ -31,3 +31,8 @@ $fp = fopen($fichero, 'rb');
 //tomar la posición actual:
             $posicion = ftell($fp);
 ------
+
+-------
+  
+    //formulario subir fichero:
+    <form action="{{ route('figura.upload') }}" method="POST" enctype="multipart/form-data">
