@@ -1,3 +1,5 @@
+<div style="text-align: justify;">
+
 # Documentacion de practicas Laravel
 
 #### Introduccion
@@ -248,3 +250,5 @@ Route::any('/cargarFilesDelete', [Controller_Pr20::class, 'cargarFiles']);
 
 Route::any('/deleteFile', [Controller_Pr20::class, 'descargarFiles']);
 ```
+
+</div>

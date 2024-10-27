@@ -10,11 +10,11 @@
         <div>
             <h2>Bienvenido</h2>
             <p>Esta es la web para dibujar con figuras. Elija que quiere hacer:</p></br>
-            <form action="/login">
+            <form action="/selectLogin">
                 <input type="submit" value="Log-in">
             </form>
 
-            <form action="/register">
+            <form action="/selectRegister">
                 <input type="submit" value="Register">
             </form>
         </div>

@@ -20,12 +20,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", function (){
-    return view('');
+    return view('home');
+});
+
+Route::get("/selectLogin", function (){
+    return view('login');
+});
+
+Route::get("/selectRegister", function (){
+    return view('register');
 });
 
 Route::get("/login", [Controller_figuras::class, 'login']);
-
 Route::get("/register", [Controller_figuras::class, 'register']);
+
+
 
 
 

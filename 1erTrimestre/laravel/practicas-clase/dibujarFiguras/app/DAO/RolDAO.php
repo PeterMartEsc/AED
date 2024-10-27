@@ -19,71 +19,28 @@ class RolDAO implements ICrud
 
     public function __construct() {}
 
-
-
-    public function delete($id): bool
+    public function findAll(): array
     {
 
+        $tablename = RolContract::TABLE_NAME;
+
+        $sql = "SELECT * FROM $tablename";
 
         $myPDO = DB::getPdo();
-        $tablename = RolContract::TABLE_NAME;
-        $colid = RolContract::COL_ID;
-        $sql = "DELETE FROM $tablename WHERE $colid  = :id";
-
         $stmt = $myPDO->prepare($sql);
-        return $stmt->execute([':id' => $id]);
-        $filasAfectadas = $stmt->rowCount();
-        return $filasAfectadas > 0;
-    }
+        $stmt->execute();
+        $row = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $roles = [];
 
-
-    public function update($p): bool
-    {
-
-        $colid = RolContract::COL_ID;
-        $colnombre = RolContract::COL_NOMBRE;
-        $tablename = RolContract::TABLE_NAME;
-        $myPDO = DB::getPdo();
-        if (!($p->getId() > 0)) {
-            return false;
+        while ($row = $stmt->fetch()) {
+            $rol = new Rol();
+            $rol->setId($row[RolContract::COL_ID])
+                ->setNombre($row[RolContract::COL_NOMBRE]);
+            $roles[] = $rol;
         }
-        $sql = "UPDATE $tablename ".
-               " SET $colnombre = :nombre " .
-               " WHERE $colid = :id";
 
-
-        try {
-            $myPDO->beginTransaction();
-            $stmt = $myPDO->prepare($sql);
-            $stmt->execute(
-                [
-                    ':nombre' => $p->getNombre(),
-                    ':id' => $p->getId()
-
-                ]
-            );
-            //si filasAfectadas > 0 => hubo éxito consulta
-            $filasAfectadas = $stmt->rowCount();
-
-
-
-            if ($filasAfectadas > 0) {
-
-                $myPDO->commit();
-            } else {
-                $myPDO->rollback();
-                return false;
-            }
-        } catch (Exception $ex) {
-            echo "ha habido una excepción se lanza rollback";
-            var_dump($ex);
-            $myPDO->rollback();
-            return false;
-        }
-        $stmt = null;
-        return true;
+        return $roles;
     }
-
 
     public function findById($id): object | null
     {
@@ -100,40 +57,83 @@ class RolDAO implements ICrud
         $stmt->execute([':id' => $id]);
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
         if ($row) {
-            $p = new Rol();
-            $p->setId($row[RolContract::COL_ID])
+            $rol = new Rol();
+            $rol->setId($row[RolContract::COL_ID])
                 ->setNombre($row[RolContract::COL_NOMBRE]);
-            return $p;
+            return $rol;
         }
 
         return null;
     }
 
-
-    public function findAll(): array
+    public function delete($id): bool
     {
 
-        $tablename = RolContract::TABLE_NAME;
-
-        $sql = "SELECT * FROM $tablename";
-
         $myPDO = DB::getPdo();
-        $stmt = $myPDO->prepare($sql);
-        $stmt->execute();
-        $row = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $roles = [];
-        while ($row = $stmt->fetch()) {
-            $p = new Rol();
-            $p->setId($row[RolContract::COL_ID])
-                ->setNombre($row[RolContract::COL_NOMBRE]);
-            $roles[] = $p;
-        }
+        $tablename = RolContract::TABLE_NAME;
+        $colid = RolContract::COL_ID;
+        $sql = "DELETE FROM $tablename WHERE $colid  = :id";
 
-        return $roles;
+        $stmt = $myPDO->prepare($sql);
+
+        return $stmt->execute([':id' => $id]);
+
+        $filasAfectadas = $stmt->rowCount();
+
+        return $filasAfectadas > 0;
     }
 
-    public function save($p): object | null
+
+    public function update($rol): bool
+    {
+
+        $colid = RolContract::COL_ID;
+        $colnombre = RolContract::COL_NOMBRE;
+        $tablename = RolContract::TABLE_NAME;
+        $myPDO = DB::getPdo();
+        if (!($rol->getId() > 0)) {
+            return false;
+        }
+        $sql = "UPDATE $tablename ".
+               " SET $colnombre = :nombre " .
+               " WHERE $colid = :id";
+
+
+        try {
+            $myPDO->beginTransaction();
+            $stmt = $myPDO->prepare($sql);
+            $stmt->execute(
+                [
+                    ':nombre' => $rol->getNombre(),
+                    ':id' => $rol->getId()
+
+                ]
+            );
+            //si filasAfectadas > 0 => hubo éxito consulta
+            $filasAfectadas = $stmt->rowCount();
+
+
+            if ($filasAfectadas > 0) {
+
+                $myPDO->commit();
+            } else {
+                $myPDO->rollback();
+                return false;
+            }
+        } catch (Exception $ex) {
+            echo "ha habido una excepción se lanza rollback";
+            var_dump($ex);
+            $myPDO->rollback();
+            return false;
+        }
+
+        $stmt = null;
+        return true;
+    }
+
+    public function save($rol): object | null
     {
         $myPDO = DB::getPdo();
         $tablename = RolContract::TABLE_NAME;
@@ -149,7 +149,7 @@ class RolDAO implements ICrud
             $stmt = $myPDO->prepare($sql);
             $stmt->execute(
                 [
-                    ':nombre' => $p->getNombre()
+                    ':nombre' => $rol->getNombre()
 
                 ]
             );
@@ -162,7 +162,7 @@ class RolDAO implements ICrud
             if ($filasAfectadas > 0) {
                 //obtenemos el id generado con:
                 $idgenerado = $myPDO->lastInsertId();
-                $p->setId($idgenerado);
+                $rol->setId($idgenerado);
                 $myPDO->commit();
             } else {
                 $myPDO->rollback();
@@ -176,6 +176,6 @@ class RolDAO implements ICrud
         }
         $stmt = null;
 
-        return $p;
+        return $rol;
     }
 }

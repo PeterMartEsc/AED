@@ -4,16 +4,16 @@ namespace App\Models;
 
 class Rol{
 
-/**
- * @var int
- *
- */
-    private int $id;
+    /**
+     * @var int
+     *
+     */
+    public int $id;
 
     /**
      * @var string
      */
-    private string $nombre;
+    public string $nombre;
 
 
     /**

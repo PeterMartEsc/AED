@@ -13,6 +13,98 @@ class UsuarioDAO implements ICrud {
 
     public function __construct() {}
 
+    public function findAll(): array {
+
+        $myPDO = DB::getPdo();
+        $sql = "SELECT ".
+            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ".
+            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
+        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME .
+         " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = ". RolContract::TABLE_NAME ."." . RolContract::COL_ID ;
+
+        // dd($sql);
+
+         $stmt = $myPDO->prepare($sql);
+
+
+        $stmt->execute();
+
+
+
+        $usuarios = [];
+        while ($row = $stmt->fetch()) {
+            $p = new Usuario();
+            $p->setId($row[0])
+                ->setNombre($row[1])
+                ->setPassword($row[2])
+                ->setRol($row[3]);
+            $usuarios[] = $p;
+        }
+
+
+        return $usuarios;
+    }
+
+    public function findById($id): object | null {
+        $myPDO = DB::getPdo();
+
+        $sql = "SELECT ".
+            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ".
+            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
+        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME
+        . " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = " . RolContract::TABLE_NAME .".". RolContract::COL_ID
+        . " WHERE " . UsuarioContract::TABLE_NAME . "." . UsuarioContract::COL_ID . " = :id";
+
+
+
+        $stmt = $myPDO->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        $row = $stmt->fetch(/* PDO::FETCH_ASSOC */);
+        if ($row) {
+            $p = new Usuario();
+            $p->setId($id)
+                ->setNombre($row[1])
+                ->setPassword($row[2])
+                ->setRol($row[3]);
+            return $p;
+        }
+
+        return null;
+    }
+
+
+    public function findByName($nombre): Usuario | null {
+        $myPDO = DB::getPdo();
+        $sqlFindName = "SELECT ".
+            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ".
+            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ".
+            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
+        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME
+        . " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = " . RolContract::TABLE_NAME .".". RolContract::COL_ID
+        . " WHERE " . UsuarioContract::TABLE_NAME .".".  UsuarioContract::COL_NOMBRE . " = :nombre";
+
+        //dd($sqlFindName);
+
+        $stmt = $myPDO->prepare($sqlFindName);
+        $stmt->execute([':nombre' => $nombre]);
+        $row = $stmt->fetch(/*PDO::FETCH_ASSOC*/);
+        if ($row) {
+            $p = new Usuario();
+            $p->setId($row[0])
+                ->setNombre($row[1])
+                ->setPassword($row[2])
+                ->setRol($row[3]);
+            return $p;
+        }
+
+        return null;
+    }
+
 
     public function deleteWithRel($id):bool{
         $tableroDAO =new TableroDAO();
@@ -72,10 +164,10 @@ class UsuarioDAO implements ICrud {
 
 
 
-        $sql = "UPDATE " . UsuarioContract::TABLE_NAME 
-        . " SET " . UsuarioContract::COL_NOMBRE . " = :nombre, " 
-        . UsuarioContract::COL_PASSWORD . " = :password, " 
-        . UsuarioContract::COL_ROL . " = :rolId " 
+        $sql = "UPDATE " . UsuarioContract::TABLE_NAME
+        . " SET " . UsuarioContract::COL_NOMBRE . " = :nombre, "
+        . UsuarioContract::COL_PASSWORD . " = :password, "
+        . UsuarioContract::COL_ROL . " = :rolId "
         . " WHERE " . UsuarioContract::COL_ID . " = :id";
 
         try {
@@ -102,7 +194,7 @@ class UsuarioDAO implements ICrud {
             }
 
         } catch (Exception $ex) {
-  
+
             var_dump($ex);
             $myPDO->rollback();
             return false;
@@ -111,104 +203,8 @@ class UsuarioDAO implements ICrud {
         return true;
     }
 
-    public function findById($id): object | null {
-        $myPDO = DB::getPdo();
 
-        $sql = "SELECT ". 
-            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ". 
-            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
-        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME 
-        . " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = " . RolContract::TABLE_NAME .".". RolContract::COL_ID 
-        . " WHERE " . UsuarioContract::TABLE_NAME . "." . UsuarioContract::COL_ID . " = :id";
-
-     
-
-        $stmt = $myPDO->prepare($sql);
-        $stmt->execute([':id' => $id]);
-        $row = $stmt->fetch(/* PDO::FETCH_ASSOC */);
-        if ($row) {
-            $p = new Usuario();
-            $p->setId($id)
-                ->setNombre($row[1])
-                ->setPassword($row[2])
-                ->setRol($row[3]);
-            return $p;
-        }
-
-        return null;
-    }
-
-
-
-
-    public function findByName($nombre): Usuario | null {
-        $myPDO = DB::getPdo();
-        $sqlFindName = "SELECT ". 
-            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ". 
-            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
-        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME 
-        . " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = " . RolContract::TABLE_NAME .".". RolContract::COL_ID 
-        . " WHERE " . UsuarioContract::TABLE_NAME .".".  UsuarioContract::COL_NOMBRE . " = :nombre";
-      
-        //dd($sqlFindName);
-
-        $stmt = $myPDO->prepare($sqlFindName);
-        $stmt->execute([':nombre' => $nombre]);
-        $row = $stmt->fetch(/*PDO::FETCH_ASSOC*/);
-        if ($row) {
-            $p = new Usuario();
-            $p->setId($row[0])
-                ->setNombre($row[1])
-                ->setPassword($row[2])
-                ->setRol($row[3]);
-            return $p;
-        }
-
-        return null;
-    }
-
-    public function findAll(): array {
-
-
-        $myPDO = DB::getPdo();
-        $sql = "SELECT ". 
-            UsuarioContract::TABLE_NAME . ".". UsuarioContract::COL_ID. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_NOMBRE. ", ". 
-            UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_PASSWORD. ", ". 
-            RolContract::TABLE_NAME . ".".RolContract::COL_NOMBRE.
-        " FROM " . UsuarioContract::TABLE_NAME . " INNER JOIN ". RolContract::TABLE_NAME .
-         " ON " . UsuarioContract::TABLE_NAME . ".".UsuarioContract::COL_ROL . " = ". RolContract::TABLE_NAME ."." . RolContract::COL_ID ;
-        
-        // dd($sql);
-
-         $stmt = $myPDO->prepare($sql);
-
-         
-        $stmt->execute();
-
-        
-
-        $usuarios = [];
-        while ($row = $stmt->fetch()) {
-            $p = new Usuario();
-            $p->setId($row[0])
-                ->setNombre($row[1])
-                ->setPassword($row[2])
-                ->setRol($row[3]);
-            $usuarios[] = $p;
-        }
-
-       
-        return $usuarios;
-    }
-
-
-
-    public function save($p): object | null {
+    public function save($usuario): object | null {
         $myPDO = DB::getPdo();
 
 
@@ -216,7 +212,7 @@ class UsuarioDAO implements ICrud {
 
 
         $stmtRol = $myPDO->prepare($sqlRolid);
-        $stmtRol->execute([':rol' => $p->getRol()]);
+        $stmtRol->execute([':rol' => $usuario->getRol()]);
         $rowRol = $stmtRol->fetch(PDO::FETCH_ASSOC);
 
         if ($rowRol) {
@@ -242,8 +238,8 @@ class UsuarioDAO implements ICrud {
             $stmt = $myPDO->prepare($sql);
             $stmt->execute(
                 [
-                    ':nombre' => $p->getNombre(),
-                    ':password' => $p->getPassword(),
+                    ':nombre' => $usuario->getNombre(),
+                    ':password' => $usuario->getPassword(),
                     ':rol' => $rolId
                 ]
             );
@@ -255,7 +251,7 @@ class UsuarioDAO implements ICrud {
             if ($filasAfectadas > 0) {
                 //obtenemos el id generado con:
                 $idgenerado = $myPDO->lastInsertId();
-                $p->setId($idgenerado);
+                $usuario->setId($idgenerado);
                 $myPDO->commit();
             } else {
                 $myPDO->rollback();
@@ -270,6 +266,6 @@ class UsuarioDAO implements ICrud {
         }
         $stmt = null;
 
-        return $p;
+        return $usuario;
     }
 }
