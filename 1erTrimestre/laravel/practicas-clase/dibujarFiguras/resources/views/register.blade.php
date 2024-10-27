@@ -5,20 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Register</title>
+        <style>
+            .register-form{
+                margin: auto;
+                border: 2px solid black;
+                padding: 10px;
+                width: 200px;
+                height: 150px;
+            }
+        </style>
     </head>
     <body class="antialiased">
-        <div>
+        <div class="register-form">
             <form action="/register">
-                <label for="username">
+                <label for="nombre">
                     Nombre de usuario
-                    <input type="text" id="username" name="username" placeholder="username">
+                    <input type="text" id="nombre" name="nombre" placeholder="nombre">
                 </label>
-                <br/>
+                <br/><br/>
                 <label for="password">
                     Contraseña
                     <input type="password" id="password" name="password" placeholder="password">
                 </label>
-                <br/>
+                <br/><br/>
                 <input type="submit" value="Register">
             </form>
         </div>

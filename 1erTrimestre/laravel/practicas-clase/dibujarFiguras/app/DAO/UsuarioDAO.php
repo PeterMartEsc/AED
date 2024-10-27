@@ -35,12 +35,12 @@ class UsuarioDAO implements ICrud {
 
         $usuarios = [];
         while ($row = $stmt->fetch()) {
-            $p = new Usuario();
-            $p->setId($row[0])
+            $usuario = new Usuario();
+            $usuario->setId($row[0])
                 ->setNombre($row[1])
                 ->setPassword($row[2])
                 ->setRol($row[3]);
-            $usuarios[] = $p;
+            $usuarios[] = $usuario;
         }
 
 
@@ -94,19 +94,19 @@ class UsuarioDAO implements ICrud {
         $stmt->execute([':nombre' => $nombre]);
         $row = $stmt->fetch(/*PDO::FETCH_ASSOC*/);
         if ($row) {
-            $p = new Usuario();
-            $p->setId($row[0])
+            $usuario = new Usuario();
+            $usuario->setId($row[0])
                 ->setNombre($row[1])
                 ->setPassword($row[2])
                 ->setRol($row[3]);
-            return $p;
+            return $usuario;
         }
 
         return null;
     }
 
 
-    public function deleteWithRel($id):bool{
+    /*public function deleteWithRel($id):bool{
         $tableroDAO =new TableroDAO();
         $tablerosDelUsuario = $tableroDAO->findByUserId($id);
         $myPDO = DB::getPdo();
@@ -130,7 +130,7 @@ class UsuarioDAO implements ICrud {
             return false;
         }
 
-    }
+    }*/
 
     public function delete($id): bool {
         $myPDO = DB::getPdo();
@@ -205,63 +205,59 @@ class UsuarioDAO implements ICrud {
 
 
     public function save($usuario): object | null {
+
         $myPDO = DB::getPdo();
+        $tablename = UsuarioContract::TABLE_NAME;
+        $colname = UsuarioContract::COL_NOMBRE;
+        $colpassword = UsuarioContract::COL_PASSWORD;
+        $colrol = UsuarioContract::COL_ROL;
 
+        $roleNombre = $usuario->getRol();
+        $roleDAO = new RolDAO();
 
-        $sqlRolid = "SELECT * FROM " . RolContract::TABLE_NAME . " WHERE " . RolContract::COL_NOMBRE . " = :rol";
+        $allRoles = $roleDAO->findAll();
 
-
-        $stmtRol = $myPDO->prepare($sqlRolid);
-        $stmtRol->execute([':rol' => $usuario->getRol()]);
-        $rowRol = $stmtRol->fetch(PDO::FETCH_ASSOC);
-
-        if ($rowRol) {
-
-            $rolId = $rowRol[RolContract::COL_ID];
-
-        }else{
-            throw new Exception("rol no encontrado");
-            return false;
+        $rolId = 0;
+        foreach ($allRoles as $role) {
+            if ($role->getNombre() === $roleNombre) {
+                $rolId = $role->getId();
+                break;
+            }
         }
 
+        $sql =
+        "INSERT INTO $tablename ( $colname, $colpassword, $colrol)
+         VALUES(:nombre, :passwd, :rol)";
 
-
-        $tablename = UsuarioContract::TABLE_NAME;
-        $colid = UsuarioContract::COL_ID;
-        $colnombre = UsuarioContract::COL_NOMBRE;
-        $colpassword = UsuarioContract::COL_PASSWORD;
-        $colrolId = UsuarioContract::COL_ROL;
-        $sql = "INSERT INTO $tablename ( $colnombre, $colpassword, $colrolId)
-        VALUES(:nombre, :password, :rol)";
         try {
             $myPDO->beginTransaction();
             $stmt = $myPDO->prepare($sql);
             $stmt->execute(
                 [
                     ':nombre' => $usuario->getNombre(),
-                    ':password' => $usuario->getPassword(),
+                    ':passwd' => $usuario->getPassword(),
                     ':rol' => $rolId
                 ]
             );
-            //si filasAfectadas > 0 => hubo éxito consulta
-            $filasAfectadas = $stmt->rowCount();
-            echo "<br>afectadas: " . $filasAfectadas;
+
+            //si affectedRows > 0 => hubo éxito consulta
+            $affectedRows = $stmt->rowCount();
 
             //forzamos un rollback aleatorio para ver que deshace los cambios
-            if ($filasAfectadas > 0) {
+            if ($affectedRows > 0) {
                 //obtenemos el id generado con:
                 $idgenerado = $myPDO->lastInsertId();
                 $usuario->setId($idgenerado);
                 $myPDO->commit();
             } else {
-                $myPDO->rollback();
+                $myPDO->rollBack();
                 return null;
             }
-
+            
         } catch (Exception $ex) {
             echo "ha habido una excepción se lanza rollback";
-            var_dump($ex);
-            $myPDO->rollback();
+            //var_dump($ex);
+            $myPDO->rollBack();
             return null;
         }
         $stmt = null;

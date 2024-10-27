@@ -32,13 +32,14 @@ Route::get("/selectRegister", function (){
 });
 
 Route::get("/login", [Controller_figuras::class, 'login']);
+
 Route::get("/register", [Controller_figuras::class, 'register']);
 
+Route::get("/logout", [Controller_figuras::class, 'logout']);
 
 
 
-
-Route::get("/nuevorol", function (){
+/*Route::get("/nuevorol", function (){
     $rolDAO = new RolDAO();
     $rol = new Rol();
     $rol->setNombre("prueba". rand(1,100));
@@ -73,6 +74,6 @@ Route::get("/borrarol", function () {
     if ($ok) {
         echo "rol borrado";
     }
-});
+});*/
 
 

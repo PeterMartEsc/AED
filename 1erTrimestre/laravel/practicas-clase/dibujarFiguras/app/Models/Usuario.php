@@ -6,11 +6,11 @@ class Usuario{
 
     public int $id;
 
-    public string $username;
+    public string $nombre;
 
     public string $password;
 
-    public Rol $rol;
+    public String $rol;
 
 
     /**
@@ -34,21 +34,21 @@ class Usuario{
     }
 
     /**
-     * Get the value of username
+     * Get the value of nombre
      */
-    public function getUsername()
+    public function getNombre()
     {
-        return $this->username;
+        return $this->nombre;
     }
 
     /**
-     * Set the value of username
+     * Set the value of nombre
      *
      * @return  self
      */
-    public function setUsername($username)
+    public function setNombre($nombre)
     {
-        $this->username = $username;
+        $this->nombre = $nombre;
 
         return $this;
     }

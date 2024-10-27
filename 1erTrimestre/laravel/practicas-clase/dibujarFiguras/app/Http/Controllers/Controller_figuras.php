@@ -1,29 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\DAO\RolDAO;
 use App\DAO\UsuarioDAO;
-use Illuminate\Http\Client\Request;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * Pasos:
- * 0.- Cambiar username por nombre en todos los campos
- * 1.- Hacer la clase Usuario y Rol
- * 2.- Comprobar el Login y Register
- * 3.- Hacer el tablero y figura contract
- * 4.- Como se guardan las imagenes en la bbdd?
+ * 1.- Comprobar el Login y Register
+ * 2.- Hacer el tablero y figura contract
+ * 3.- Como se guardan las imagenes en la bbdd?
  *
  * - Dar estilo al login, register, home y game
  */
 
 class Controller_figuras
 {
+    protected $usuarioDAO;
+    protected $rolDAO;
+
+    public function __construct(){
+        $this->usuarioDAO = new UsuarioDAO();
+        $this->rolDAO = new RolDAO();
+    }
+
     public function login(Request $request){
-        $username = $request->get('username');
-        session()->set('username', $username);
+
+        $nombre = $request->get('nombre');
+        session()->put('nombre', $nombre);
+
         $password = $request->get('password');
         $paswordHashed = Hash::make($password);
-        session()->set('password', $paswordHashed);
+        session()->put('password', $paswordHashed);
 
         $this->checkLogin();
 
@@ -31,31 +41,48 @@ class Controller_figuras
     }
 
     public function register(Request $request){
-        $username = $request->get('username');
+
+        /*$request->validate()([
+            'nombre' => 'required|string|max:100',
+            'password' => 'required|string',
+        ]);*/
+
+
+        $nombre = $request->get('nombre');
         $password = $request->get('password');
 
         $hashedPassword = Hash::make($password);
 
-        //$usuario = new Usuario();
-        //$usuario->setUsername($username);
-        //$usuario->setPassword($hashedPassword);
-        //$usuario->setRol($rol);
+        $usuario = new Usuario();
+        $usuario->setNombre($nombre);
+        $usuario->setPassword($hashedPassword);
 
-        //UsuarioDAO::save($usuario);
+        $rolUsuario = $this->rolDAO->findById(1);
+        $rolName = $rolUsuario->getNombre();
+
+        $usuario->setRol($rolName);
+
+        //dd($usuario);
+        $this->usuarioDAO->save($usuario);
+        $mensajeRegister = "Se ha registrado correctamente";
+
+        return view("login", compact('mensajeRegister'));
     }
 
     public function checkLogin(){
-        $username = session()->get('username');
+        $nombre = session()->get('nombre');
 
-        if(!isset($username)){
-            return redirect("/login");
+        if(!isset($nombre)){
+            return redirect("/selectLogin");
         }
 
-        //$user = UsuarioDAO::findByName($username);
+        $user = $this->usuarioDAO->findByName($nombre);
 
-        if(!isset($user)){
+        if($user === null){
             $mensajeUser = "Usuario no encontrado";
-            return view("login", compact("mensajeUser"));
+
+            return redirect("/selectLogin")->with('mensajeUser', $mensajeUser);
+            //dd($user);
         }
 
         $passwordUser = $user->getPassword();
@@ -69,5 +96,10 @@ class Controller_figuras
 
         $rol = $user->getRol();
         session()->set('actualRol', $rol);
+    }
+
+    public function logout(){
+        session()->flush();
+        return redirect("/selectLogin");
     }
 }
