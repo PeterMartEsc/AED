@@ -14,10 +14,13 @@
                 @csrf
                 <label for="fichero">Nombre fichero</label>
                 <input type="text" name="fichero" id="fichero">
+
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre", id="nombre">
+
                 <label for="correo">Correo</label>
                 <input type="text" name="correo" id="correo">
+                
                 <input type="submit" value="Crear">
                 </form>
         </div>

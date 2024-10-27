@@ -13,21 +13,15 @@ class Controller_Pr18 extends Controller
         $nombre = $request->get('nombre');
         $correo = $request->get('correo');
 
+        //Storage::put("/".$nombreFichero.".csv", $contenido);
 
-        $nombreFichero->storeAs("/".$dir);
+        $data = [$nombre,$correo];
+        $csvLine = implode(',', $data) . "\n";
 
+        // Guardar o añadir la línea al archivo CSV. El append toma como base storage/app
+        Storage::append($dir."/".$nombreFichero.".csv", $csvLine);
 
-        $contentDir = Storage::allFiles("/".$dir);
+        return view('Pr18_formCrearFichero');
 
-        if (($open = fopen(storage_path() . "/".$dir, "r")) !== FALSE) {
-
-            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-                $contenido[] = $data;
-            }
-
-            fclose($open);
-
-            return view('Pr18_formCrearFichero', compact('contenido', 'contentDir'));
-        }
     }
 }
