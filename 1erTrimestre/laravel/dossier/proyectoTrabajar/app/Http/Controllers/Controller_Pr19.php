@@ -14,6 +14,6 @@ class Controller_Pr19 extends Controller
 
     public function descargarFiles(Request $request){
         $archivoDescargar = $request->get('archivo');
-        return response()->download(storage_path('app/'.$archivoDescargar));
+        return response()->download(storage_path('/'.$archivoDescargar));
     }
 }

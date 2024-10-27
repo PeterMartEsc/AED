@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller_Pr16;
 use App\Http\Controllers\Controller_Pr17;
 use App\Http\Controllers\Controller_Pr18;
 use App\Http\Controllers\Controller_Pr19;
+use App\Http\Controllers\Controller_Pr20;
+
 
 
 
@@ -35,24 +37,24 @@ use App\Http\Controllers\PruebaController;
 
 //Pr01
        //any para todas
-//Route::get('/', function () {echo "Under Construction";});
+Route::get('/', function () {echo "Under Construction";});
 
 //pr02
-//Route::post('/pruebita', function () {echo "se ha ejecutado una petición POST a la dirección: /pruebita";});
+Route::post('/pruebita', function () {echo "se ha ejecutado una petición POST a la dirección: /pruebita";});
 
 //pr03
-//Route::any('/relatos/{numero}', function ($numero) {echo "petición recibida para el parámetro: $numero";})->where('numero', '[0-9]+');
+Route::any('/relatos/{numero}', function ($numero) {echo "petición recibida para el parámetro: $numero";})->where('numero', '[0-9]+');
 
 //pr04
-//Route::any('/', function () {echo "pagina raiz de nuestra aplicacion";});
+Route::any('/', function () {echo "pagina raiz de nuestra aplicacion";});
 
 
 //Pr05
-//Route::get('/', [Controller_Pr05_ListarProductos::class, 'listarProductosGet']);
-//Route::post('/', [Controller_Pr05_ListarProductos::class, 'listarProductosPost']);
+Route::get('/listarProductosGet', [Controller_Pr05_ListarProductos::class, 'listarProductosGet']);
+Route::post('/listarProductosPost', [Controller_Pr05_ListarProductos::class, 'listarProductosPost']);
 
 //Pr07
-//Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
+Route::get('/numPrimos', [Controller_Pr07::class,'numPrimos']);
 
 //Pr09
 Route::get('/time', function(){
@@ -97,12 +99,14 @@ Route::any('/subirFile', [Controller_Pr18::class, 'crearFichero']);
 
 
 //Pr19
-Route::any('/cargarFiles', [Controller_Pr19::class, 'cargarFiles']);
+Route::any('/cargarFilesDownload', [Controller_Pr19::class, 'cargarFiles']);
 
 Route::any('/downloadFile', [Controller_Pr19::class, 'descargarFiles']);
 
 
-
+//Pr20
+Route::any('/cargarFilesDelete', [Controller_Pr20::class, 'cargarFiles']);
+Route::any('/deleteFile', [Controller_Pr20::class, 'descargarFiles']);
 
 
 
