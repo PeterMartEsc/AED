@@ -4,7 +4,8 @@ USE construcciones;
 CREATE TABLE roles (
   id INT AUTO_INCREMENT,
   nombre VARCHAR(20) NOT NULL,
-  CONSTRAINT pk_roles PRIMARY KEY (id)
+  CONSTRAINT pk_roles PRIMARY KEY (id),
+  CONSTRAINT uq_roles_nombre UNIQUE (nombre)  -- Clave única para nombre en roles
 );
 
 CREATE TABLE usuarios (
@@ -13,6 +14,7 @@ CREATE TABLE usuarios (
   password VARCHAR(250) NOT NULL,
   rol INT NOT NULL DEFAULT 1,
   CONSTRAINT pk_usuarios PRIMARY KEY (id),
+  CONSTRAINT uq_usuarios_nombre UNIQUE (nombre),  -- Clave única para nombre en usuarios
   FOREIGN KEY (rol) REFERENCES roles(id)
 );
 
@@ -26,8 +28,6 @@ CREATE TABLE tableros (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
-
-
 CREATE TABLE figuras (
   id INT AUTO_INCREMENT,
   imagen BLOB,
@@ -35,4 +35,5 @@ CREATE TABLE figuras (
   CONSTRAINT pk_figuras PRIMARY KEY (id)
 );
 
-INSERT INTO roles (id,nombre) VALUES (1,'usuario'), (2,'admin');
+-- Insertar valores en la tabla roles
+INSERT INTO roles (id, nombre) VALUES (1, 'usuario'), (2, 'admin');

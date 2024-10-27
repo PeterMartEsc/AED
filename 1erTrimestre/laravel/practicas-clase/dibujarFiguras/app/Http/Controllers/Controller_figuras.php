@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers;
 use App\DAO\UsuarioDAO;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Hash;
 
-
+/**
+ * Pasos:
+ * 0.- Cambiar username por nombre en todos los campos
+ * 1.- Hacer la clase Usuario y Rol
+ * 2.- Comprobar el Login y Register
+ * 3.- Hacer el tablero y figura contract
+ * 4.- Como se guardan las imagenes en la bbdd?
+ *
+ * - Dar estilo al login, register, home y game
+ */
 
 class Controller_figuras
 {
@@ -25,12 +36,12 @@ class Controller_figuras
 
         $hashedPassword = Hash::make($password);
 
-        //$usuario = new User();
+        //$usuario = new Usuario();
         //$usuario->setUsername($username);
         //$usuario->setPassword($hashedPassword);
         //$usuario->setRol($rol);
 
-        UsuarioDAO::save();
+        //UsuarioDAO::save($usuario);
     }
 
     public function checkLogin(){
@@ -40,19 +51,19 @@ class Controller_figuras
             return redirect("/login");
         }
 
-        $user = UsuarioDAO::findByName($username);
+        //$user = UsuarioDAO::findByName($username);
 
         if(!isset($user)){
-            $mensaje = "Usuario no encontrado";
-            return view("login", compact("mensaje"));
+            $mensajeUser = "Usuario no encontrado";
+            return view("login", compact("mensajeUser"));
         }
 
         $passwordUser = $user->getPassword();
         $passwordSession = session()->get('password');
 
         if($passwordUser!= $passwordSession){
-            $mensaje = "Contraseña incorrecta";
-            return view("login", compact("mensaje"));
+            $mensajePassw = "Contraseña incorrecta";
+            return view("login", compact("mensajePassw"));
         }
 
 

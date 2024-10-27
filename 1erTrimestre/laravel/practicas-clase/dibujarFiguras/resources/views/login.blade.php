@@ -11,11 +11,13 @@
             <form action="/login">
                 <label for="username">
                     Nombre de usuario
+                    {{isset($mensajeUser) ? $mensajeUser : ''}}
                     <input type="text" id="username" name="username" placeholder="username">
                 </label>
                 <br/>
                 <label for="password">
                     Contraseña
+                    {{isset($mensajePassw) ? $mensajePassw : ''}}
                     <input type="password" id="password" name="password" placeholder="password">
                 </label>
                 <br/>

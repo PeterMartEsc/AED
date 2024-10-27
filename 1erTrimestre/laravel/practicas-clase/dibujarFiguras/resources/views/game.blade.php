@@ -7,8 +7,8 @@
         <title>Game</title>
     </head>
     <body class="antialiased">
-        <div>
-
+        <div class="profile">
+            <h2>Bienvenido: {{session()->get('username')}}</h2>
         </div>
     </body>
 </html>
