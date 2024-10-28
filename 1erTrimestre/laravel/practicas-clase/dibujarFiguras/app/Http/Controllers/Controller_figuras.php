@@ -80,9 +80,8 @@ class Controller_figuras
 
         if($user === null){
             $mensajeUser = "Usuario no encontrado";
-
-            return redirect("/selectLogin")->with('mensajeUser', $mensajeUser);
             //dd($user);
+            return redirect("/selectLogin")->with('mensajeUser', $mensajeUser);
         }
 
         $passwordUser = $user->getPassword();
@@ -102,4 +101,7 @@ class Controller_figuras
         session()->flush();
         return redirect("/selectLogin");
     }
+
+
+
 }

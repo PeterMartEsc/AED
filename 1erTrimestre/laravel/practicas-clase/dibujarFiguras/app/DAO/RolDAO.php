@@ -50,8 +50,9 @@ class RolDAO implements ICrud
 
         $sql = "SELECT * FROM $tablename WHERE $colid = :id";
 
-        $myPDO = DB::getPdo();
+        //$myPDO = DB::getPdo();
 
+        $myPDO = new PDO("mysql:dbname=construcciones;host=127.0.0.1;port=3306", "root", "1q2w3e4r");
         $stmt = $myPDO->prepare($sql);
 
         $stmt->execute([':id' => $id]);

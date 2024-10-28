@@ -24,8 +24,10 @@ Route::get("/", function (){
 });
 
 Route::get("/selectLogin", function (){
+    //dd("hola");
     return view('login');
-});
+})->name("pruebalogin");
+
 
 Route::get("/selectRegister", function (){
     return view('register');
