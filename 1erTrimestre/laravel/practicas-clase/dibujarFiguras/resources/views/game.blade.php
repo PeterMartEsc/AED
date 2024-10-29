@@ -18,6 +18,7 @@
     <body class="antialiased">
         <div class="profile">
             <h2>Bienvenido: {{session()->get('nombre')}}</h2>
+            <p><b>Rol:</b> {{session()->get('actualRol')}}</p>
 
             <form action="/logout">
                 <input type="submit" value="Logout">

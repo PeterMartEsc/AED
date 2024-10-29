@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * Pasos:
- * 1.- Comprobar el Login y Register
- * 2.- Hacer el tablero y figura contract
- * 3.- Como se guardan las imagenes en la bbdd?
+ * 1.- Para usuario admin, opción de crear/eliminar usuario, añadir/eliminar figuras
  *
- * - Dar estilo al login, register, home y game
+ * 1.- Hacer el tablero y figura contract
+ * 2.- Como se guardan las imagenes en la bbdd?
+ *
+ *
  */
 
-class Controller_figuras
+class Controller_usuario
 {
     protected $usuarioDAO;
     protected $rolDAO;
@@ -29,15 +30,33 @@ class Controller_figuras
     public function login(Request $request){
 
         $nombre = $request->get('nombre');
-        session()->put('nombre', $nombre);
 
         $password = $request->get('password');
-        $paswordHashed = Hash::make($password);
-        session()->put('password', $paswordHashed);
 
-        $this->checkLogin();
+        $user = $this->usuarioDAO->findByName($nombre);
 
-        return view('game');
+        if($user === null){
+            echo "No existe usuario";
+            echo "<br/><br/>";
+            echo '<a href="/selectLogin">volver a hacer login</>';
+            return;
+        }else{
+
+            if(Hash::check($password, $user->getPassword()) ){
+                session()->put('nombre', $nombre);
+            }else{
+                echo "Contraseña incorrecta";
+                echo "<br/><br/>";
+                echo '<a href="/selectLogin">volver a hacer login</>';
+                return;
+            }
+
+        }
+
+        $rol = $user->getRol();
+        session()->put('actualRol', $rol);
+
+        return redirect('/game');
     }
 
     public function register(Request $request){
@@ -70,31 +89,12 @@ class Controller_figuras
     }
 
     public function checkLogin(){
-        $nombre = session()->get('nombre');
+        $nombre = session()->get('usuario');
 
         if(!isset($nombre)){
             return redirect("/selectLogin");
         }
 
-        $user = $this->usuarioDAO->findByName($nombre);
-
-        if($user === null){
-            $mensajeUser = "Usuario no encontrado";
-            //dd($user);
-            return redirect("/selectLogin")->with('mensajeUser', $mensajeUser);
-        }
-
-        $passwordUser = $user->getPassword();
-        $passwordSession = session()->get('password');
-
-        if($passwordUser!= $passwordSession){
-            $mensajePassw = "Contraseña incorrecta";
-            return view("login", compact("mensajePassw"));
-        }
-
-
-        $rol = $user->getRol();
-        session()->set('actualRol', $rol);
     }
 
     public function logout(){

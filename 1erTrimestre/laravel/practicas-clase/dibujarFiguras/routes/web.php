@@ -1,11 +1,6 @@
 <?php
 
-use App\DAO\RolDAO;
-use App\Http\Controllers\ConstruccionController;
-use App\Http\Controllers\Controller_figuras;
-use App\Http\Controllers\PruebaController;
-use App\Http\Controllers\UsuarioController;
-use App\Models\Rol;
+use App\Http\Controllers\Controller_usuario;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +28,15 @@ Route::get("/selectRegister", function (){
     return view('register');
 });
 
-Route::get("/login", [Controller_figuras::class, 'login']);
+Route::get("/login", [Controller_usuario::class, 'login']);
 
-Route::get("/register", [Controller_figuras::class, 'register']);
+Route::get("/register", [Controller_usuario::class, 'register']);
 
-Route::get("/logout", [Controller_figuras::class, 'logout']);
+Route::get("/logout", [Controller_usuario::class, 'logout']);
+
+Route::get("/game", function (){
+    return view('game');
+});
 
 
 

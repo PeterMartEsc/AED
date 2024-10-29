@@ -18,17 +18,17 @@
     </head>
     <body class="antialiased">
         <div class="login-form">
-            {{isset($mensajeRegister) ? $mensajeRegister : ''}}
+            @isset($mensajeRegister)
+                {{$mensajeRegister}}
+            @endisset
             <form action="/login">
                 <label for="nombre">
                     Nombre de usuario <br/>
-                    {{isset($mensajeUser) ? $mensajeUser : ''}}
                     <input type="text" id="nombre" name="nombre" placeholder="nombre">
                 </label>
                 <br/><br/>
                 <label for="password">
                     Contraseña <br/>
-                    {{isset($mensajePassw) ? $mensajePassw : ''}}
                     <input type="password" id="password" name="password" placeholder="password">
                 </label>
                 <br/><br/>
