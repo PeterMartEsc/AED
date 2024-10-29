@@ -1,21 +1,29 @@
 <?php
 
-class Alumno {
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Alumno extends Model
+{
+    use HasFactory;
+
 
     /**
      * @var string
      */
-    public $nombre;
+    protected $nombre;
 
     /**
      * @var string
      */
-    public $apellidos;
+    protected $apellidos;
 
     /**
      * @var int
      */
-    public $edad;
+    protected $edad;
 
 
 

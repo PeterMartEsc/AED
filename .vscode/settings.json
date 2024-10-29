@@ -30,6 +30,12 @@
             "driver": "SQLite",
             "name": "ejemplo-migrations",
             "database": "${workspaceFolder:AED}/1erTrimestre/laravel/practicas-clase/dibujarFiguras/database/database.sqlite"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "dossier-1",
+            "database": "${workspaceFolder:AED}/1erTrimestre/laravel-bbdd/dossier/dossier-proyecto/database/database.sqlite"
         }
     ]
 }
