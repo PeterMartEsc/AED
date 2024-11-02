@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Hash;
  *
  */
 
+ /**
+  * Passw: Casa
+  * ------------------
+  * Pepito : 1q2w3e4r
+  * Goku: 1234
+  */
+
 class Controller_usuario
 {
     protected $usuarioDAO;
@@ -47,7 +54,7 @@ class Controller_usuario
             }else{
                 echo "Contraseña incorrecta";
                 echo "<br/><br/>";
-                echo '<a href="/selectLogin">volver a hacer login</>';
+                echo '<a href="/selectLogin">volver a hacer login</a>';
                 return;
             }
 
@@ -101,7 +108,5 @@ class Controller_usuario
         session()->flush();
         return redirect("/selectLogin");
     }
-
-
 
 }

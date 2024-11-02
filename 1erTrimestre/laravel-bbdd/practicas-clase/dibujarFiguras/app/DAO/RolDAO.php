@@ -52,7 +52,7 @@ class RolDAO implements ICrud
 
         //$myPDO = DB::getPdo();
 
-        $myPDO = new PDO("mysql:dbname=construcciones;host=127.0.0.1;port=3306", "root", "1q2w3e4r");
+        $myPDO = new PDO("mysql:dbname=construcciones;host=127.0.0.1;port=3306", "root", "");
         $stmt = $myPDO->prepare($sql);
 
         $stmt->execute([':id' => $id]);

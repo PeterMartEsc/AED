@@ -140,16 +140,16 @@ class UsuarioDAO implements ICrud {
         return $filasAfectadas > 0;
     }
 
-    public function update($p): bool {
+    public function update($usuario): bool {
         $myPDO = DB::getPdo();
-        if (!($p->getId() > 0)) {
+        if (!($usuario->getId() > 0)) {
             return false;
         }
         $sqlRolid = "SELECT * FROM " . RolContract::TABLE_NAME . " WHERE " . RolContract::COL_NOMBRE . " = :rol";
 
 
         $stmtRol = $myPDO->prepare($sqlRolid);
-        $stmtRol->execute([':rol' => $p->getRol()]);
+        $stmtRol->execute([':rol' => $usuario->getRol()]);
         $rowRol = $stmtRol->fetch(PDO::FETCH_ASSOC);
 
         if ($rowRol) {
@@ -175,10 +175,10 @@ class UsuarioDAO implements ICrud {
             $stmt = $myPDO->prepare($sql);
             $stmt->execute(
                 [
-                    ':nombre' => $p->getNombre(),
-                    ':password' => $p->getPassword(),
+                    ':nombre' => $usuario->getNombre(),
+                    ':password' => $usuario->getPassword(),
                     ':rolId' => $rolId,
-                    ':id' => $p->getId()
+                    ':id' => $usuario->getId()
                 ]
             );
             //si filasAfectadas > 0 => hubo éxito consulta
@@ -253,7 +253,7 @@ class UsuarioDAO implements ICrud {
                 $myPDO->rollBack();
                 return null;
             }
-            
+
         } catch (Exception $ex) {
             echo "ha habido una excepción se lanza rollback";
             //var_dump($ex);

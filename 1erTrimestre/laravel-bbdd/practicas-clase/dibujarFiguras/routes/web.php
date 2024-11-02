@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Controller_usuario;
+use App\Http\Controllers\Controller_game;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Rutas Login*/
+
 Route::get("/", function (){
     return view('home');
 });
 
 Route::get("/selectLogin", function (){
-    //dd("hola");
     return view('login');
 })->name("pruebalogin");
 
@@ -37,6 +40,19 @@ Route::get("/logout", [Controller_usuario::class, 'logout']);
 Route::get("/game", function (){
     return view('game');
 });
+
+
+/*Rutas Game*/
+
+Route::get("/administrarUsuarios", [Controller_game::class, 'mostrarUsuarios']);
+
+Route::get("/deleteUser", [Controller_game::class, 'borrarUsuario']);
+
+Route::get("/editarUser", [Controller_game::class, 'editarUsuario']);
+
+Route::get("/actualizarInfoUser", [Controller_game::class, 'actualizarInfoUser']);
+
+/*Rutas Figuras*/
 
 
 
