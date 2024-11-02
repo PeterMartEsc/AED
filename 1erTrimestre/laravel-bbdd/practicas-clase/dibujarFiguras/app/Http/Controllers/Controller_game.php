@@ -7,6 +7,15 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Pasos:
+ *
+ * 1.- Hacer el tablero y figura contract
+ * 2.- Como se guardan las imagenes en la bbdd?
+ * 3.- Guardar imagenes en la bbdd
+ * 4.- Crear tableros
+ */
+
 class Controller_game{
 
     protected $usuarioDAO;

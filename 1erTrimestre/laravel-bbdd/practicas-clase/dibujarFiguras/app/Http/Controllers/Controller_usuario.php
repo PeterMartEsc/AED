@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * Pasos:
- * 1.- Para usuario admin, opción de crear/eliminar usuario, añadir/eliminar figuras
- *
- * 1.- Hacer el tablero y figura contract
- * 2.- Como se guardan las imagenes en la bbdd?
- *
- *
- */
-
- /**
   * Passw: Casa
   * ------------------
   * Pepito : 1q2w3e4r
