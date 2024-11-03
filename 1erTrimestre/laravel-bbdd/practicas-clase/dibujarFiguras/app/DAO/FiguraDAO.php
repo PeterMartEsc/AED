@@ -14,14 +14,14 @@ use PDO;
 class FiguraDAO implements ICrud
 {
 
-    
+
     public function __construct() {}
 
 
 
     public function delete($id): bool{
 
-        
+
         $myPDO = DB::getPdo();
         $stmt = $myPDO->prepare("DELETE FROM " . FiguraContract::TABLE_NAME. " WHERE ". FiguraContract::COL_ID." = :id");
         return $stmt->execute([':id' => $id]);
@@ -36,7 +36,7 @@ class FiguraDAO implements ICrud
             return false;
         }
         $sql = "UPDATE " . FiguraContract::TABLE_NAME. " SET " . FiguraContract::COL_IMAGEN. " = :imagen, ". FiguraContract::COL_TIPO_IMAGEN. " = :tipo WHERE ". FiguraContract::COL_ID." = :id";
- 
+
 
         try {
             $myPDO->beginTransaction();
@@ -44,7 +44,7 @@ class FiguraDAO implements ICrud
             $stmt->execute(
                 [
                     ':imagen' => $p->getImagenBinario(),
-                    ':tipo' => $p->getMimeType(),
+                    ':tipo' => $p->getTipoimagen(),
                     ':id' => $p->getId()
 
                 ]
@@ -52,14 +52,14 @@ class FiguraDAO implements ICrud
             //si filasAfectadas > 0 => hubo éxito consulta
             $filasAfectadas = $stmt->rowCount();
             echo "<br>afectadas: " . $filasAfectadas;
-           
-            
+
+
             //forzamos un rollback aleatorio para ver que deshace los cambios
             if ($filasAfectadas > 0) {
-                
+
                 $myPDO->commit();
-                
-                
+
+
             } else {
                 $myPDO->rollback();
                 return false;
@@ -78,8 +78,8 @@ class FiguraDAO implements ICrud
 
 
     public function findById($id): object | null{
-        
-      
+
+
         $myPDO = DB::getPdo();
         $stmt = $myPDO->prepare("SELECT * FROM " . FiguraContract::TABLE_NAME. " WHERE ". FiguraContract::COL_ID . " = :id");
         $stmt->execute([':id' => $id]);
@@ -89,15 +89,15 @@ class FiguraDAO implements ICrud
             $p->setId($row[FiguraContract::COL_ID])
                 ->setImagenBinario($row[FiguraContract::COL_IMAGEN])
                 ->setImagenBase64(base64_encode($row[FiguraContract::COL_IMAGEN]))
-                ->setMimeType($row[FiguraContract::COL_TIPO_IMAGEN]);
+                ->setTipoimagen($row[FiguraContract::COL_TIPO_IMAGEN]);
             return $p;
         }
-            
+
         return null;
     }
 
-  
-    public function findAll(): array 
+
+    public function findAll(): array
     {
 
 
@@ -112,10 +112,10 @@ class FiguraDAO implements ICrud
             $p->setId($row[FiguraContract::COL_ID])
                 ->setImagenBinario($row[FiguraContract::COL_IMAGEN])
                 ->setImagenBase64(base64_encode($row[FiguraContract::COL_IMAGEN]))
-                ->setMimeType($row[FiguraContract::COL_TIPO_IMAGEN]);
+                ->setTipoimagen($row[FiguraContract::COL_TIPO_IMAGEN]);
             $figuras[] = $p;
         }
-            
+
         return $figuras;
 
     }
@@ -135,23 +135,23 @@ class FiguraDAO implements ICrud
             $stmt->execute(
                 [
                     ':imagen' => $p->getImagenBinario(),
-                    ':tipo' => $p->getMimeType()
+                    ':tipo' => $p->getTipoimagen()
 
                 ]
             );
             //si filasAfectadas > 0 => hubo éxito consulta
             $filasAfectadas = $stmt->rowCount();
             echo "<br>afectadas: " . $filasAfectadas;
-           
-            
+
+
             //forzamos un rollback aleatorio para ver que deshace los cambios
             if ($filasAfectadas > 0) {
                 //obtenemos el id generado con:
                 $idgenerado = $myPDO->lastInsertId();
-                $p->setId($idgenerado);                
+                $p->setId($idgenerado);
                 $myPDO->commit();
-                
-                
+
+
             } else {
                 $myPDO->rollback();
                 return null;

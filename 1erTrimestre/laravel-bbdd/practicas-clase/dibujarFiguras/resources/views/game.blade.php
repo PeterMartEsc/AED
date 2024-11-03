@@ -23,7 +23,7 @@
                 padding: 10px;
                 margin: auto;
                 width: 400px;
-                height: 100px;
+                height: auto;
             }
 
             .funcionesAdmin{
@@ -51,7 +51,7 @@
         <div class="funcionesAdmin">
             @if (session()->get('actualRol') == 'admin')
                 <a href="/administrarUsuarios">Administrar usuarios</a>
-                <a href="/administrarFiguras">Administrar figuras</a>
+                <a href="/mostrarFiguras">Administrar figuras</a>
 
             @endif
         </div>
@@ -61,18 +61,18 @@
 
         <div class="tableros">
             <h5>Tableros de {{session()->get('nombre')}}</h5>
-            @if(null !== session()->get('tableros'))
+
+            <a href="/nombrarTablero">Crear Tablero</a>
+            <br/><br/>
+            @if(null !== session()->get('tablerosNames'))
                 @foreach (session()->get('tablerosNames') as $tableroName)
-                    <li>
-                        {{$tableroName}}
-                        <form action="/editarTablero">
-                            <input type="hidden" name="tableroName" value="{{$tableroName}}">
-                            <input type="submit" value="Editar">
-                        </form>
-                    </li>
+                    <li><form action="/editarTablero">
+                        <label for="tableroName">{{$tableroName}}</label>
+                        <input type="hidden" name="tableroName" value="{{$tableroName}}">
+                        <input type="submit" value="Editar">
+                    </form></li>
                 @endforeach
             @endif
-            <a href="/crearTablero">Crear Tablero</a>
         </div>
 
 

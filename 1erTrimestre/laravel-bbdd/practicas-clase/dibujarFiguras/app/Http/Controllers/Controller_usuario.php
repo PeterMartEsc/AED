@@ -18,10 +18,12 @@ class Controller_usuario
 {
     protected $usuarioDAO;
     protected $rolDAO;
+    protected $Controller_tablero;
 
     public function __construct(){
         $this->usuarioDAO = new UsuarioDAO();
         $this->rolDAO = new RolDAO();
+        $this->Controller_tablero = new Controller_tablero();
     }
 
     public function login(Request $request){
@@ -53,6 +55,7 @@ class Controller_usuario
         $rol = $user->getRol();
         session()->put('actualRol', $rol);
 
+        $this->Controller_tablero->obtainTableros();
         return redirect('/game');
     }
 

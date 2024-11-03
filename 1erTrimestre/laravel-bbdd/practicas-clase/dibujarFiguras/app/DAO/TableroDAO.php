@@ -17,14 +17,14 @@ use PDO;
 class TableroDAO implements ICrud
 {
 
-    
+
     public function __construct() {}
 
 
 
     public function delete($id): bool{
 
-        
+
         $myPDO = DB::getPdo();
         $stmt = $myPDO->prepare("DELETE FROM " . TableroContract::TABLE_NAME. " WHERE ". TableroContract::COL_ID." = :id");
         $stmt->execute([':id' => $id]);
@@ -38,20 +38,20 @@ class TableroDAO implements ICrud
         if( !($p->getId() > 0)){
             return false;
         }
-        $sql = "UPDATE " . TableroContract::TABLE_NAME. 
-               " SET " . TableroContract::COL_CONTENIDO. " = :contenido, ". 
+        $sql = "UPDATE " . TableroContract::TABLE_NAME.
+               " SET " . TableroContract::COL_CONTENIDO. " = :contenido, ".
                TableroContract::COL_FECHA. " = :fecha, ".
                TableroContract::COL_NOMBRE. " = :nombre, ".
                TableroContract::COL_USUARIO_ID. " = :usuario_id ".
                " WHERE ". TableroContract::COL_ID." = :id";
- 
+
 
         try {
             $myPDO->beginTransaction();
             $stmt = $myPDO->prepare($sql);
             $stmt->execute(
                 [
-                    ':contenido' => $p->getContenido(), 
+                    ':contenido' => $p->getContenido(),
                     ':fecha' => $p->getFecha()->getTimestamp(),
                     ':id' => $p->getId(),
                     ':nombre' => $p->getNombre(),
@@ -62,14 +62,14 @@ class TableroDAO implements ICrud
             //si filasAfectadas > 0 => hubo éxito consulta
             $filasAfectadas = $stmt->rowCount();
             echo "<br>afectadas: " . $filasAfectadas;
-           
-            
+
+
             //forzamos un rollback aleatorio para ver que deshace los cambios
             if ($filasAfectadas > 0) {
-                
+
                 $myPDO->commit();
-                
-                
+
+
             } else {
                 $myPDO->rollback();
                 return false;
@@ -88,8 +88,8 @@ class TableroDAO implements ICrud
 
 
     public function findById($id): object | null{
-        
-      
+
+
         $myPDO = DB::getPdo();
         $stmt = $myPDO->prepare("SELECT * FROM " . TableroContract::TABLE_NAME. " WHERE ". TableroContract::COL_ID . " = :id");
         $stmt->execute([':id' => $id]);
@@ -101,30 +101,30 @@ class TableroDAO implements ICrud
                 ->setFecha(DateTime::createFromFormat( 'U', $row[TableroContract::COL_FECHA]) )
                 ->setNombre($row[TableroContract::COL_NOMBRE])
                 ->setUsuarioId($row[TableroContract::COL_USUARIO_ID])  ;
-                
+
             return $p;
         }
-            
+
         return null;
     }
 
 
 
 
-    public function findByUserId($id): array 
+    public function findByUserId($id): array
     {
 
         $tablerotable = TableroContract::TABLE_NAME ;
 
         $tablero_usuario_id =  TableroContract::COL_USUARIO_ID;
-  
 
-      
+
+
 
         $myPDO = DB::getPdo();
 
         $sql = "SELECT * " .
-        " FROM $tablerotable " . 
+        " FROM $tablerotable " .
         " WHERE $tablero_usuario_id = $id ";
 
         $stmt = $myPDO->prepare($sql);
@@ -140,14 +140,14 @@ class TableroDAO implements ICrud
                 ->setUsuarioId($row[TableroContract::COL_USUARIO_ID])  ;
             $tableros[] = $p;
         }
-            
+
         return $tableros;
 
     }
 
 
-  
-    public function findAll(): array 
+
+    public function findAll(): array
     {
 
 
@@ -166,14 +166,14 @@ class TableroDAO implements ICrud
                 ->setUsuarioId($row[TableroContract::COL_USUARIO_ID])  ;
             $tableros[] = $p;
         }
-            
+
         return $tableros;
 
     }
 
 
 
-    
+
     public function save($p): object | null
     {
         $myPDO = DB::getPdo();
@@ -196,23 +196,21 @@ class TableroDAO implements ICrud
                     ':nombre' => $p->getNombre(),
                     ':usuario_id' => $p->getUsuarioId()
 
-
-
                 ]
             );
             //si filasAfectadas > 0 => hubo éxito consulta
             $filasAfectadas = $stmt->rowCount();
             echo "<br>afectadas: " . $filasAfectadas;
-           
-            
+
+
             //forzamos un rollback aleatorio para ver que deshace los cambios
             if ($filasAfectadas > 0) {
                 //obtenemos el id generado con:
                 $idgenerado = $myPDO->lastInsertId();
-                $p->setId($idgenerado);                
+                $p->setId($idgenerado);
                 $myPDO->commit();
-                
-                
+
+
             } else {
                 $myPDO->rollback();
                 return null;

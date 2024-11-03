@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Controller_usuario;
-use App\Http\Controllers\Controller_game;
+use App\Http\Controllers\Controller_admin;
+use App\Http\Controllers\Controller_tablero;
 
 use Illuminate\Support\Facades\Route;
 
@@ -42,17 +43,26 @@ Route::get("/game", function (){
 });
 
 
-/*Rutas Game*/
+/*Rutas Admin*/
 
-Route::get("/administrarUsuarios", [Controller_game::class, 'mostrarUsuarios']);
+Route::get("/administrarUsuarios", [Controller_admin::class, 'mostrarUsuarios']);
 
-Route::get("/deleteUser", [Controller_game::class, 'borrarUsuario']);
+Route::get("/deleteUser", [Controller_admin::class, 'borrarUsuario']);
 
-Route::get("/editarUser", [Controller_game::class, 'editarUsuario']);
+Route::get("/editarUser", [Controller_admin::class, 'editarUsuario']);
 
-Route::get("/actualizarInfoUser", [Controller_game::class, 'actualizarInfoUser']);
+Route::get("/actualizarInfoUser", [Controller_admin::class, 'actualizarInfoUser']);
 
-/*Rutas Figuras*/
+
+
+/*Rutas Tableros*/
+
+Route::get("/mostrarFiguras", [Controller_admin::class, 'mostrarFiguras']);
+
+Route::get("/nombrarTablero", [Controller_tablero::class, 'nombrarTablero']);
+
+Route::get("/crearTablero", [Controller_tablero::class, 'crearTablero']);
+
 
 
 

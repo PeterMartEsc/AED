@@ -16,14 +16,12 @@ use Illuminate\Support\Facades\Hash;
  * 4.- Crear tableros
  */
 
-class Controller_game{
+class Controller_admin{
 
     protected $usuarioDAO;
-    protected $rolDAO;
 
     public function __construct(){
         $this->usuarioDAO = new UsuarioDAO();
-        $this->rolDAO = new RolDAO();
     }
 
     function mostrarUsuarios(){
