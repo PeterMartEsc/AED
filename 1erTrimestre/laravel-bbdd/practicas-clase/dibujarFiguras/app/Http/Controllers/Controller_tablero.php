@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DAO\FiguraDAO;
+use App\DAO\Figuras_TablerosDAO;
 use App\DAO\UsuarioDAO;
 use App\DAO\TableroDAO;
+use App\Models\Figura;
+use App\Models\Figuras_Tableros;
 use App\Models\Tablero;
 use DateTime;
 use Illuminate\Http\Request;
@@ -22,18 +25,48 @@ class Controller_tablero{
     protected $usuarioDAO;
     protected $tableroDAO;
     protected $figuraDAO;
-
+    protected $figuras_tablerosDAO;
 
     public function __construct(){
         $this->usuarioDAO = new UsuarioDAO();
         $this->tableroDAO = new TableroDAO();
         $this->figuraDAO = new FiguraDAO();
+        $this->figuras_tablerosDAO = new Figuras_TablerosDAO();
     }
 
-    function mostrarFiguras(){
+    function subirImagen(Request $request){
+
+        $imagen = $request->file('imagen');
+        $imagenBinaria = file_get_contents($imagen->getRealPath());
+
+        $figura = new Figura();
+        $figura->setImagenBinario($imagenBinaria);
+        $figura->setTipoimagen('png');
+
+        $this->figuraDAO->save($figura);
+
+        $this->actualizarFiguras();
+
+        echo '<a href="/actualizarFiguras">Volver a administrar figuras</a>';
+    }
+
+    function actualizarFiguras(){
 
         $figuras = $this->figuraDAO->findAll();
 
+        if($figuras == null){
+            $figuras=[];
+        }
+
+        $imagenes = [];
+
+        for($i = 0; $i < count($figuras); $i++){
+
+            $imagenes[$i] = $figuras[$i]->getImagenBase64();
+            //dd( $figuras[$i]->getImagenBase64());
+        }
+
+        return view('adminFigur', compact('imagenes'));
     }
 
     function nombrarTablero(){
@@ -96,5 +129,111 @@ class Controller_tablero{
 
         session()->put('tablerosNames', $nombres);
     }
+
+    function editarTablero(Request $request){
+
+        $tableroname = $request->get('tableroName');
+
+        session()->put('actualTablero', $tableroname);
+
+        $imagenes = $this->getImagenesDisponibles();
+
+        $posiciones = null;
+        //$posiciones = [];
+
+        return view('editarTablero', compact('imagenes', 'posiciones'));
+    }
+
+    function getImagenesDisponibles(){
+
+        $figuras = $this->figuraDAO->findAll();
+
+        if($figuras == null){
+            $figuras=[];
+        }
+
+        $imagenes = [];
+
+        for($i = 0; $i < count($figuras); $i++){
+            $imagenes[$i] = $figuras[$i]->getImagenBase64();
+        }
+
+        return $imagenes;
+    }
+
+    /*function colocarFiguras(Request $request){
+        $imagenes = $this->getImagenesDisponibles();
+        //dd($imagenes);
+        $idFigura = $request->get('figura');
+
+        $posiciones = [];
+        for($i = 0; $i<28; $i++){
+            $posicion = $request->get('posicion'.$i);
+
+            if ($posicion !== null) {
+                $posiciones[$i] = (int) $posicion;
+            } else {
+                $posiciones[$i] = null;
+            }
+        }
+
+        //dd($posiciones);
+
+        $tableros = $this->tableroDAO->findAll();
+
+        foreach ($tableros as $tablero){
+            if($tablero->getNombre() === session()->get('actualTablero')){
+                $tableroid = $tablero->getId();
+                break;
+            }
+        }
+
+        $posicionesTablero = $this->figuras_tablerosDAO->findByTableroId($tableroid);
+
+        for($i = 0; $i < count($posiciones); $i++){
+            if($posiciones[$i] !== null){
+
+                foreach($posicionesTablero as $posicionEspecifica){
+                    $posicion = $posicionEspecifica->getPosicion();
+                    if($posicion == $posiciones[$i]){
+                        $this->figuras_tablerosDAO->delete($posicionEspecifica->getId());
+                    }
+                }
+
+                $figuras_tableros = new Figuras_Tableros();
+                $figuras_tableros->setTablero_id($tableroid);
+                $figuras_tableros->setFigura_id($idFigura);
+                $figuras_tableros->setPosicion($posiciones[$i]);
+
+                $this->figuras_tablerosDAO->save($figuras_tableros);
+            }
+        }
+
+        $posiciones = $this->colocarFigurasPosicion($posiciones, $idFigura);
+
+        return view('editarTablero', compact('posiciones', 'imagenes'));
+    }
+
+    function colocarFigurasPosicion($posiciones, $idFigura){
+
+        for($i = 0; $i<count($posiciones); $i++){
+            $figura = $this->figuraDAO->findById($idFigura);
+            $figura0 = $this->figuraDAO->findById(1);
+
+            $imagen = $figura->getImagenBase64();
+            $imagen0 = $figura0->getImagenBase64();
+            //dd($imagen);
+
+            if($posiciones[$i] == null){
+                $posiciones[$i] = $imagen0;
+            } else {
+                $posiciones[$i] = $imagen;
+            }
+
+        }
+
+        return $posiciones;
+    }*/
+
 
 }

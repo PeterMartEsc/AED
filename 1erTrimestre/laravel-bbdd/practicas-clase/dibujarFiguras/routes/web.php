@@ -57,11 +57,21 @@ Route::get("/actualizarInfoUser", [Controller_admin::class, 'actualizarInfoUser'
 
 /*Rutas Tableros*/
 
-Route::get("/mostrarFiguras", [Controller_admin::class, 'mostrarFiguras']);
+Route::get("/actualizarFiguras", [Controller_tablero::class, 'actualizarFiguras']);
+
+Route::post("/subirImagen", [Controller_tablero::class, 'subirImagen']);
+
 
 Route::get("/nombrarTablero", [Controller_tablero::class, 'nombrarTablero']);
 
 Route::get("/crearTablero", [Controller_tablero::class, 'crearTablero']);
+
+
+Route::get("/editarTablero", [Controller_tablero::class, 'editarTablero']);
+Route::get("/colocarFiguras", [Controller_tablero::class, 'colocarFiguras']);
+
+
+
 
 
 

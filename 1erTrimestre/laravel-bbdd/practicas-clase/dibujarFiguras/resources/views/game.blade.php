@@ -51,7 +51,7 @@
         <div class="funcionesAdmin">
             @if (session()->get('actualRol') == 'admin')
                 <a href="/administrarUsuarios">Administrar usuarios</a>
-                <a href="/mostrarFiguras">Administrar figuras</a>
+                <a href="/actualizarFiguras">Administrar figuras</a>
 
             @endif
         </div>

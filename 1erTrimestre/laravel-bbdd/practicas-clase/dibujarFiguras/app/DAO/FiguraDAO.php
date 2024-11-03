@@ -17,8 +17,6 @@ class FiguraDAO implements ICrud
 
     public function __construct() {}
 
-
-
     public function delete($id): bool{
 
 
@@ -131,14 +129,18 @@ class FiguraDAO implements ICrud
         VALUES(:imagen, :tipo)";
         try {
             $myPDO->beginTransaction();
+            //dd($sql);
             $stmt = $myPDO->prepare($sql);
+
             $stmt->execute(
+
                 [
                     ':imagen' => $p->getImagenBinario(),
                     ':tipo' => $p->getTipoimagen()
 
                 ]
             );
+
             //si filasAfectadas > 0 => hubo éxito consulta
             $filasAfectadas = $stmt->rowCount();
             echo "<br>afectadas: " . $filasAfectadas;
