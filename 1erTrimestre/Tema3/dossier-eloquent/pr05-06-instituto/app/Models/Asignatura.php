@@ -13,10 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 class Asignatura extends Model
 {
     /**
+     *
      * @var array
      */
     protected $fillable = ['nombre', 'curso'];
 
+    public $timestamps = false;
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

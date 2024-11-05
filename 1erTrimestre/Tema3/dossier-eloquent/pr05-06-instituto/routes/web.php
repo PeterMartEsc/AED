@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller_pr06;
+use App\Http\Controllers\Controller_pr12;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/veralumno/{dni}', [Controller_pr06::class, 'findAlumnoById']);
+
+Route::get('/saveNuevaAsignatura', [Controller_pr12::class, 'saveNuevaAsignatura']);
+
+Route::get('/createNuevaAsignatura', [Controller_pr12::class, 'createNuevaAsignatura']);
+
