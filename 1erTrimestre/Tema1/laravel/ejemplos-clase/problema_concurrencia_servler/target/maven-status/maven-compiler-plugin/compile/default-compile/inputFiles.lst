@@ -1,3 +1,4 @@
-/home/carlos/Escritorio/ProyectoBaseWeb/src/main/java/es/iespuertodelacruz/jc/proyectobase/dao/ICrud.java
-/home/carlos/Escritorio/ProyectoBaseWeb/src/main/java/es/iespuertodelacruz/jc/proyectobase/contract/LapizContract.java
-/home/carlos/Escritorio/ProyectoBaseWeb/src/main/java/es/iespuertodelacruz/jc/proyectobase/entity/Lapiz.java
+/home/dam/Pedro-temp/Pedro-AED/1erTrimestre/Tema1/laravel/ejemplos-clase/problema_concurrencia_servler/src/main/java/es/iespuertodelacruz/jc/proyectobase/entity/Lapiz.java
+/home/dam/Pedro-temp/Pedro-AED/1erTrimestre/Tema1/laravel/ejemplos-clase/problema_concurrencia_servler/src/main/java/es/iespuertodelacruz/jc/proyectobase/dao/ICrud.java
+/home/dam/Pedro-temp/Pedro-AED/1erTrimestre/Tema1/laravel/ejemplos-clase/problema_concurrencia_servler/src/main/java/es/iespuertodelacruz/jc/proyectobase/contract/LapizContract.java
+/home/dam/Pedro-temp/Pedro-AED/1erTrimestre/Tema1/laravel/ejemplos-clase/problema_concurrencia_servler/src/main/java/es/iespuertodelacruz/jc/proyectobase/controller/PruebaConcurrencia.java
