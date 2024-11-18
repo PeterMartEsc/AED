@@ -1,0 +1,13 @@
+.nombres{
+    background-color: grey;
+    border: solid 1px, black;
+    width: 200px;
+    margin: auto;
+}
+
+.player{
+    width: max-content;
+    margin: auto;
+    padding: 50px;
+    padding-bottom: 10px;
+}
