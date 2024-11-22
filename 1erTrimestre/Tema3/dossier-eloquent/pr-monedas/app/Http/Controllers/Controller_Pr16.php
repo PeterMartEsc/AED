@@ -10,10 +10,10 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller_Pr16
 {
-    function saveHistoricoPr17(){
+    function saveHistoricoPr16(){
         $dolar1 = Moneda::find(1);
         $historicoNuevo = new Historico();
-        $historicoNuevo->fecha = '2021-11-14';
+        $historicoNuevo->fecha = '2024-11-23';
         $historicoNuevo->equivalenteeuro = 0.92;
         $dolar1->historicos()->save($historicoNuevo);
 

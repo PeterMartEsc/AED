@@ -11,7 +11,7 @@ class Controller_pr12
     function saveNuevaAsignatura(){
 
         $asignatura = new Asignatura();
-        //$asignatura->id = 9;
+        $asignatura->id = 9;
         $asignatura->nombre = "EjemploAsignatura1";
         $asignatura->curso = "1º DAM";
         echo "Ejecutando el 'save' de la asignatura";
@@ -22,7 +22,7 @@ class Controller_pr12
     function createNuevaAsignatura(){
 
         $asignatura = new Asignatura();
-        //$asignatura->id = 10;
+        $asignatura->id = 10;
         $asignatura->nombre = "EjemploAsignatura2";
         $asignatura->curso = "2º DAM";
 

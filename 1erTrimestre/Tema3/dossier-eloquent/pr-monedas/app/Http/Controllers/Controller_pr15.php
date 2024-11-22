@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historico;
+use App\Models\Moneda;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class Controller
+class Controller_pr15
 {
     function crearNuevoHistoricoPr15(){
 
-        $historicoNuevo = new Historico();
-        $historicoNuevo->fecha = '2021-12-31';
-        $historicoNuevo->equivalenteeuro = 0.89;
+        $dolar1 = Moneda::find(1);
 
-        //$dolar1->historicos()->save($historicoNuevo);
-        //$dolar1->refresh();
+        $historicoNuevo = new Historico();
+        $historicoNuevo->fecha = '2024-11-22';
+        $historicoNuevo->equivalenteeuro = 0.96;
+        $historicoNuevo->moneda()->associate($dolar1);
+        $historicoNuevo->save();
+
         echo "generado: ".json_encode($historicoNuevo, JSON_UNESCAPED_UNICODE) . "<br>";
     }
 }

@@ -9,7 +9,6 @@ class Alumno extends Model
 {
     use HasFactory;
 
-
     /**
      * @var string
      */
