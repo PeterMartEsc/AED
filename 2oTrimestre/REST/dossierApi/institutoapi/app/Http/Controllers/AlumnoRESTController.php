@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AlumnoDTO;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class AlumnoRESTController extends Controller
      */
     public function index()
     {
-        //
+        return AlumnoDTO::collection(Alumno::all());
     }
 
     /**

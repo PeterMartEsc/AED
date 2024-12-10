@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumnoRESTController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-Route::apiResource('tasks', 'TasksController');
+Route::apiResource('alumnos', AlumnoRESTController::class)->except('destroy');
+
+Route::prefix('')->group(function () {
+    //Route::get('/alumnos', [AlumnoRESTController::class, 'index']); No haría falta por el apiResource?
+    //Route::get('/alumnos/{alumno}', [AlumnoRESTController::class, 'show']);
+    //Route::get('/alumnos/{alumno}', [AlumnoRESTController::class, 'update']);
+
+});
