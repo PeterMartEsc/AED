@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AsignaturaDTO;
 use App\Models\Asignatura;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class AsignaturaRESTController extends Controller
      */
     public function index()
     {
-        //
+        return AsignaturaDTO::collection(Asignatura::all());
     }
 
     /**
@@ -28,7 +29,11 @@ class AsignaturaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asignatura = AsignaturaDTO::create([
+            'nombre' => $request->nombre,
+            'curso' => $request->curso
+            ]);
+        return new AsignaturaDTO($asignatura);
     }
 
     /**
@@ -52,7 +57,8 @@ class AsignaturaRESTController extends Controller
      */
     public function update(Request $request, Asignatura $asignatura)
     {
-        //
+        $asignatura->update($request->only(['nombre', 'curso']));
+        return new AsignaturaDTO($asignatura);
     }
 
     /**
@@ -60,6 +66,7 @@ class AsignaturaRESTController extends Controller
      */
     public function destroy(Asignatura $asignatura)
     {
-        //
+        $asignatura->delete();
+        return response()->json(null, 204);
     }
 }

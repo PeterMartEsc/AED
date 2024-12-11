@@ -29,7 +29,12 @@ class AlumnoRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alumno = AlumnoDTO::create([
+            'id_alumno' => $request->id_alumno,
+            'nombre' => $request->nombre,
+            'fechanacimiento' => $request->fechanacimiento
+            ]);
+        return new AlumnoDTO($alumno);
     }
 
     /**
@@ -53,7 +58,8 @@ class AlumnoRESTController extends Controller
      */
     public function update(Request $request, Alumno $alumno)
     {
-        //
+        $alumno->update($request->only(['id_alumno', 'edad', 'fechanacimiento']));
+        return new AlumnoDTO($alumno);
     }
 
     /**
@@ -61,6 +67,7 @@ class AlumnoRESTController extends Controller
      */
     public function destroy(Alumno $alumno)
     {
-        //
+        $alumno->delete();
+        return response()->json(null, 204);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MatriculaDTO;
 use App\Models\Matricula;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class MatriculaRESTController extends Controller
      */
     public function index()
     {
-        return response()->json([
+        /*return response()->json([
             'saludo' => 'Hola soy Pedro',
-            ]);
+            ]);*/
+
+        return MatriculaDTO::collection(Matricula::all());
     }
 
     /**
@@ -30,7 +33,11 @@ class MatriculaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $matricula = MatriculaDTO::create([
+            'dni' => $request->dni,
+            'year' => $request->year
+            ]);
+        return new MatriculaDTO($matricula);
     }
 
     /**
@@ -54,7 +61,8 @@ class MatriculaRESTController extends Controller
      */
     public function update(Request $request, Matricula $matricula)
     {
-        //
+        $matricula->update($request->only(['nombre', 'curso']));
+        return new MatriculaDTO($matricula);
     }
 
     /**
@@ -62,6 +70,7 @@ class MatriculaRESTController extends Controller
      */
     public function destroy(Matricula $matricula)
     {
-        //
+        $matricula->delete();
+        return response()->json(null, 204);
     }
 }
