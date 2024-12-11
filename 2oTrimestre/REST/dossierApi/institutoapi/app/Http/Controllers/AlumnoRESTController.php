@@ -32,7 +32,8 @@ class AlumnoRESTController extends Controller
         $alumno = AlumnoDTO::create([
             'id_alumno' => $request->id_alumno,
             'nombre' => $request->nombre,
-            'fechanacimiento' => $request->fechanacimiento
+            'apellidos' => $request->apellidos,
+            'fechanacimiento' => strtotime($request->input('fechanacimiento')),
             ]);
         return new AlumnoDTO($alumno);
     }
@@ -58,7 +59,7 @@ class AlumnoRESTController extends Controller
      */
     public function update(Request $request, Alumno $alumno)
     {
-        $alumno->update($request->only(['id_alumno', 'edad', 'fechanacimiento']));
+        $alumno->update($request->only(['nombre', 'apellidos', 'fechanacimiento']));
         return new AlumnoDTO($alumno);
     }
 

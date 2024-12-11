@@ -15,7 +15,8 @@ class AsignaturaDTO extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-
+            'nombre' => $this->nombre,
+            'curso' => $this->curso
         ];
     }
 }

@@ -19,8 +19,10 @@ class AlumnoDTO extends JsonResource
         return [
 
             'id_alumno' => $this->dni,
-            'nombre' => $this->nombre . " " .  $this->apellido,
-            'es_mayor_de_edad' => (time() - $this->fechanacimiento/1000) / ($diaEnSegundos * 365) >= 18
+            'nombre' => $this->nombre,
+            'apellidos' => $this->apellidos,
+            'fechanacimiento' => date("Y-m-d", $this->fechanacimiento/1000)
         ];
     }
+
 }

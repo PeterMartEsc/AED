@@ -34,8 +34,10 @@ class MatriculaRESTController extends Controller
     public function store(Request $request)
     {
         $matricula = MatriculaDTO::create([
+            'id_matricula' => $request->id,
             'dni' => $request->dni,
-            'year' => $request->year
+            'year' => $request->year,
+            'asignaturas' => $request->asignaturas
             ]);
         return new MatriculaDTO($matricula);
     }
@@ -61,7 +63,14 @@ class MatriculaRESTController extends Controller
      */
     public function update(Request $request, Matricula $matricula)
     {
-        $matricula->update($request->only(['nombre', 'curso']));
+        $matricula->update($request->only(['dni', 'year']));
+        $matricula->asignaturas()->detach();
+
+        if($request->has('asignaturas')){
+            foreach($request->asinignaturas as $asignaturaid){
+                //$matricula->asignaturas()->
+            }
+        }
         return new MatriculaDTO($matricula);
     }
 
