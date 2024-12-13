@@ -6,11 +6,31 @@ use App\Http\Resources\AlumnoDTO;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 
+/**
+ *  @OA\Info(
+ *      title="Instituto api",
+ *      version="1.0.0",
+ *      description="Esta es la documentación de la API generada automáticamente con Swagger",
+ *      @OA\Contact(
+ *          email="soporte@example.com"
+ *      )
+ *  )
+ */
 class AlumnoRESTController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    *
+    * @OA\Get(
+    *   path="/api/alumnos",
+    *   summary="Obtener lista de alumnos",
+    *   description="Retorna una lista de alumnos",
+    *   tags={"Alumnos"},
+    *   @OA\Response(
+    *       response=200,
+    *       description="Lista de alumnos"
+    *   )
+    * )
+    */
     public function index()
     {
         return AlumnoDTO::collection(Alumno::all());
@@ -25,8 +45,18 @@ class AlumnoRESTController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+    *
+    * @OA\Post(
+    *   path="/api/alumnos",
+    *   summary="Crear un alumno",
+    *   description="Crea un alumno",
+    *   tags={"Alumnos"},
+    *   @OA\Response(
+    *       response=200,
+    *       description="Crear alumno"
+    *   )
+    * )
+    */
     public function store(Request $request)
     {
         $alumno = AlumnoDTO::create([
@@ -55,8 +85,18 @@ class AlumnoRESTController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+    *
+    * @OA\Put(
+    *   path="/api/alumnos/{alumno}",
+    *   summary="Actualiza un alumno",
+    *   description="Actualiza un alumno",
+    *   tags={"Pedro"},
+    *   @OA\Response(
+    *       response=200,
+    *       description="Edita alumno existente sustituyendo al completo"
+    *   )
+    * )
+    */
     public function update(Request $request, Alumno $alumno)
     {
         $alumno->update($request->only(['nombre', 'apellidos', 'fechanacimiento']));
@@ -64,8 +104,18 @@ class AlumnoRESTController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+    *
+    * @OA\Delete(
+    *   path="/api/alumnos/{alumno}",
+    *   summary="Elimina un alumno",
+    *   description="Elimina un alumno",
+    *   tags={"Alumnos"},
+    *   @OA\Response(
+    *       response=200,
+    *       description="Edita alumno existente sustituyendo info"
+    *   )
+    * )
+    */
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
