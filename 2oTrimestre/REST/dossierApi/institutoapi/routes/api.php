@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlumnoRESTController;
 use App\Http\Controllers\AsignaturaRESTController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\MatriculaRESTController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,6 @@ Route::prefix('')->group(function () {
 Route::apiResource('matriculas', MatriculaRESTController::class);
 
 Route::apiResource('asignaturas', AsignaturaRESTController::class);
+
+Route::post('/upload', [ImagesController::class, 'subir']);
+

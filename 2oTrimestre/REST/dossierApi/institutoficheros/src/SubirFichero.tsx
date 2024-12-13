@@ -1,8 +1,9 @@
-import { React, useState, FormEvent, axios } from 'react'
+import axios from 'axios';
+import {  useState, FormEvent } from 'react'
 
 type Props = {}
 
-function subirFichero({ }: Props) {
+function SubirFichero({ }: Props) {
 
     const [mensajes, setmensajes] = useState("");
 
@@ -14,7 +15,7 @@ function subirFichero({ }: Props) {
             const formData = new FormData();
             formData.append("file", file);
             try {
-                let response = await axios.post('http://localhost:8000/api/upload', 
+                let response = await axios.post('http://localhost:8001/api/upload', 
                     formData, {
                         headers: { 'Content-Type': 'multipart/form-data' }
                     }
@@ -44,4 +45,4 @@ function subirFichero({ }: Props) {
 
 }
 
-export default subirFichero
+export default SubirFichero
