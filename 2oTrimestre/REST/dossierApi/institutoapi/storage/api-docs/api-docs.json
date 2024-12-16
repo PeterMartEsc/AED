@@ -1,0 +1,79 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Instituto api",
+        "description": "Esta es la documentación de la API generada automáticamente con Swagger",
+        "contact": {
+            "email": "soporte@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/alumnos": {
+            "get": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Obtener lista de alumnos",
+                "description": "Retorna una lista de alumnos",
+                "operationId": "969d349afb0d8e2243627f1b4ceca1e5",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alumnos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Crear un alumno",
+                "description": "Crea un alumno",
+                "operationId": "c08df626d6ea6839c5129e6c189acca9",
+                "responses": {
+                    "200": {
+                        "description": "Crear alumno"
+                    }
+                }
+            }
+        },
+        "/api/alumnos/{alumno}": {
+            "put": {
+                "tags": [
+                    "Pedro"
+                ],
+                "summary": "Actualiza un alumno",
+                "description": "Actualiza un alumno",
+                "operationId": "e22f4c7fe7e249162cdea6e25f32e15d",
+                "responses": {
+                    "200": {
+                        "description": "Edita alumno existente sustituyendo al completo"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Elimina un alumno",
+                "description": "Elimina un alumno",
+                "operationId": "99a18ae3f35586857f894cb8c0bd1558",
+                "responses": {
+                    "200": {
+                        "description": "Edita alumno existente sustituyendo info"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Alumnos",
+            "description": "Alumnos"
+        },
+        {
+            "name": "Pedro",
+            "description": "Pedro"
+        }
+    ]
+}
