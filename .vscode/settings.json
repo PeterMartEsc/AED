@@ -1,9 +1,4 @@
 {
-    "conventionalCommits.scopes": [
-        "blackjack",
-        "texteditor",
-        "dibujarfiguras"
-    ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ab307e",
         "activityBar.background": "#ab307e",
