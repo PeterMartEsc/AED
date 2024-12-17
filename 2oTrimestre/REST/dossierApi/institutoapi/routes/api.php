@@ -22,18 +22,12 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::apiResource('alumnos', AlumnoRESTController::class)->except('destroy');
+Route::apiResource('alumnos', AlumnoRESTController::class)->middleware('roladmin');
+Route::apiResource('matriculas', MatriculaRESTController::class)->middleware('roladmin');
+Route::apiResource('asignaturas', AsignaturaRESTController::class)->middleware('roladmin');
 
-Route::prefix('')->group(function () {
-    //Route::get('/alumnos', [AlumnoRESTController::class, 'index']); No haría falta por el apiResource?
-    //Route::get('/alumnos/{alumno}', [AlumnoRESTController::class, 'show']);
-    //Route::get('/alumnos/{alumno}', [AlumnoRESTController::class, 'update']);
+Route::post('upload', [ImagesController::class, 'subir']);
 
-});
-
-Route::apiResource('matriculas', MatriculaRESTController::class);
-
-Route::apiResource('asignaturas', AsignaturaRESTController::class);
-
-Route::post('/upload', [ImagesController::class, 'subir']);
-
+//Auth
+Route::post('register', [AuthApiController::class, 'register']);
+Route::post('login', [AuthApiController::class, 'login']);
