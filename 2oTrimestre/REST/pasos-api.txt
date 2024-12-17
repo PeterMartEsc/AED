@@ -1,0 +1,74 @@
+1.- Crear el .sql y la bbdd en phpMyAdmin
+
+2.- Instalar en el proyecto el Krlove
+
+    composer require krlove/eloquent-model-generator --dev
+    
+3.- Añadir la linea 
+
+    Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+
+3.- Modificar el .env con los datos de la bbdd
+
+4.- Crear los Modelos a partir de la bbdd con Krlove
+
+    php artisan krlove:generate:model Task --table-name=tasks --no-timestamps
+
+5.- Comprobar el no-timestamp
+
+    public $timestamps = false;
+
+6.- Modificar en caso de tener relaciones N:M y si no, comprobar que estén bien realizadas las lineas especificas
+
+    - N:M :
+        return $this->belongsToMany(
+                Pelicula::class, //objetos de la relación manytomany que queremos obtener
+                'actores_peliculas', //nombre de la tabla de enlace
+                'actores_id', // aquí el nombre de la foreign key en la tabla de enlace de nuestra entity id
+                'pelicula_id' // aquí la foreign key de tabla de enlace, que apunta a la otra entidad
+                );
+
+    - 1:N :
+
+
+7.- Crear migraciones 
+
+    php artisan make:migration nombre_migration
+
+8.- Completar los metodos up y down para crear las migraciones correctamente
+
+9.- Crear los seeders 
+    
+    (investigar)
+
+10.- Crear los controladores REST a partir de los modelos
+
+11.- Crear los metodos especificos de los controladores REST
+
+12.- Añadir las rutas al api.php
+
+    Route::apiResource('tasks', 'TasksController'); // Route::apiResource('tasks', TasksController:class);
+
+13.- En caso de querer añadir rutas especificas:
+
+    Route::prefix('')->group(function () {
+        Route::get/post/put('/tasks/miaccion', [TaskController::class,"mimetodo"]);
+        ...
+    });
+
+14.- Crear los DTO
+
+    php artisan make:resource TaskDTO 
+
+    Los DTO también son llamados Resources
+
+15.- Podemos añadir una salida en especifico en el DTO sobreescribiendo el medoto toArray (como el toString de Java)
+
+    return [
+        'idkeyMostrada' => $this->idproducto,
+        'nombreKeyMostrada' => $this->nombre,
+        'precioKeyMostrada' => $this->precio,
+        'stockKeyMostrada' => $this->stock,
+    ];
+
+    

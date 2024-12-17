@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ActorRESTController;
+use App\Http\Controllers\CategoriaRESTController;
+use App\Http\Controllers\DirectorRESTController;
+use App\Http\Controllers\PeliculaRESTController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('peliculas', PeliculaRESTController::class);
+
+Route::apiResource('actores', ActorRESTController::class);
+
+Route::apiResource('categorias', CategoriaRESTController::class);
+
+Route::apiResource('directores', DirectorRESTController::class);
+
+

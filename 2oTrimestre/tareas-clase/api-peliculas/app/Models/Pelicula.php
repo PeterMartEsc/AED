@@ -30,7 +30,12 @@ class Pelicula extends Model
      */
     public function actoresPeliculas()
     {
-        return $this->hasMany('App\Models\ActoresPelicula');
+        return $this->belongsToMany(
+            Actor::class, //objetos de la relación manytomany que queremos obtener
+            'actores_peliculas', //nombre de la tabla de enlace
+            'pelicula_id', // aquí el nombre de la foreign key en la tabla de enlace de nuestra entity id
+            'actor_id' // aquí la foreign key de tabla de enlace, que apunta a la otra entidad
+            );
     }
 
     /**
@@ -38,7 +43,12 @@ class Pelicula extends Model
      */
     public function directoresPeliculas()
     {
-        return $this->hasMany('App\Models\DirectoresPelicula');
+        return $this->belongsToMany(
+            Director::class, //objetos de la relación manytomany que queremos obtener
+            'directores_peliculas', //nombre de la tabla de enlace
+            'pelicula_id', // aquí el nombre de la foreign key en la tabla de enlace de nuestra entity id
+            'director_id' // aquí la foreign key de tabla de enlace, que apunta a la otra entidad
+            );
     }
 
     /**
@@ -46,6 +56,11 @@ class Pelicula extends Model
      */
     public function categoriasPeliculas()
     {
-        return $this->hasMany('App\Models\CategoriasPelicula');
+        return $this->belongsToMany(
+            Categoria::class, //objetos de la relación manytomany que queremos obtener
+            'categorias_peliculas', //nombre de la tabla de enlace
+            'pelicula_id', // aquí el nombre de la foreign key en la tabla de enlace de nuestra entity id
+            'categoria_id' // aquí la foreign key de tabla de enlace, que apunta a la otra entidad
+            );
     }
 }

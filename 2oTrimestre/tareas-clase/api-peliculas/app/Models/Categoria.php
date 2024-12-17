@@ -23,6 +23,11 @@ class Categoria extends Model
      */
     public function categoriasPeliculas()
     {
-        return $this->hasMany('App\Models\CategoriasPelicula');
+        return $this->belongsToMany(
+            Pelicula::class, //objetos de la relación manytomany que queremos obtener
+            'categorias_peliculas', //nombre de la tabla de enlace
+            'categoria_id', // aquí el nombre de la foreign key en la tabla de enlace de nuestra entity id
+            'pelicula_id' // aquí la foreign key de tabla de enlace, que apunta a la otra entidad
+            );
     }
 }
