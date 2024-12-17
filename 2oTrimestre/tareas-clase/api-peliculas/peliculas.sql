@@ -1,0 +1,48 @@
+
+
+INSERT INTO actor(id, nombre, apellidos) VALUES ('1','Leonardo','DiCaprio');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('2','Kate','Winslet');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('3','Brad','Pitt');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('4','Margot','Robbie');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('5','Johnny','Depp');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('6','Helena','Bonham Carter');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('7','Robert','Downey Jr.');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('8','Chris','Evans');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('9','Scarlett','Johansson');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('10','Tom','Hanks');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('11','Robin','Wright');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('12','Natalie','Portman');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('13','Mila','Kunis');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('14','Christian','Bale');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('15','Heath','Ledger');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('16','Emma','Stone');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('17','Ryan','Gosling');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('18','Anne','Hathaway');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('19','Hugh','Jackman');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('20','Daniel','Radcliffe');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('21','Rupert','Grint');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('22','Emma','Watson');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('23','Jennifer','Lawrence');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('24','Josh','Hutcherson');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('25','Tom','Cruise');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('26','Emily','Blunt');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('27','Matt','Damon');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('28','Jessica','Chastain');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('29','Morgan','Freeman');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('30','Tim','Robbins');
+INSERT INTO actor(id, nombre, apellidos) VALUES ('31','Michael','Caine');
+
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('1','Ciencia Ficción');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('2','Drama');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('3','Comedia');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('4','Acción');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('5','Biografía');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('6','Musical');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('7','Aventura');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('8','Bélica');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('9','Romántica');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('10','Suspense');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('11','Western');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('12','Crimen');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('13','Thriller Psicológico');
+INSERT INTO `categorias`(`id`, `nombre`) VALUES ('14','Fantasía');
