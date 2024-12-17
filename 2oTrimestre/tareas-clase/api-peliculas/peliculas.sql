@@ -1,36 +1,93 @@
+CREATE DATABASE peliculas;
+USE peliculas;
+
+CREATE TABLE peliculas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(50) UNIQUE NOT NULL,
+    year YEAR NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    trailer VARCHAR(255),
+    caratula VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE actores (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(30) NOT NULL,
+	apellidos VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE directores (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(30) NOT NULL,
+	apellidos VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE categorias (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(30) UNIQUE NOT NULL
+);
+
+CREATE TABLE actores_peliculas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	pelicula_id INT NOT NULL,
+	actor_id INT NOT NULL,
+	FOREIGN KEY (pelicula_id) REFERENCES peliculas(id),
+	FOREIGN KEY (actor_id) REFERENCES actores(id),
+    CONSTRAINT actores_pelicula UNIQUE (actor_id,pelicula_id)
+);
 
 
-INSERT INTO actor(id, nombre, apellidos) VALUES ('1','Leonardo','DiCaprio');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('2','Kate','Winslet');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('3','Brad','Pitt');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('4','Margot','Robbie');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('5','Johnny','Depp');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('6','Helena','Bonham Carter');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('7','Robert','Downey Jr.');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('8','Chris','Evans');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('9','Scarlett','Johansson');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('10','Tom','Hanks');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('11','Robin','Wright');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('12','Natalie','Portman');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('13','Mila','Kunis');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('14','Christian','Bale');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('15','Heath','Ledger');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('16','Emma','Stone');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('17','Ryan','Gosling');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('18','Anne','Hathaway');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('19','Hugh','Jackman');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('20','Daniel','Radcliffe');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('21','Rupert','Grint');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('22','Emma','Watson');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('23','Jennifer','Lawrence');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('24','Josh','Hutcherson');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('25','Tom','Cruise');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('26','Emily','Blunt');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('27','Matt','Damon');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('28','Jessica','Chastain');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('29','Morgan','Freeman');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('30','Tim','Robbins');
-INSERT INTO actor(id, nombre, apellidos) VALUES ('31','Michael','Caine');
+CREATE TABLE directores_peliculas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	pelicula_id INT NOT NULL,
+	director_id INT NOT NULL,
+	FOREIGN KEY (pelicula_id) REFERENCES peliculas(id),
+	FOREIGN KEY (director_id) REFERENCES directores(id),
+    CONSTRAINT directores_pelicula UNIQUE (director_id,pelicula_id)
+);
+
+CREATE TABLE categorias_peliculas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pelicula_id INT NOT NULL,
+    categoria_id INT NOT NULL,
+    FOREIGN KEY (pelicula_id) REFERENCES peliculas(id),
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+    CONSTRAINT categorias_pelicula UNIQUE (categoria_id,pelicula_id)
+);
+
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('1','Leonardo','DiCaprio');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('2','Kate','Winslet');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('3','Brad','Pitt');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('4','Margot','Robbie');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('5','Johnny','Depp');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('6','Helena','Bonham Carter');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('7','Robert','Downey Jr.');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('8','Chris','Evans');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('9','Scarlett','Johansson');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('10','Tom','Hanks');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('11','Robin','Wright');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('12','Natalie','Portman');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('13','Mila','Kunis');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('14','Christian','Bale');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('15','Heath','Ledger');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('16','Emma','Stone');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('17','Ryan','Gosling');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('18','Anne','Hathaway');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('19','Hugh','Jackman');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('20','Daniel','Radcliffe');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('21','Rupert','Grint');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('22','Emma','Watson');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('23','Jennifer','Lawrence');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('24','Josh','Hutcherson');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('25','Tom','Cruise');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('26','Emily','Blunt');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('27','Matt','Damon');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('28','Jessica','Chastain');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('29','Morgan','Freeman');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('30','Tim','Robbins');
+INSERT INTO `actores`(`id`, `nombre`, `apellidos`) VALUES ('31','Michael','Caine');
 
 INSERT INTO `categorias`(`id`, `nombre`) VALUES ('1','Ciencia Ficción');
 INSERT INTO `categorias`(`id`, `nombre`) VALUES ('2','Drama');
