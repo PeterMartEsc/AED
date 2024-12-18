@@ -4,6 +4,7 @@ use App\Http\Controllers\AlumnoRESTController;
 use App\Http\Controllers\AsignaturaRESTController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\MatriculaRESTController;
+use App\Http\Controllers\AuthApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,9 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::apiResource('alumnos', AlumnoRESTController::class)->middleware('roladmin');
-Route::apiResource('matriculas', MatriculaRESTController::class)->middleware('roladmin');
-Route::apiResource('asignaturas', AsignaturaRESTController::class)->middleware('roladmin');
+Route::apiResource('alumnos', AlumnoRESTController::class)->middleware('auth:api');
+Route::apiResource('matriculas', MatriculaRESTController::class);//->middleware('roladmin');
+Route::apiResource('asignaturas', AsignaturaRESTController::class);//->middleware('roladmin');
 
 Route::post('upload', [ImagesController::class, 'subir']);
 

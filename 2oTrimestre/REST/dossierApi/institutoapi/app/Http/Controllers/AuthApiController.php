@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -14,7 +16,7 @@ class AuthApiController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user',
+            'role' => 'user'
         ]);
         return auth('api')->login($user);
     }
@@ -24,7 +26,6 @@ class AuthApiController extends Controller
         $pass = $request->input('password');
         $user = User::where('name', '=', $nom)
             ->first();
-
         if (isset($user)) {
             $usuarioname = $user['name'];
             $usuariohashpass = $user['password'];
@@ -37,7 +38,10 @@ class AuthApiController extends Controller
             }
         } else {
             return response()
-                ->json(['error' => 'User not found', $nom => $pass], 401);
+                ->json([
+                    'error' => 'User not found',
+                    $user => $pass
+                    ], 401);
         }
     }
 }
