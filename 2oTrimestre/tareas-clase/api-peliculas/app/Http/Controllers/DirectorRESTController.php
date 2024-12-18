@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DirectorDTO;
 use App\Models\Director;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class DirectorRESTController extends Controller
      */
     public function index()
     {
-        //
+        return DirectorDTO::collection(Director::all());
     }
 
     /**
@@ -28,7 +29,13 @@ class DirectorRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $director = DirectorDTO::create([
+            'id' => $request->id,
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos
+            ]);
+
+        return new DirectorDTO($director);
     }
 
     /**
@@ -52,7 +59,8 @@ class DirectorRESTController extends Controller
      */
     public function update(Request $request, Director $director)
     {
-        //
+        $director->update($request->only(['nombre', 'apellidos']));
+        return new DirectorDTO($director);
     }
 
     /**
@@ -60,6 +68,7 @@ class DirectorRESTController extends Controller
      */
     public function destroy(Director $director)
     {
-        //
+        $director->delete();
+        return response()->json(null, 204);
     }
 }

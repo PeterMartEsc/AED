@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoriaDTO;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class CategoriaRESTController extends Controller
      */
     public function index()
     {
-        //
+        return CategoriaDTO::collection(Categoria::all());
     }
 
     /**
@@ -28,7 +29,12 @@ class CategoriaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoria = CategoriaDTO::create([
+            'id' => $request->id,
+            'nombre' => $request->nombre
+            ]);
+
+        return new CategoriaDTO($categoria);
     }
 
     /**
@@ -52,7 +58,8 @@ class CategoriaRESTController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        $categoria->update($request->only(['nombre']));
+        return new CategoriaDTO($categoria);
     }
 
     /**
@@ -60,6 +67,7 @@ class CategoriaRESTController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return response()->json(null, 204);
     }
 }
