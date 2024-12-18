@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PeliculaDTO;
 use App\Models\Pelicula;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class PeliculaRESTController extends Controller
      */
     public function index()
     {
-        //
+        return PeliculaDTO::collection(Pelicula::all());
     }
 
     /**
@@ -34,9 +35,10 @@ class PeliculaRESTController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelicula $pelicula)
+    public function show($id)
     {
-        //
+        //$pelicula = Pelicula::with('actores')->find($id);
+        //return new PeliculaDTO($pelicula);
     }
 
     /**

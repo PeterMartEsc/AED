@@ -43,24 +43,25 @@
 
 10.- Crear los controladores REST a partir de los modelos
 
-11.- Crear los metodos especificos de los controladores REST
+11.- Crear los DTO
 
-12.- Añadir las rutas al api.php
+    php artisan make:resource TaskDTO 
+
+    Los DTO también son llamados Resources
+
+12.- Crear los metodos especificos de los controladores REST
+
+13.- Añadir las rutas al api.php
 
     Route::apiResource('tasks', 'TasksController'); // Route::apiResource('tasks', TasksController:class);
 
-13.- En caso de querer añadir rutas especificas:
+14.- En caso de querer añadir rutas especificas:
 
     Route::prefix('')->group(function () {
         Route::get/post/put('/tasks/miaccion', [TaskController::class,"mimetodo"]);
         ...
     });
 
-14.- Crear los DTO
-
-    php artisan make:resource TaskDTO 
-
-    Los DTO también son llamados Resources
 
 15.- Podemos añadir una salida en especifico en el DTO sobreescribiendo el medoto toArray (como el toString de Java)
 

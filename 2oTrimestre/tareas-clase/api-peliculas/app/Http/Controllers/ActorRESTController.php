@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actor;
 use Illuminate\Http\Request;
+use App\Http\Resources\ActorDTO;
 
 class ActorRESTController extends Controller
 {
@@ -12,7 +13,7 @@ class ActorRESTController extends Controller
      */
     public function index()
     {
-        //
+        return ActorDTO::collection(Actor::all());
     }
 
     /**
@@ -28,7 +29,13 @@ class ActorRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $actor = ActorDTO::create([
+            'id' => $request->id,
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos
+            ]);
+
+        return new ActorDTO($actor);
     }
 
     /**
@@ -52,7 +59,8 @@ class ActorRESTController extends Controller
      */
     public function update(Request $request, Actor $actor)
     {
-        //
+        $actor->update($request->only(['nombre', 'apellidos']));
+        return new ActorDTO($actor);
     }
 
     /**
@@ -60,6 +68,7 @@ class ActorRESTController extends Controller
      */
     public function destroy(Actor $actor)
     {
-        //
+        $actor->delete();
+        return response()->json(null, 204);
     }
 }
