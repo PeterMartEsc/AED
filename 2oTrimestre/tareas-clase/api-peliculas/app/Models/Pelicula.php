@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pelicula extends Model
 {
     public $timestamps = false;
+    protected $hidden = ['pivot'];
     /**
      * @var array
      */

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Categoria;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +27,8 @@ class DatabaseSeeder extends Seeder
             DirectoresSeeder::class,
             PeliculasSeeder::class,
             ActoresPeliculasSeeder::class,
+            CategoriasPeliculasSeeder::class,
+            DirectoresPeliculasSeeder::class,
         ]);
     }
 }

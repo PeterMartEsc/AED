@@ -18,19 +18,19 @@ class PeliculaDTO extends JsonResource
     {
         $pelicula = Pelicula::find($this->id);
         $actores = $pelicula->actoresPeliculas;
+        $categorias = $pelicula->categoriasPeliculas;
+        $directores = $pelicula->directoresPeliculas;
+
         return [
             'id' => $this->id,
             'titulo' => $this->titulo,
             'year' => $this->year,
+            'direccion' => $directores,
             'actores' => $actores,
+            'categorias' => $categorias,
             'descripcion' => $this->descripcion,
             'caratula' => $this->caratula,
             'trailer' => $this->trailer,
-
         ];
-    }
-
-    public function actoresPelicula(int $id){
-        $arrayActoresId = Actor::where("id", $id);
     }
 }

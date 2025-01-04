@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 class Actor extends Model
 {
     public $timestamps = false;
+
+    // evita que en el objeto se muestre el 'pivot' al hacer un get all
+    protected $hidden = ['pivot'];  //(el pivot es la info de las tablas de las que obtiene los elementos de N:M)
+
     /**
      * The table associated with the model.
      *
