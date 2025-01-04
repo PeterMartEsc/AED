@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Actor;
+use App\Models\Pelicula;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,11 +16,13 @@ class PeliculaDTO extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $actores = $this->actoresPelicula($this->id);
+        $pelicula = Pelicula::find($this->id);
+        $actores = $pelicula->actoresPeliculas;
         return [
             'id' => $this->id,
             'titulo' => $this->titulo,
             'year' => $this->year,
+            'actores' => $actores,
             'descripcion' => $this->descripcion,
             'caratula' => $this->caratula,
             'trailer' => $this->trailer,
@@ -27,6 +31,6 @@ class PeliculaDTO extends JsonResource
     }
 
     public function actoresPelicula(int $id){
-        
+        $arrayActoresId = Actor::where("id", $id);
     }
 }
