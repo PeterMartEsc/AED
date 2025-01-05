@@ -72,9 +72,14 @@ class ActorRESTController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Actor $actor)
+    public function destroy($id)
     {
-        $actor->delete();
-        return response()->json(null, 204);
+        $actor = Actor::find($id);
+        if (!$actor) {
+            return response()->json(['error' => 'No se ha encontrado el actor'], 404);
+        } else {
+            $actor->delete();
+            return response()->json(['message' => 'Se ha eliminado correctamente'], 204);
+        }
     }
 }

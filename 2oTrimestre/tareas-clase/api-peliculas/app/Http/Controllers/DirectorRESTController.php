@@ -72,9 +72,14 @@ class DirectorRESTController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Director $director)
+    public function destroy($id)
     {
-        $director->delete();
-        return response()->json(null, 204);
+        $director = Director::find($id);
+        if (!$director) {
+            return response()->json(['error' => 'No se ha encontrado el director'], 404);
+        } else {
+            $director->delete();
+            return response()->json(null, 204);
+        }
     }
 }

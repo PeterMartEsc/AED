@@ -72,9 +72,14 @@ class CategoriaRESTController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        $categoria->delete();
-        return response()->json(null, 204);
+        $categoria = Categoria::find($id);
+        if (!$categoria) {
+            return response()->json(['error' => 'No se ha encontrado la categoría'], 404);
+        } else {
+            $categoria->delete();
+            return response()->json(null, 204);
+        }
     }
 }
