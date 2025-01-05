@@ -17,6 +17,7 @@ class PeliculaDTO extends JsonResource
     public function toArray(Request $request): array
     {
         $pelicula = Pelicula::find($this->id);
+
         $actores = $pelicula->actoresPeliculas;
         $categorias = $pelicula->categoriasPeliculas;
         $directores = $pelicula->directoresPeliculas;

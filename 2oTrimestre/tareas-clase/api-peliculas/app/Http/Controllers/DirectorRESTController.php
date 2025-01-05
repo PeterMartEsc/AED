@@ -43,7 +43,7 @@ class DirectorRESTController extends Controller
      */
     public function show(Director $director)
     {
-        //
+        return new DirectorDTO($director);
     }
 
     /**

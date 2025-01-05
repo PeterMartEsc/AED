@@ -42,7 +42,8 @@ class CategoriaRESTController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return new CategoriaDTO($categoria);
+
     }
 
     /**

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('actores_peliculas', function (Blueprint $table) {
             $table->id(); // id INT AUTO_INCREMENT PRIMARY KEY
-            $table->foreignId('pelicula_id')->references('id')->on('peliculas')->onDelete('cascade');
-            $table->foreignId('actor_id')->references('id')->on('actores')->onDelete('cascade');
+            $table->foreignId('pelicula_id')->references('id')->on('peliculas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('actor_id')->references('id')->on('actores')->onDelete('cascade')->onUpdate('cascade');
             $table->unique(['actor_id', 'pelicula_id']);
         });
     }

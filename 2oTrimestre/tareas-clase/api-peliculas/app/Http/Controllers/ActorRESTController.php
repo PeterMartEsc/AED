@@ -43,7 +43,7 @@ class ActorRESTController extends Controller
      */
     public function show(Actor $actor)
     {
-        //
+        return new ActorDTO($actor);
     }
 
     /**

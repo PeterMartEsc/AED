@@ -29,16 +29,24 @@ class PeliculaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pelicula = PeliculaDTO::create([
+                'id' => $request->id,
+                'titulo' => $request->titulo,
+                'year' => $request->year,
+                'descripcion' => $request->descripcion,
+                'caratula' => $request->caratula,
+                'trailer' => $request->trailer,
+            ]);
+
+        return new PeliculaDTO($pelicula);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Pelicula $pelicula)
     {
-        //$pelicula = Pelicula::with('actores')->find($id);
-        //return new PeliculaDTO($pelicula);
+        return new PeliculaDTO($pelicula);
     }
 
     /**
@@ -54,7 +62,43 @@ class PeliculaRESTController extends Controller
      */
     public function update(Request $request, Pelicula $pelicula)
     {
-        //
+        //La variable data no se usa, pero sirve para comprobar que los datos son correctos
+        $data = $request->validate([
+            'titulo' => 'string|max:50',
+            'year' => 'integer' . date('Y'),
+            'descripcion' => 'string|max:255',
+            'caratula' => 'string|max:255',
+            'trailer' => 'string|max:255',
+            'actores' => 'array', // Check de que se envíe un array de actores
+            'categorias' => 'array', // Check de que se envíe un array de categorías
+            'directores' => 'array', // Check de que se envíe un array de directores
+
+        ]);
+
+        // Actualizar los datos de la película
+        $pelicula->update($request->only(['titulo', 'year', 'descripcion', 'caratula', 'trailer']));
+
+        // Actualizar la relación con los actores | categorias | directores
+        if ($request->has('actores')) {
+            //Llama al metodo del belongsTo con un sync para obtener los actores
+            $pelicula->actoresPeliculas()->sync($request->input('actores'));
+        }
+
+        if ($request->has('categorias')) {
+            //Llama al metodo del belongsTo con un sync para obtener las categorias
+            $pelicula->categoriasPeliculas()->sync($request->input('categorias'));
+        }
+
+        if ($request->has('directores')) {
+            //Llama al metodo del belongsTo con un sync para obtener los directores
+            $pelicula->directoresPeliculas()->sync($request->input('directores'));
+        }
+
+        // Cargar los actores, categorías y directores en el objeto de la pelicula
+        $peliculaActualizada = $pelicula->load('actores', 'categorias', 'directores');
+
+        // Retornar la película actualizada como recurso
+        return new PeliculaDTO($peliculaActualizada);
     }
 
     /**
@@ -62,6 +106,7 @@ class PeliculaRESTController extends Controller
      */
     public function destroy(Pelicula $pelicula)
     {
-        //
+        $pelicula->delete();
+        return response()->json(null, 204);
     }
 }
