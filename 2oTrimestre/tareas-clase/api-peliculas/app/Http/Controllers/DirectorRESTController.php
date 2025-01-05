@@ -29,7 +29,7 @@ class DirectorRESTController extends Controller
      */
     public function store(Request $request)
     {
-        $director = DirectorDTO::create([
+        $director = Director::create([
             'id' => $request->id,
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos

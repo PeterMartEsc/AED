@@ -29,7 +29,7 @@ class CategoriaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = CategoriaDTO::create([
+        $categoria = Categoria::create([
             'id' => $request->id,
             'nombre' => $request->nombre
             ]);

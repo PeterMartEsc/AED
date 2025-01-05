@@ -29,7 +29,7 @@ class PeliculaRESTController extends Controller
      */
     public function store(Request $request)
     {
-        $pelicula = PeliculaDTO::create([
+        $pelicula = Pelicula::create([
                 'id' => $request->id,
                 'titulo' => $request->titulo,
                 'year' => $request->year,

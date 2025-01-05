@@ -29,7 +29,7 @@ class ActorRESTController extends Controller
      */
     public function store(Request $request)
     {
-        $actor = ActorDTO::create([
+        $actor = Actor::create([
             'id' => $request->id,
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos
