@@ -40,10 +40,16 @@ class CategoriaRESTController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
-        return new CategoriaDTO($categoria);
 
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['error' => 'No se ha encontrado la categoría'], 404);
+        }
+
+        return new CategoriaDTO($categoria);
     }
 
     /**

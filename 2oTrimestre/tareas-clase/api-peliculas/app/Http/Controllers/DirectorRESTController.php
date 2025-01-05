@@ -41,8 +41,14 @@ class DirectorRESTController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Director $director)
+    public function show($id)
     {
+        $director = Director::find($id);
+
+        if (!$director) {
+            return response()->json(['error' => 'No se ha encontrado el director'], 404);
+        }
+
         return new DirectorDTO($director);
     }
 

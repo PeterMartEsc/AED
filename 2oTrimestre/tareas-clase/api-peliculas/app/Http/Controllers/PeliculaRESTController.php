@@ -44,8 +44,14 @@ class PeliculaRESTController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelicula $pelicula)
+    public function show($id)
     {
+        $pelicula = Pelicula::find($id);
+
+        if (!$pelicula) {
+            return response()->json(['error' => 'No se ha encontrado la pelicula'], 404);
+        }
+
         return new PeliculaDTO($pelicula);
     }
 

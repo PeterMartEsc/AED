@@ -41,8 +41,14 @@ class ActorRESTController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Actor $actor)
+    public function show($id)
     {
+        $actor = Actor::find($id);
+
+        if (!$actor) {
+            return response()->json(['error' => 'No se ha encontrado el actor'], 404);
+        }
+
         return new ActorDTO($actor);
     }
 
