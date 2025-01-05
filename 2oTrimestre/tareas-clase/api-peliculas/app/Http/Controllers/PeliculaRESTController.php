@@ -29,6 +29,19 @@ class PeliculaRESTController extends Controller
      */
     public function store(Request $request)
     {
+        //La variable data no se usa, pero sirve para comprobar que los datos son correctos
+        $data = $request->validate([
+            'titulo' => 'string|max:50',
+            'year' => 'integer|between:1900,' . date('Y'),
+            'descripcion' => 'string|max:255',
+            'caratula' => 'string|max:255',
+            'trailer' => 'string|max:255',
+            'actores' => 'array', // Check de que se envíe un array de actores
+            'categorias' => 'array', // Check de que se envíe un array de categorías
+            'directores' => 'array', // Check de que se envíe un array de directores
+
+        ]);
+
         $pelicula = Pelicula::create([
                 'id' => $request->id,
                 'titulo' => $request->titulo,
@@ -37,6 +50,10 @@ class PeliculaRESTController extends Controller
                 'caratula' => $request->caratula,
                 'trailer' => $request->trailer,
             ]);
+
+        $pelicula->actoresPeliculas()->sync($request->input('actores'));
+        $pelicula->categoriasPeliculas()->sync($request->input('categorias'));
+        $pelicula->directoresPeliculas()->sync($request->input('directores'));
 
         return new PeliculaDTO($pelicula);
     }
