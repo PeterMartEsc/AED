@@ -63,8 +63,9 @@ class DirectorRESTController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Director $director)
+    public function update(Request $request, $id)
     {
+        $director = Director::find($id);
         $director->update($request->only(['nombre', 'apellidos']));
         return new DirectorDTO($director);
     }

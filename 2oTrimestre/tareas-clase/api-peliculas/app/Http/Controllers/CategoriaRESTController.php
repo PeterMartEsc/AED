@@ -63,8 +63,9 @@ class CategoriaRESTController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, $id)
     {
+        $categoria = Categoria::find($id);
         $categoria->update($request->only(['nombre']));
         return new CategoriaDTO($categoria);
     }

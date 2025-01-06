@@ -63,8 +63,9 @@ class ActorRESTController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Actor $actor)
+    public function update(Request $request, $id)
     {
+        $actor = Actor::find($id);
         $actor->update($request->only(['nombre', 'apellidos']));
         return new ActorDTO($actor);
     }

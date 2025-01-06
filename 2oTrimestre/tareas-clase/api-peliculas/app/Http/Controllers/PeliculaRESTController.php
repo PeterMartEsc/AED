@@ -83,12 +83,14 @@ class PeliculaRESTController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pelicula $pelicula)
+    public function update(Request $request, $id)
     {
+        $pelicula = Pelicula::find($id);
+
         //La variable data no se usa, pero sirve para comprobar que los datos son correctos
         $data = $request->validate([
             'titulo' => 'string|max:50',
-            'year' => 'integer' . date('Y'),
+            'year' => 'integer|between:1900,' . date('Y'),
             'descripcion' => 'string|max:255',
             'caratula' => 'string|max:255',
             'trailer' => 'string|max:255',
@@ -118,7 +120,7 @@ class PeliculaRESTController extends Controller
         }
 
         // Cargar los actores, categorías y directores en el objeto de la pelicula
-        $peliculaActualizada = $pelicula->load('actores', 'categorias', 'directores');
+        $peliculaActualizada = $pelicula->load('actoresPeliculas', 'categoriasPeliculas', 'directoresPeliculas');
 
         // Retornar la película actualizada como recurso
         return new PeliculaDTO($peliculaActualizada);
@@ -127,9 +129,15 @@ class PeliculaRESTController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelicula $pelicula)
+    public function destroy($id)
     {
-        $pelicula->delete();
-        return response()->json(null, 204);
+        $pelicula = Pelicula::find($id);
+
+        if (!$pelicula) {
+            return response()->json(['error' => 'No se ha encontrado la pelicula'], 404);
+        } else {
+            $pelicula->delete();
+            return response()->json(null, 204);
+        }
     }
 }
