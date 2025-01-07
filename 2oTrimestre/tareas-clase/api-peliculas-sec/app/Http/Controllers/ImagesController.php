@@ -10,6 +10,7 @@ class ImagesController extends Controller
     {
         //suponemos que el atributo al subir se ha llamado: file
         if ($request->hasFile('file')) {
+            dd("jajaja");
             $fichero = $request->file('file');
             $nombre = $fichero->getClientOriginalName();
             $path = $fichero->storeAs('../../public/caratulas/'.$nombre);

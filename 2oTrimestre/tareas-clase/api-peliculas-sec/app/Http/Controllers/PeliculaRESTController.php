@@ -35,14 +35,13 @@ class PeliculaRESTController extends Controller
             'year' => 'integer|between:1900,' . date('Y'),
             'descripcion' => 'string|max:255',
             'caratula' => 'file|mimes:jpg,png',
+            'route' => 'string | max:255',
             'trailer' => 'string|max:255',
             'actores' => 'array', // Check de que se envíe un array de actores
             'categorias' => 'array', // Check de que se envíe un array de categorías
             'directores' => 'array', // Check de que se envíe un array de directores
-
         ]);
 
-        
 
         $pelicula = Pelicula::create([
                 'id' => $request->id,

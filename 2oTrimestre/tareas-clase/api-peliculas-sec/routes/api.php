@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthApiController::class, 'register']);
 Route::post('login', [AuthApiController::class, 'login']);
+Route::post('/upload', [ImagesController::class, 'upload']);
+
 
 /**
  * Public peliculas routes
@@ -42,7 +44,7 @@ Route::get('/peliculas/{pelicula}', [PeliculaRESTController::class, 'show']);
  */
 Route::middleware('auth:api')->group(function () {
     Route::post('/peliculas', [PeliculaRESTController::class, 'store']);
-    Route::post('/upload', [ImagesController::class, 'upload']);
+
     Route::put('/peliculas/{movie}', [PeliculaRESTController::class, 'update']);
     Route::delete('/peliculas/{movie}', [PeliculaRESTController::class, 'destroy'])->middleware('roladmin');
 });
