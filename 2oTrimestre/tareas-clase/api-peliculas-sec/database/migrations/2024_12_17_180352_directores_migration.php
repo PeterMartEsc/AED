@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // id INT AUTO_INCREMENT PRIMARY KEY
             $table->string('nombre', 30); // nombre VARCHAR(30) NOT NULL
             $table->string('apellidos', 50); // apellidos VARCHAR(50) NOT NULL
+            $table->unique(['nombre', 'apellidos']);
         });
     }
 

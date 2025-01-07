@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ActoresPeliculasSeeder::class,
             CategoriasPeliculasSeeder::class,
             DirectoresPeliculasSeeder::class,
+            UsuariosSeeder::class,
         ]);
     }
 }

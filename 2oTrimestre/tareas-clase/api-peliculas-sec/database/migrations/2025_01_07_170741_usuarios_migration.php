@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actores', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id(); // id INT AUTO_INCREMENT PRIMARY KEY
             $table->string('nombre', 30); // nombre VARCHAR(30) NOT NULL
-            $table->string('apellidos', 50); // apellidos VARCHAR(50) NOT NULL
-            $table->unique(['nombre', 'apellidos']);
+            $table->string('email', 100)->unique(); // email VARCHAR(100) NOT NULL
+            $table->string('password', 100); // password VARCHAR(100) NOT NULL
+            $table->string('rol', 20); // rol VARCHAR(20) NOT NULL
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actores');
+        Schema::dropIfExists('usuarios');
     }
 };

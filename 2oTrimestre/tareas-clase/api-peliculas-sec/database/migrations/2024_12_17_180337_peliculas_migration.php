@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('peliculas', function (Blueprint $table) {
             $table->id(); // id INT AUTO_INCREMENT PRIMARY KEY
-            $table->string('titulo', 50)->unique(); // titulo VARCHAR(50) UNIQUE NOT NULL
+            $table->string('titulo', 50); // titulo VARCHAR(50) UNIQUE NOT NULL
             $table->year('year'); // year YEAR NOT NULL
             $table->string('descripcion', 255); // descripcion VARCHAR(255) NOT NULL
             $table->string('trailer', 255)->nullable(); // trailer VARCHAR(255), nullable
             $table->string('caratula', 255)->nullable(); // caratula VARCHAR(255), nullable
+            $table->unique(['titulo', 'year']);
+
         });
     }
 
