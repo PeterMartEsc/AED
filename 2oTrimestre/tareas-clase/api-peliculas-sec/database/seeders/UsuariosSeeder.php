@@ -21,6 +21,13 @@ class UsuariosSeeder extends Seeder
                 'password' => '$2y$12$nH7MVu.AU6MTEC33FZqjM.TFfrKCmhVOfEpdDW7NuPCR.waD8VopO',
                 'rol' => 'usuario'
             ],
+            [
+                'id' => 2,
+                'nombre' => 'Usuario Admin',
+                'email' => 'exampleAdmin@example.com',
+                'password' => '$2y$12$nH7MVu.AU6MTEC33FZqjM.TFfrKCmhVOfEpdDW7NuPCR.waD8VopO',
+                'rol' => 'admin'
+            ],
         ]);
     }
 }

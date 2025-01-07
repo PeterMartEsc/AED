@@ -4,6 +4,7 @@ use App\Http\Controllers\ActorRESTController;
 use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\CategoriaRESTController;
 use App\Http\Controllers\DirectorRESTController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\PeliculaRESTController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +42,9 @@ Route::get('/peliculas/{pelicula}', [PeliculaRESTController::class, 'show']);
  */
 Route::middleware('auth:api')->group(function () {
     Route::post('/peliculas', [PeliculaRESTController::class, 'store']);
+    Route::post('/upload', [ImagesController::class, 'upload']);
     Route::put('/peliculas/{movie}', [PeliculaRESTController::class, 'update']);
-    Route::delete('/peliculas/{movie}', [PeliculaRESTController::class, 'destroy'])->middleware('roleAdmin');
+    Route::delete('/peliculas/{movie}', [PeliculaRESTController::class, 'destroy'])->middleware('roladmin');
 });
 
 
@@ -61,7 +63,7 @@ Route::get('/categorias/{category}', [CategoriaRESTController::class, 'show']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/categorias', [CategoriaRESTController::class, 'store']);
     Route::put('/categorias/{category}', [CategoriaRESTController::class, 'update']);
-    Route::delete('/categorias/{category}', [CategoriaRESTController::class, 'destroy'])->middleware('roleAdmin');
+    Route::delete('/categorias/{category}', [CategoriaRESTController::class, 'destroy'])->middleware('roladmin');
 });
 
 
@@ -77,7 +79,7 @@ Route::get('/actores/{actor}', [ActorRESTController::class, 'show']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/actores', [ActorRESTController::class, 'store']);
     Route::put('/actores/{actor}', [ActorRESTController::class, 'update']);
-    Route::delete('/actores/{actor}', [ActorRESTController::class, 'destroy'])->middleware('roleAdmin');
+    Route::delete('/actores/{actor}', [ActorRESTController::class, 'destroy'])->middleware('roladmin');
 });
 
 
@@ -95,7 +97,7 @@ Route::get('/directores/{director}', [DirectorRESTController::class, 'show']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/directores', [DirectorRESTController::class, 'store']);
     Route::put('/directores/{director}', [DirectorRESTController::class, 'update']);
-    Route::delete('/directores/{director}', [DirectorRESTController::class, 'destroy'])->middleware('roleAdmin');
+    Route::delete('/directores/{director}', [DirectorRESTController::class, 'destroy'])->middleware('roladmin');
 });
 
 
