@@ -1,0 +1,10 @@
+
+
+
+Get: todos sorteos
+
+Get: loteria actual
+
+Get: sorteo pasado
+
+Post: apostar loteria

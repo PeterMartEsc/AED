@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/acertarnumero")
-@CrossOrigin //Evitar el ataque cross origin desde navegador. Permites to-do si pones esta etiqueta
+@CrossOrigin //Evitar el ataque cross origin desde navegador. Permites todo si pones esta etiqueta
 public class MiappController {
 
     public static class ApuestaDTO{
