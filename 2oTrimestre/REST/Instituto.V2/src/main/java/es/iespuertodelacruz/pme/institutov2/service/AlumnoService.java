@@ -43,6 +43,7 @@ public class AlumnoService implements IServiceGeneric<Alumno, String>{
 			alumno.setNombre(object.getNombre());
 			alumno.setApellidos(object.getApellidos());
 			alumno.setFechanacimiento(object.getFechanacimiento());
+			return true;
 		} else {
 			return false;
 		}
