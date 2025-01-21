@@ -4,6 +4,8 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the asignaturas database table.
@@ -28,8 +30,11 @@ public class Asignatura implements Serializable {
 
 	//bi-directional many-to-many association to Matricula
 	@ManyToMany  //(fetch=FetchType.LAZY)
-	@JoinTable(name="asignatura_matricula",	joinColumns={ @JoinColumn(name="idasignatura") }, 
-	inverseJoinColumns={ @JoinColumn(name="idmatricula") })
+	@JoinTable(name="asignatura_matricula",	
+					joinColumns={ @JoinColumn(name="idasignatura") }, 
+					inverseJoinColumns={ @JoinColumn(name="idmatricula") 
+				})
+	@JsonIgnore
 	private List<Matricula> matriculas;
 
 	public Asignatura() {

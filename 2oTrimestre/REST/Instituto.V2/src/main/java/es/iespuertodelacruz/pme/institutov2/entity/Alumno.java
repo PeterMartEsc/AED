@@ -2,7 +2,8 @@ package es.iespuertodelacruz.pme.institutov2.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
-import java.math.BigInteger;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,7 +24,8 @@ public class Alumno implements Serializable {
 	@Column(length=50)
 	private String apellidos;
 
-	private Long fechanacimiento;
+	@Convert(converter= DateToLongConverter.class)
+	private Date fechanacimiento;
 
 	@Column(length=50)
 	private String nombre;
@@ -51,11 +53,11 @@ public class Alumno implements Serializable {
 		this.apellidos = apellidos;
 	}
 
-	public Long getFechanacimiento() {
+	public Date getFechanacimiento() {
 		return this.fechanacimiento;
 	}
 
-	public void setFechanacimiento(Long fechanacimiento) {
+	public void setFechanacimiento(Date fechanacimiento) {
 		this.fechanacimiento = fechanacimiento;
 	}
 

@@ -1,5 +1,25 @@
 package es.iespuertodelacruz.pme.institutov2.entity;
 
-public class DateToLongConverter {
+import java.util.Date;
+
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
+
+@Converter(autoApply = true)
+public class DateToLongConverter implements AttributeConverter<Date, Long> {
+
+	@Override
+	public Long convertToDatabaseColumn(Date date) {
+		// TODO Auto-generated method stub
+		return (date == null) ? null : date.getTime();
+	}
+
+	@Override
+	public Date convertToEntityAttribute(Long timestamp) {
+		// TODO Auto-generated method stub
+		return (timestamp == null) ? null : new Date(timestamp);
+	}
+	
+	
 
 }
