@@ -8,16 +8,11 @@ DROP TABLE IF EXISTS `usuarios`;
 DROP TABLE IF EXISTS `roles`;
 
 CREATE TABLE `usuarios`(
-	id int AUTO_INCREMENT,
-	nombre CHARACTER(50),
-	password VARCHAR(100),
-	idrole int,
-	CONSTRAINT `fk_role` FOREIGN KEY(`idrole`) REFERENCES `roles`(`id`),
+
 );
 
 CREATE TABLE `roles`(
-    id int AUTO_INCREMENT,
-    role_name CHARACTER(50),
+
 );
 
 CREATE TABLE `alumnos`(
