@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.iespuertodelacruz.pme</groupId>
-	<artifactId>Instituto.V2</artifactId>
+	<artifactId>Instituto Sec</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Instituto.V2</name>
+	<name>Instituto Sec</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

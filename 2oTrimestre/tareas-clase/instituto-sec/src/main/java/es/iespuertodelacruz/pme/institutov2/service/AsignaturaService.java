@@ -4,9 +4,10 @@ import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
 import es.iespuertodelacruz.pme.institutov2.repository.AsignaturaRepository;
 import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class AsignaturaService implements IServiceGeneric<Asignatura, Integer> {
 
     @Autowired
