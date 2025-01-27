@@ -61,7 +61,7 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 			alumno.setFechanacimiento(object.getFechanacimiento());
 			//set lista de asignaturas
 			alumno.setImagen(object.getImagen());
-			//alumnoRepository.save(alumno);
+			alumnoRepository.save(alumno);
 			return true;
 		} else{
 			return false;

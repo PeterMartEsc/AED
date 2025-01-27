@@ -1,15 +1,18 @@
 1 - Al final de un update no se hace un repository.save() ?
 
-2 - Al crear una matrícula, estamos comprobando y guardando una relación con varias asignaturas,
-y guardando en esas asignaturas, la respectiva matrícula. En cambio, al alumno, solo comprobamos que existe,
-pero no estamos haciendo nada con la relación de alumno -> manyMatrículas.
+2 - Hay que hacer varios dto, uno para cada tipo de versión?
 
-No deberíamos hacer alumno.getMatriculas().add(matricula)  ?
-En los propios metodos del alumno con relación a matrícula igual ?
 
-Err 500 Modifying queries can only use void or int/Integer as return type
+Alumno no tiene por que tener matriculas, matricula necesita alumno para existir
 
-Hay que hacer varios dto, uno para cada tipo de versión?
+
+{
+  "dni": "11122238K",
+  "nombre": "Ejemplo updated",
+  "apellidos": "Apellidos updated",
+  "fechaNacimiento": "2025-01-27T19:12:21.319Z",
+  "imagen": "imagen2"
+}
 
 
 

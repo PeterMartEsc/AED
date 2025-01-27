@@ -10,13 +10,11 @@ public class DateToLongConverter implements AttributeConverter<Date, Long> {
 
 	@Override
 	public Long convertToDatabaseColumn(Date date) {
-		// TODO Auto-generated method stub
 		return (date == null) ? null : date.getTime();
 	}
 
 	@Override
 	public Date convertToEntityAttribute(Long timestamp) {
-		// TODO Auto-generated method stub
 		return (timestamp == null) ? null : new Date(timestamp);
 	}
 	
