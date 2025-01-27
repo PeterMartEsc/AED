@@ -10,7 +10,6 @@ public record AlumnoDTO (
         String nombre,
         String apellidos,
         Date fechaNacimiento,
-        List<Matricula> matriculas
-) {
-
-}
+        List<Matricula> matriculas,
+        String imagen
+) {}
