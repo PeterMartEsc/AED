@@ -1,4 +1,13 @@
 package es.iespuertodelacruz.pme.institutov2.dto;
 
-public record AsignaturaDTOEntrada() {
+import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
+
+import java.util.List;
+
+public record AsignaturaDTOEntrada(
+        int id,
+        String curso,
+        String nombre
+        //List<Matricula> matriculas
+) {
 }

@@ -21,5 +21,5 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Integer>
             value="DELETE FROM asignaturas WHERE id = :idAsignatura",
             nativeQuery = true
     )
-    int deleteByIdNotVoid(@Param("idMatricula") Integer idAsignatura);
+    int deleteByIdNotVoid(@Param("idAsignatura") Integer idAsignatura);
 }

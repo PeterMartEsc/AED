@@ -34,7 +34,7 @@ public class Asignatura implements Serializable {
 					joinColumns={ @JoinColumn(name="idasignatura") }, 
 					inverseJoinColumns={ @JoinColumn(name="idmatricula") 
 				})
-	@JsonIgnore
+	//@JsonIgnore
 	private List<Matricula> matriculas;
 
 	public Asignatura() {

@@ -55,7 +55,7 @@ public class AlumnoRESTController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<?> create(@RequestBody AlumnoDTOEntrada dto){
+	public ResponseEntity<?> createAlumno(@RequestBody AlumnoDTOEntrada dto){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
@@ -69,7 +69,7 @@ public class AlumnoRESTController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<?> update(/*@PathVariable("dni") String dni,*/ @RequestBody AlumnoDTOEntrada dto){
+	public ResponseEntity<?> updateAlumno(/*@PathVariable("dni") String dni,*/ @RequestBody AlumnoDTOEntrada dto){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
@@ -83,7 +83,7 @@ public class AlumnoRESTController {
 	}
 
 	@DeleteMapping("/delete/{dni}")
-	public ResponseEntity<?> delete(@PathVariable("dni") String dni){
+	public ResponseEntity<?> deleteAlumno(@PathVariable("dni") String dni){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
