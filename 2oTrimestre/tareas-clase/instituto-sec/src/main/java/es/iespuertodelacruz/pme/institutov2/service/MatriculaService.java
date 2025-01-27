@@ -90,7 +90,7 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 			}
 
 			if(matricula.getAlumno() != null){
-				Alumno alumno = alumnoRepository.findAlumnoByDni(matricula.getAlumno().getDni());
+				Alumno alumno = alumnoRepository.findById(matricula.getAlumno().getDni()).orElse(null);
 				if(alumno == null){
 					throw new RuntimeException("No existe el alumno " +matricula.getAlumno());
 				}

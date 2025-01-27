@@ -22,7 +22,7 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 
 	@Override
 	public Alumno findById(String dni) {
-		return alumnoRepository.findAlumnoByDni(dni);
+		return alumnoRepository.findById(dni).orElse(null);
 	}
 
 	@Override
@@ -34,11 +34,14 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 	@Override
 	@Transactional
 	public boolean update(Alumno object) {
+
 		if(object != null && object.getDni() != null) {
+
 			Alumno alumno = alumnoRepository.findById(object.getDni()).orElse(null);
 			if(alumno == null){
 				throw new RuntimeException("No existe el alumno " +object);
 			}
+
 			alumno.setNombre(object.getNombre());
 			alumno.setApellidos(object.getApellidos());
 			alumno.setFechanacimiento(object.getFechanacimiento());

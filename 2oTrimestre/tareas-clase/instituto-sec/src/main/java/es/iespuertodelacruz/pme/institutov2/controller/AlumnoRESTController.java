@@ -20,9 +20,9 @@ public class AlumnoRESTController {
 	
 	@GetMapping("/")
 	public ResponseEntity<?> findAllAlumnos(){
-		Logger logger = Logger.getLogger("logger");
+		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
-		logger.info("Llamada al find all get /api/alumnos");
+		//logger.info("Llamada al find all get /api/alumnos");
 
 		return ResponseEntity.ok(alumnoService.findAll()
 			.stream()
@@ -34,8 +34,7 @@ public class AlumnoRESTController {
 							alumno.getMatriculas()
 							)
 				)
-			.collect(Collectors.toList())
-			
+			//.collect(Collectors.toList())
 		);
 	}
 

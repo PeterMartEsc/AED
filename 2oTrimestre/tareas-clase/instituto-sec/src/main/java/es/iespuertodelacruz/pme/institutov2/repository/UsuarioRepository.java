@@ -8,13 +8,14 @@ import org.springframework.data.repository.query.Param;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
-    @Modifying //Consulta que modifica la bbdd
+    /*@Modifying //Consulta que modifica la bbdd
     //"DELETE FROM Alumno a WHERE a.dni = :dni" Usa las entities JQL
     @Query(
             value="SELECT * FROM alumno WHERE dni = :dni",
             nativeQuery = true
     ) //Native Query
-    Usuario findUsuarioByDni(@Param("dni") String dni);
+    Usuario findUsuarioByDni(@Param("dni") String dni);*/
+    //No es necesaria, findById funciona. Modifying Queries can only return void or int/Integer
 
     @Modifying //Consulta que modifica la bbdd
     //"DELETE FROM Alumno a WHERE a.dni = :dni" Usa las entities JQL
@@ -23,4 +24,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
             nativeQuery = true
     ) //Native Query
     int deleteUsuarioBydDni(@Param("dni") String dni);
+
 }

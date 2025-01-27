@@ -19,7 +19,7 @@ public class UsuarioService implements IServiceGeneric<Usuario, String> {
 
     @Override
     public Usuario findById(String dni) {
-        return usuarioRepository.findUsuarioByDni(dni);
+        return usuarioRepository.findById(dni).orElse(null);
     }
 
     @Override
