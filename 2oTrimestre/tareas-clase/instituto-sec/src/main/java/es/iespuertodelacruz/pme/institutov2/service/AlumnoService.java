@@ -1,7 +1,11 @@
 package es.iespuertodelacruz.pme.institutov2.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
+import es.iespuertodelacruz.pme.institutov2.repository.MatriculaRepository;
 import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,12 @@ import es.iespuertodelacruz.pme.institutov2.repository.AlumnoRepository;
 public class AlumnoService implements IServiceGeneric<Alumno, String> {
 
 	@Autowired AlumnoRepository alumnoRepository;
-	
+	@Autowired
+	MatriculaRepository matriculaRepository;
+	/*@Autowired
+	AsignaturaService asignaturaService;*/
+
+
 	@Override
 	public List<Alumno> findAll() {
 		return alumnoRepository.findAll();
@@ -27,7 +36,12 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 
 	@Override
 	@Transactional
-	public Alumno save(Alumno object) {		
+	public Alumno save(Alumno object) {
+
+		/*if(object == null){
+			throw new RuntimeException("El alumno es nulo");
+		}*/
+
 		return alumnoRepository.save(object);
 	}
 
