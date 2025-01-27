@@ -22,13 +22,13 @@ public class Alumno implements Serializable {
 	private String dni;
 
 	@Column(length=50)
+	private String nombre;
+
+	@Column(length=50)
 	private String apellidos;
 
 	@Convert(converter= DateToLongConverter.class)
 	private Date fechanacimiento;
-
-	@Column(length=50)
-	private String nombre;
 
 	//bi-directional many-to-one association to Matricula
 	@OneToMany(mappedBy="alumno")

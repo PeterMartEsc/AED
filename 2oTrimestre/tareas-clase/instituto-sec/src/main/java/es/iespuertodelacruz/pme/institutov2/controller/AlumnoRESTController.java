@@ -3,12 +3,10 @@ package es.iespuertodelacruz.pme.institutov2.controller;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import es.iespuertodelacruz.pme.institutov2.dto.AlumnoDTO;
 import es.iespuertodelacruz.pme.institutov2.service.AlumnoService;
@@ -39,7 +37,22 @@ public class AlumnoRESTController {
 			.collect(Collectors.toList())
 			
 		);
-		
+	}
+
+	@GetMapping("/{dni}")
+	public ResponseEntity<?> findAlumnoByDni(@PathVariable String dni){
+		//Logger logger = Logger.getLogger("logger");
+		//Logger logger = Logger.getLogger(Globals.LOGGER);
+		//logger.info("Llamada al find all get /api/alumnos");
+		Alumno alumno = alumnoService.findById(dni);
+		AlumnoDTO dto = new AlumnoDTO(
+				alumno.getDni(),
+				alumno.getNombre(),
+				alumno.getApellidos(),
+				alumno.getFechanacimiento(),
+				alumno.getMatriculas()
+		);
+		return ResponseEntity.ok(dto);
 	}
 	
 }

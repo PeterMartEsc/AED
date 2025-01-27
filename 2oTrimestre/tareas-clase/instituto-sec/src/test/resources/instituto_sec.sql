@@ -33,7 +33,7 @@ CREATE TABLE `matriculas`(
     CONSTRAINT `uc_dniyear` UNIQUE(`dni`,`year`)
 );
 
-CREATE TABLE asignatura_matricula(
+CREATE TABLE `asignatura_matricula`(
     id int AUTO_INCREMENT,
     idmatricula int,
     idasignatura int,
@@ -53,16 +53,16 @@ CREATE TABLE `usuarios` (
     fecha_creacion BIGINT NOT NULL,
 	CONSTRAINT pk_usuarios PRIMARY KEY(dni),
 	CONSTRAINT uc_nombre UNIQUE(nombre),
-	CONSTRAINT uc_correo UNIQUE(correo),
+	CONSTRAINT uc_correo UNIQUE(correo)
 );
 
 INSERT INTO `alumnos` (`dni`, `nombre`, `apellidos`, `fechanacimiento`) VALUES ('12345678Z', 'Ana', 'Martín', '968972400000');
 INSERT INTO `alumnos` (`dni`, `nombre`, `apellidos`, `fechanacimiento`) VALUES ('87654321X', 'Marcos', 'Afonso Jiménez', '874278000000');
 INSERT INTO `alumnos` (`dni`, `nombre`, `apellidos`, `fechanacimiento`) VALUES ('12312312K', 'María Luisa', 'Gutiérrez', '821234400000');
 
-INSERT INTO usuarios (nombre, password, correo, rol, verificado, token_verificacion, fecha_creacion) VALUES
+INSERT INTO usuarios (dni, nombre, password, correo, rol, verificado, token_verificacion, fecha_creacion) VALUES
 ('11111111U', 'usuario', 'hashed_password_user', 'user@email.com', 'user', 1, 'token_de_verificacion_user', 1674825600);
-INSERT INTO usuarios (nombre, password, correo, rol, verificado, token_verificacion, fecha_creacion) VALUES
+INSERT INTO usuarios (dni, nombre, password, correo, rol, verificado, token_verificacion, fecha_creacion) VALUES
 ('11111111A', 'admin', 'hashed_password_admin', 'admin@email.com', 'admin', 1, 'token_de_verificacion_admin', 1674825700);
 
 

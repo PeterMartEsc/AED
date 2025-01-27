@@ -19,4 +19,12 @@ public interface AlumnoRepository extends JpaRepository<Alumno, String> {
 			nativeQuery = true
 			) //Native Query
 	int deleteAlumnoBydDni(@Param("dni") String dni);
+
+	@Modifying //Consulta que modifica la bbdd
+	//"DELETE FROM Alumno a WHERE a.dni = :dni" Usa las entities JQL
+	@Query(
+			value="SELECT * FROM alumno WHERE dni = :dni",
+			nativeQuery = true
+	) //Native Query
+	Alumno findAlumnoByDni(@Param("dni") String dni);
 }

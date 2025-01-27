@@ -15,5 +15,11 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 			nativeQuery = true
 	)
 	int deleteRelatedAsignaturasById(@Param("idMatricula") Integer idMatricula);
-	
+
+	@Modifying
+	@Query(
+			value="DELETE FROM matriculas WHERE id = :idMatricula",
+			nativeQuery = true
+	)
+	int deleteByIdNotVoid(@Param("idMatricula") Integer idMatricula);
 }
