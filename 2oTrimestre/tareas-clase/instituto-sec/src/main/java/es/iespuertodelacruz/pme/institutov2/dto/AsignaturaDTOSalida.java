@@ -7,8 +7,8 @@ import java.util.List;
 public record AsignaturaDTOSalida(
         int id,
         String curso,
-        String nombre,
-        List<Matricula> matriculas
+        String nombre
+        //List<Matricula> matriculas
 
 ) {
 }

@@ -28,8 +28,7 @@ public class AsignaturaRESTController {
                         .map(asignatura -> new AsignaturaDTOSalida(
                                         asignatura.getId(),
                                         asignatura.getNombre(),
-                                        asignatura.getCurso(),
-                                        asignatura.getMatriculas()
+                                        asignatura.getCurso()
                                 )
                             )
                 //.collect(Collectors.toList())
@@ -45,9 +44,16 @@ public class AsignaturaRESTController {
         AsignaturaDTOSalida dto = new AsignaturaDTOSalida(
                 asignatura.getId(),
                 asignatura.getNombre(),
-                asignatura.getCurso(),
-                asignatura.getMatriculas()
+                asignatura.getCurso()
         );
         return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteAlumno(@PathVariable("id") Integer id){
+        //Logger logger = Logger.getLogger("logger");
+        //Logger logger = Logger.getLogger(Globals.LOGGER);
+        //logger.info("Llamada al find all get /api/alumnos");
+        return ResponseEntity.ok(asignaturaService.deleteById(id));
     }
 }

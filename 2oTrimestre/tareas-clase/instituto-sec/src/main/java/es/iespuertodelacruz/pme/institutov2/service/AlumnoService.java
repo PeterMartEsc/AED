@@ -56,11 +56,21 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 				throw new RuntimeException("No existe el alumno " +object);
 			}
 
-			alumno.setNombre(object.getNombre());
-			alumno.setApellidos(object.getApellidos());
-			alumno.setFechanacimiento(object.getFechanacimiento());
-			//set lista de asignaturas
-			alumno.setImagen(object.getImagen());
+			if(object.getNombre() != null){
+				alumno.setNombre(object.getNombre());
+			}
+
+			if(object.getApellidos() != null){
+				alumno.setApellidos(object.getApellidos());
+			}
+
+			if(object.getFechanacimiento() != null){
+				alumno.setFechanacimiento(object.getFechanacimiento());
+			}
+
+			if(object.getImagen() != null){
+				alumno.setImagen(object.getImagen());
+			}
 			alumnoRepository.save(alumno);
 			return true;
 		} else{
