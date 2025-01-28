@@ -79,6 +79,10 @@ public class Partida {
 
         boolean hayGanador = comprobarGanador();
 
+        if(hayGanador){
+            //Si hay ganador, decirlo
+        }
+
         return tablero;
     }
 
@@ -131,7 +135,7 @@ public class Partida {
         if(diagonalIzq == 3|| diagonalDer == 3){
             return true;
         }
-        
+
         return false;
     }
 
