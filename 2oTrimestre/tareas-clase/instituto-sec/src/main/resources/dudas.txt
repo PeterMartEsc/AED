@@ -15,5 +15,8 @@ Alumno no tiene por que tener matriculas, matricula necesita alumno para existir
 }
 
 
+V1: solo login register
 
+V2: Get All Get by Id (solo muestra a el mismo)
 
+V3: Admin (modificar, crear, mostrar todos)

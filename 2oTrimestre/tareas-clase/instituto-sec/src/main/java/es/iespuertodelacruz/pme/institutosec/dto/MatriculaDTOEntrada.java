@@ -1,6 +1,11 @@
 package es.iespuertodelacruz.pme.institutosec.dto;
 
-public record MatriculaDTOEntrada(
+import java.util.List;
 
+public record MatriculaDTOEntrada(
+        int id,
+        int anio,
+        AlumnoDTOEntrada alumno,
+        List<AsignaturaDTOEntrada> asignaturas
 ) {
 }

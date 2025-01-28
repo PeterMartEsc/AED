@@ -94,5 +94,11 @@ public class MatriculaRESTController {
 		return ResponseEntity.ok(matriculaService.save(dto));
 	}*/
 
-
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> deleteMatricula(@PathVariable("id") Integer id){
+		//Logger logger = Logger.getLogger("logger");
+		//Logger logger = Logger.getLogger(Globals.LOGGER);
+		//logger.info("Llamada al find all get /api/alumnos");
+		return ResponseEntity.ok(matriculaService.deleteById(id));
+	}
 }
