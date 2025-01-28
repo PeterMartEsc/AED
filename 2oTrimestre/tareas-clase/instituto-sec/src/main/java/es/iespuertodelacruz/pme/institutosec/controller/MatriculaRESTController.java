@@ -89,8 +89,10 @@ public class MatriculaRESTController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	@PostMapping
+	/*@PostMapping
 	public ResponseEntity<?> save(@RequestBody Matricula dto){
 		return ResponseEntity.ok(matriculaService.save(dto));
-	}
+	}*/
+
+
 }

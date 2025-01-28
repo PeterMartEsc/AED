@@ -39,18 +39,18 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 	public Matricula save(Matricula matricula) {
 		//Si el alumno de la matrícula es null, devolver null
 		if(matricula.getAlumno() == null) {
-			return null;
+			throw new RuntimeException("La matricula tiene que tener un alumno");
 		}
 
 		//Busca el alumno, si es null devuelve null
 		Alumno alumno = alumnoRepository.findById(matricula.getAlumno().getDni()).orElse(null);
 		if(alumno == null) {
-			return null;
+			throw new RuntimeException("No existe el alumno");
 		}
 
 		List<Asignatura> asignaturas = new ArrayList<Asignatura>();
 
-		//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0
+		//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0 (no está vacia)
 		if(matricula.getAsignaturas() != null && !matricula.getAsignaturas().isEmpty()){
 			
 			matricula.getAsignaturas().forEach(
@@ -65,7 +65,7 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 							asignaturas.add(asignatura);
 							// Accede a la lista de asignaturas de la asignatura actual
 							// y le añade la matricula, ya que se ha creado una relación
-							asignatura.getMatriculas().add(matricula);
+							//asignatura.getMatriculas().add(matricula);
 							}
 			);
 			
@@ -89,7 +89,7 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 				throw new RuntimeException("No existe la matricula " +object);
 			}
 
-			if(matricula.getAlumno() != null){
+			if(object.getAlumno() != null){
 				Alumno alumno = alumnoRepository.findById(matricula.getAlumno().getDni()).orElse(null);
 				if(alumno == null){
 					throw new RuntimeException("No existe el alumno " +matricula.getAlumno());
@@ -99,9 +99,9 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 
 			List<Asignatura> asignaturas = new ArrayList<Asignatura>();
 			//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0
-			if(matricula.getAsignaturas() != null && !matricula.getAsignaturas().isEmpty()){
+			if(object.getAsignaturas() != null && !object.getAsignaturas().isEmpty()){
 
-				matricula.getAsignaturas().forEach(
+				object.getAsignaturas().forEach(
 						asignatura -> {
 							//Obtiene cada asignatura por id
 							Asignatura asignaturaNotNull = asignaturaRepository.findById(asignatura.getId()).orElse(null);
