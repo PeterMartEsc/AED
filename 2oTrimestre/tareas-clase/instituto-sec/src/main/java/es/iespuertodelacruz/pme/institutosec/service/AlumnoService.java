@@ -1,18 +1,15 @@
-package es.iespuertodelacruz.pme.institutov2.service;
+package es.iespuertodelacruz.pme.institutosec.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
-import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
-import es.iespuertodelacruz.pme.institutov2.repository.MatriculaRepository;
-import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
+import es.iespuertodelacruz.pme.institutosec.repository.MatriculaRepository;
+import es.iespuertodelacruz.pme.institutosec.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
-import es.iespuertodelacruz.pme.institutov2.repository.AlumnoRepository;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.repository.AlumnoRepository;
 
 @Service
 public class AlumnoService implements IServiceGeneric<Alumno, String> {
@@ -37,10 +34,28 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 	@Override
 	@Transactional
 	public Alumno save(Alumno object) {
+		String regex = "^[0-9]{8}[A-Z]{1}$";
 
-		/*if(object == null){
-			throw new RuntimeException("El alumno es nulo");
-		}*/
+		if(object.getDni() == null || !object.getDni().matches(regex)){
+			throw new RuntimeException("El DNI del alumno no es válido");
+		}
+
+		if(object.getNombre() == null){
+			throw new RuntimeException("El alumno ha de tener nombre");
+		}
+
+		if(object.getApellidos() == null){
+			throw new RuntimeException("El alumno ha de tener apellidos");
+		}
+
+		if(object.getFechanacimiento() == null){
+			throw new RuntimeException("El alumno ha de tener fecha de nacimiento");
+		}
+
+		if(object.getImagen() == null){
+			throw new RuntimeException("El alumno ha de tener una foto");
+			// TODO: foto por defecto
+		}
 
 		return alumnoRepository.save(object);
 	}
@@ -54,6 +69,7 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 			Alumno alumno = alumnoRepository.findById(object.getDni()).orElse(null);
 			if(alumno == null){
 				throw new RuntimeException("No existe el alumno " +object);
+				//TODO: cambiarlo por un false ?
 			}
 
 			if(object.getNombre() != null){
@@ -71,6 +87,7 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 			if(object.getImagen() != null){
 				alumno.setImagen(object.getImagen());
 			}
+
 			alumnoRepository.save(alumno);
 			return true;
 		} else{

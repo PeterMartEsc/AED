@@ -1,11 +1,11 @@
-package es.iespuertodelacruz.pme.institutov2.service;
+package es.iespuertodelacruz.pme.institutosec.service;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
-import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
-import es.iespuertodelacruz.pme.institutov2.repository.AsignaturaRepository;
-import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
+import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutosec.repository.AsignaturaRepository;
+import es.iespuertodelacruz.pme.institutosec.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -26,6 +26,7 @@ public class AsignaturaService implements IServiceGeneric<Asignatura, Integer> {
     }
 
     @Override
+    @Transactional
     public Asignatura save(Asignatura object) {
 
         if(object.getNombre() == null){
@@ -40,6 +41,7 @@ public class AsignaturaService implements IServiceGeneric<Asignatura, Integer> {
     }
 
     @Override
+    @Transactional
     public boolean update(Asignatura object) {
 
         if(object != null && object.getId() != 0) {
@@ -65,6 +67,7 @@ public class AsignaturaService implements IServiceGeneric<Asignatura, Integer> {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Integer id) {
         asignaturaRepository.deleteRelatedMatriculasById(id);
 

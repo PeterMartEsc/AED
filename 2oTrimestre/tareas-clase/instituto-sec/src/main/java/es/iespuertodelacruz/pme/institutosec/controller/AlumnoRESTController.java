@@ -1,13 +1,13 @@
-package es.iespuertodelacruz.pme.institutov2.controller;
+package es.iespuertodelacruz.pme.institutosec.controller;
 
-import es.iespuertodelacruz.pme.institutov2.dto.AlumnoDTOEntrada;
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.dto.AlumnoDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import es.iespuertodelacruz.pme.institutov2.dto.AlumnoDTOSalida;
-import es.iespuertodelacruz.pme.institutov2.service.AlumnoService;
+import es.iespuertodelacruz.pme.institutosec.dto.AlumnoDTOSalida;
+import es.iespuertodelacruz.pme.institutosec.service.AlumnoService;
 
 @RestController
 @RequestMapping("/api/alumnos")

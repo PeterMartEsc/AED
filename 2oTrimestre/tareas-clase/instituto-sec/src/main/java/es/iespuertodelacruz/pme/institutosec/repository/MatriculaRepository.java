@@ -1,11 +1,11 @@
-package es.iespuertodelacruz.pme.institutov2.repository;
+package es.iespuertodelacruz.pme.institutosec.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
+import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 	

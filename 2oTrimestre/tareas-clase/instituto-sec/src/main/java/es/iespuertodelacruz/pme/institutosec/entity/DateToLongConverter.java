@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.entity;
+package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.util.Date;
 

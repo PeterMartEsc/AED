@@ -1,7 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.dto;
-
-import es.iespuertodelacruz.pme.institutov2.entity.DateToLongConverter;
-import jakarta.persistence.Convert;
+package es.iespuertodelacruz.pme.institutosec.dto;
 
 import java.util.Date;
 

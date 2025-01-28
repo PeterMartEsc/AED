@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.service.interfaces;
+package es.iespuertodelacruz.pme.institutosec.service.interfaces;
 
 import java.util.List;
 

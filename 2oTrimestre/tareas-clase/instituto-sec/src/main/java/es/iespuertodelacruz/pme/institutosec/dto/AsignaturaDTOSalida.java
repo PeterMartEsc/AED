@@ -1,8 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.dto;
-
-import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
-
-import java.util.List;
+package es.iespuertodelacruz.pme.institutosec.dto;
 
 public record AsignaturaDTOSalida(
         int id,

@@ -1,2 +1,6 @@
-package es.iespuertodelacruz.pme.institutosec.dto;public record MatriculaDTOEntrada() {
+package es.iespuertodelacruz.pme.institutosec.dto;
+
+public record MatriculaDTOEntrada(
+
+) {
 }

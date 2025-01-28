@@ -1,6 +1,6 @@
-package es.iespuertodelacruz.pme.institutov2.repository;
+package es.iespuertodelacruz.pme.institutosec.repository;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Usuario;
+import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.repository;
+package es.iespuertodelacruz.pme.institutosec.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
 
 @Repository //No es necesario, pero si por documentacion
 public interface AlumnoRepository extends JpaRepository<Alumno, String> {

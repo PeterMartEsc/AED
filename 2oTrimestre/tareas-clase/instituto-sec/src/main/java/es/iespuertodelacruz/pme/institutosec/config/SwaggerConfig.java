@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.config;
+package es.iespuertodelacruz.pme.institutosec.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

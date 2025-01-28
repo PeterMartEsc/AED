@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.entity;
+package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
@@ -21,20 +21,21 @@ public class Alumno implements Serializable {
 	@Column(unique=true, nullable=false, length=20)
 	private String dni;
 
-	@Column(length=50)
+	@Column(length=50, nullable=false)
 	private String nombre;
 
-	@Column(length=50)
+	@Column(length=50, nullable=false)
 	private String apellidos;
 
 	@Convert(converter= DateToLongConverter.class)
+	@Column(nullable = false)
 	private Date fechanacimiento;
 
 	//bi-directional many-to-one association to Matricula
 	@OneToMany(mappedBy="alumno")
 	private List<Matricula> matriculas;
 
-	@Column(length=100)
+	@Column(length=100, nullable = false)
 	private String imagen;
 
 	public Alumno() {

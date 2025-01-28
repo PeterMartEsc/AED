@@ -1,19 +1,19 @@
-package es.iespuertodelacruz.pme.institutov2.service;
+package es.iespuertodelacruz.pme.institutosec.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
+import es.iespuertodelacruz.pme.institutosec.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
-import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
-import es.iespuertodelacruz.pme.institutov2.entity.Matricula;
-import es.iespuertodelacruz.pme.institutov2.repository.AlumnoRepository;
-import es.iespuertodelacruz.pme.institutov2.repository.AsignaturaRepository;
-import es.iespuertodelacruz.pme.institutov2.repository.MatriculaRepository;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
+import es.iespuertodelacruz.pme.institutosec.repository.AlumnoRepository;
+import es.iespuertodelacruz.pme.institutosec.repository.AsignaturaRepository;
+import es.iespuertodelacruz.pme.institutosec.repository.MatriculaRepository;
 
 @Service
 public class MatriculaService implements IServiceGeneric<Matricula, Integer> {

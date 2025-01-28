@@ -1,10 +1,11 @@
-package es.iespuertodelacruz.pme.institutov2.controller;
+package es.iespuertodelacruz.pme.institutosec.controller;
 
-import es.iespuertodelacruz.pme.institutov2.dto.AsignaturaDTOSalida;
-import es.iespuertodelacruz.pme.institutov2.dto.AsignaturaDTOSalida;
-import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
-import es.iespuertodelacruz.pme.institutov2.entity.Asignatura;
-import es.iespuertodelacruz.pme.institutov2.service.AsignaturaService;
+import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOSalida;
+import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutosec.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +50,34 @@ public class AsignaturaRESTController {
         return ResponseEntity.ok(dto);
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<?> createAsignatura(@RequestBody AsignaturaDTOEntrada dto){
+        //Logger logger = Logger.getLogger("logger");
+        //Logger logger = Logger.getLogger(Globals.LOGGER);
+        //logger.info("Llamada al find all get /api/alumnos");
+        Asignatura asignatura = new Asignatura();
+        asignatura.setId(dto.id());
+        asignatura.setNombre(dto.nombre());
+        asignatura.setCurso(dto.curso());
+        
+        return ResponseEntity.ok(asignaturaService.save(asignatura));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateAsignatura( @RequestBody AsignaturaDTOEntrada dto){
+        //Logger logger = Logger.getLogger("logger");
+        //Logger logger = Logger.getLogger(Globals.LOGGER);
+        //logger.info("Llamada al find all get /api/alumnos");
+        Asignatura asignatura = new Asignatura();
+        asignatura.setId(dto.id());
+        asignatura.setNombre(dto.nombre());
+        asignatura.setCurso(dto.curso());
+
+        return ResponseEntity.ok(asignaturaService.update(asignatura));
+    }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteAlumno(@PathVariable("id") Integer id){
+    public ResponseEntity<?> deleteAsignatura(@PathVariable("id") Integer id){
         //Logger logger = Logger.getLogger("logger");
         //Logger logger = Logger.getLogger(Globals.LOGGER);
         //logger.info("Llamada al find all get /api/alumnos");

@@ -1,8 +1,8 @@
-package es.iespuertodelacruz.pme.institutov2.service;
+package es.iespuertodelacruz.pme.institutosec.service;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Usuario;
-import es.iespuertodelacruz.pme.institutov2.repository.UsuarioRepository;
-import es.iespuertodelacruz.pme.institutov2.service.interfaces.IServiceGeneric;
+import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
+import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
+import es.iespuertodelacruz.pme.institutosec.service.interfaces.IServiceGeneric;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

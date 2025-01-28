@@ -1,7 +1,7 @@
-package es.iespuertodelacruz.pme.institutov2;
+package es.iespuertodelacruz.pme.institutosec;
 
-import es.iespuertodelacruz.pme.institutov2.entity.Alumno;
-import es.iespuertodelacruz.pme.institutov2.service.AlumnoService;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.service.AlumnoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

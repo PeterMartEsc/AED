@@ -1,9 +1,9 @@
-package es.iespuertodelacruz.pme.institutov2.entity;
+package es.iespuertodelacruz.pme.institutosec.entity;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.Date;
 
 
 /**
@@ -17,8 +17,8 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(unique=true, nullable=false, length=20)
-	private String dni;
+	@Column(unique=true, nullable=false)
+	private int id;
 	@Column(length=45, unique=true, nullable=false)
 	private String nombre;
 
@@ -30,13 +30,15 @@ public class Usuario implements Serializable {
 	@Column(length=45, nullable=false)
 	private String rol;
 
+	@Column(nullable=false)
 	private byte verificado;
 
-	@Column(name="token_verificacion")
+	@Column(name="token_verificacion", nullable=false)
 	private String tokenVerificacion;
 
-	@Column(name="fecha_creacion")
-	private BigInteger fechaCreacion;
+	@Column(name="fecha_creacion", nullable=false)
+	@Convert(converter= DateToLongConverter.class)
+	private Date fechaCreacion;
 
 
 	public Usuario() {
@@ -50,19 +52,19 @@ public class Usuario implements Serializable {
 		this.correo = correo;
 	}
 
-	public String getDni() {
-		return this.dni;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public BigInteger getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return this.fechaCreacion;
 	}
 
-	public void setFechaCreacion(BigInteger fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 

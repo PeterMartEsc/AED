@@ -1,10 +1,8 @@
-package es.iespuertodelacruz.pme.institutov2.entity;
+package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -22,10 +20,10 @@ public class Asignatura implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(length=50)
+	@Column(length=50, nullable = false)
 	private String curso;
 
-	@Column(length=50)
+	@Column(length=50, nullable = false)
 	private String nombre;
 
 	//bi-directional many-to-many association to Matricula

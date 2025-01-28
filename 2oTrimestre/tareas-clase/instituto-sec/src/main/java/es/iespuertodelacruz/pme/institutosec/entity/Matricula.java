@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2.entity;
+package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
@@ -21,13 +21,13 @@ public class Matricula implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	private int id;
-
-	private int year;
+	@Column(nullable = false)
+	private int anio;
 
 	//bi-directional many-to-one association to Alumno
 	@ManyToOne
 	@JoinColumn(name="dni")
-	@JsonIgnore
+	//@JsonIgnore
 	private Alumno alumno;
 
 	//bi-directional many-to-many association to Asignatura
@@ -45,12 +45,12 @@ public class Matricula implements Serializable {
 		this.id = id;
 	}
 
-	public int getYear() {
-		return this.year;
+	public int getAnio() {
+		return this.anio;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	public Alumno getAlumno() {

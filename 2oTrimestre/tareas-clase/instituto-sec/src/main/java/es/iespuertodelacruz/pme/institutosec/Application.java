@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutov2;
+package es.iespuertodelacruz.pme.institutosec;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
