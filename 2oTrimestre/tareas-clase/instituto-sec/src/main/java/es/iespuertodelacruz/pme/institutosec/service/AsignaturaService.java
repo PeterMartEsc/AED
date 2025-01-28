@@ -27,6 +27,15 @@ public class AsignaturaService implements IServiceGeneric<Asignatura, Integer> {
 
     @Override
     public Asignatura save(Asignatura object) {
+
+        if(object.getNombre() == null){
+            throw new RuntimeException("La asignatura tiene que tener un nombre asociado");
+        }
+
+        if(object.getCurso() == null){
+            throw new RuntimeException("La asignatura tiene que tener un curso");
+        }
+
         return asignaturaRepository.save(object);
     }
 
