@@ -101,14 +101,37 @@ public class Partida {
             for(int j = 0 ; j<3; j++){
                 if(tablero[x][j] == jugadorTurno.getFigura()){
                     contadorX++;
+                    //contadorY++;
+                } else if (tablero[j][x] == jugadorTurno.getFigura()){
+                    contadorY++;
                 }
             }
+            if(contadorX == 3|| contadorY == 3){
+                return true;
+            }
+            contadorX = 0;
+            contadorY = 0;
         }
-
-
+        return false;
     }
 
     private boolean comprobarDiagonales(){
+        int diagonalIzq = 0;
+        int diagonalDer = 0;
+
+        for(int x = 0; x< 3; x++){
+            if(tablero[x][x] == jugadorTurno.getFigura()){
+                diagonalIzq++;
+            }
+            if(tablero[x][x-1] == jugadorTurno.getFigura()){
+                diagonalDer++;
+            }
+
+        }
+        if(diagonalIzq == 3|| diagonalDer == 3){
+            return true;
+        }
+        
         return false;
     }
 
