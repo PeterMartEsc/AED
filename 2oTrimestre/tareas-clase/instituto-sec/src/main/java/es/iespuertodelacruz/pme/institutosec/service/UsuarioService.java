@@ -35,11 +35,16 @@ public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
             //return null;
         }
 
+        if(usuario.getPassword() == null){
+            throw new RuntimeException("El usuario debe tener contraseña");
+        }
+
         if(usuario.getCorreo() == null){
             throw new RuntimeException("El usuario debe tener correo");
         }
 
         //usuario.setRol("user"); //usuariosetRol("admin");
+        usuario.setTokenVerificacion("token_ejemplo");
 
         return usuarioRepository.save(usuario);
     }

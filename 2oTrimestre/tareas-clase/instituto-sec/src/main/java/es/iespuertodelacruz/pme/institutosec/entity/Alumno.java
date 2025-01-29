@@ -1,6 +1,8 @@
 package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -33,6 +35,7 @@ public class Alumno implements Serializable {
 
 	//bi-directional many-to-one association to Matricula
 	@OneToMany(mappedBy="alumno")
+	@JsonIgnore
 	private List<Matricula> matriculas;
 
 	@Column(length=100, nullable = false)

@@ -37,6 +37,7 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 	@Override
 	@Transactional
 	public Matricula save(Matricula matricula) {
+
 		//Si el alumno de la matrícula es null, devolver null
 		if(matricula.getAlumno() == null) {
 			throw new RuntimeException("La matricula tiene que tener un alumno");
@@ -60,84 +61,75 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 					asignatura -> {
 							//Obtiene cada asignatura por id
 							Asignatura asignaturaNotNull = asignaturaRepository.findById(asignatura.getId()).orElse(null);
+							System.out.println(asignaturaNotNull);
 							if(asignaturaNotNull == null) {
 								//Si la asignatura es nula, devuelve que no existe
 								throw new RuntimeException("No existe la asignatura");
 							}
 							//Si no es null, la añade a la lista de asignaturas
 							asignaturas.add(asignaturaNotNull);
-							// Accede a la lista de asignaturas de la asignatura actual
-							// y le añade la matricula, ya que se ha creado una relación
-							try{
-								int i = matriculaRepository.createRelationAsignaturaMatricula(matriculaSaved.getId(), asignaturaNotNull.getId());
-							} catch (NullPointerException e){
-								throw new NullPointerException("La modificación en tabla intermedia falló " + e);
-							}
-							//asignaturaNotNull.getMatriculas().add(matricula);
+							matriculaRepository.createRelationAsignaturaMatricula(matriculaSaved.getId(), asignaturaNotNull.getId());
 					}
 			);
-			
-			//matricula.getAsignaturas().clear;
-			//matricula.setAsignaturas(asignaturas);
-		}
-		//alumno.getMatriculas().add(matricula); //????
 
+		}
+		//Set de asignaturas para que no devuelva la que unicamente tiene ids
+		matriculaSaved.setAsignaturas(asignaturas);
 		return matriculaSaved;
 	}
 
 	@Override
+	@Transactional
 	public boolean update(Matricula object) {
 
-		if(object != null && object.getId() != 0) {
+		Matricula matricula = matriculaRepository.findById(object.getId()).orElse(null);
 
-			Matricula matricula = matriculaRepository.findById(object.getId()).orElse(null);
+		if (matricula == null){
+			throw new RuntimeException("No existe la matricula " +object);
+		}
 
-			if (matricula == null){
-				throw new RuntimeException("No existe la matricula " +object);
+		if(object.getAnio() != 0){
+			matricula.setAnio(object.getAnio());
+		}
+
+		if(object.getAlumno() != null){
+			Alumno alumno = alumnoRepository.findById(matricula.getAlumno().getDni()).orElse(null);
+			if(alumno == null){
+				throw new RuntimeException("No existe el alumno " +matricula.getAlumno());
 			}
+			matricula.setAlumno(object.getAlumno());
+		}
 
-			if(object.getAnio() != 0){
-				matricula.setAnio(object.getAnio());
-			}
+		Matricula matriculaSaved = matriculaRepository.save(matricula);
 
-			if(object.getAlumno() != null){
-				Alumno alumno = alumnoRepository.findById(matricula.getAlumno().getDni()).orElse(null);
-				if(alumno == null){
-					throw new RuntimeException("No existe el alumno " +matricula.getAlumno());
-				}
-				matricula.setAlumno(object.getAlumno());
-			}
+		//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0
+		if(object.getAsignaturas() != null && !object.getAsignaturas().isEmpty()){
+			//Borra la RELACIÓN de esta matrícula con cualquier asignatura
+			matriculaRepository.deleteRelatedAsignaturasById(object.getId());
 
 			List<Asignatura> asignaturas = new ArrayList<Asignatura>();
-			//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0
-			if(object.getAsignaturas() != null && !object.getAsignaturas().isEmpty()){
 
-				object.getAsignaturas().forEach(
-						asignatura -> {
-							//Obtiene cada asignatura por id
-							Asignatura asignaturaNotNull = asignaturaRepository.findById(asignatura.getId()).orElse(null);
-							if(asignaturaNotNull == null) {
-								//Si la asignatura es nula, devuelve que no existe
-								throw new RuntimeException("No existe la asignatura " +asignatura);
-							}
-							//Si no es null, la añade a la lista de asignaturas
-							asignaturas.add(asignatura);
-							// Accede a la lista de asignaturas de la asignatura actual
-							// y le añade la matricula, ya que se ha creado una relación
-							asignatura.getMatriculas().add(matricula);
+			object.getAsignaturas().forEach(
+					asignatura -> {
+						//Obtiene cada asignatura por id
+						Asignatura asignaturaNotNull = asignaturaRepository.findById(asignatura.getId()).orElse(null);
+						if(asignaturaNotNull == null) {
+							//Si la asignatura es nula, devuelve que no existe
+							throw new RuntimeException("No existe la asignatura " +asignatura);
 						}
-				);
+						//Si no es null, la añade a la lista de asignaturas
+						asignaturas.add(asignatura);
+						matriculaRepository.createRelationAsignaturaMatricula(matriculaSaved.getId(), asignaturaNotNull.getId());
+					}
+			);
 
-				//matricula.getAsignaturas().clear;
-				matricula.setAsignaturas(asignaturas);
-			}
-
-			matriculaRepository.save(matricula); //??
-
-			return true;
-		} else{
-			return false;
+			//matricula.getAsignaturas().clear;
+			matriculaSaved.setAsignaturas(asignaturas);
 		}
+
+		//matriculaRepository.save(matricula); //??
+
+		return true;
 	}
 
 	@Override

@@ -104,10 +104,6 @@ public class MatriculaRESTControllerV3 {
 
 		Alumno alumno = new Alumno();
 		alumno.setDni(dto.alumnoDni());
-		//alumno.setNombre(dto.alumno().nombre());
-		//alumno.setApellidos(dto.alumno().apellidos());
-		//alumno.setFechanacimiento(dto.alumno().fechaNacimiento());
-		//alumno.setImagen(dto.alumno().imagen());
 		matricula.setAlumno(alumno);
 
 		List<Asignatura> asignaturas = new ArrayList<>();
@@ -115,14 +111,38 @@ public class MatriculaRESTControllerV3 {
 				id -> {
 					Asignatura asignaturaId = new Asignatura();
 					asignaturaId.setId(id);
-					//asignaturaEspecifica.setNombre(asignatura.nombre());
-					//asignaturaEspecifica.setCurso(asignatura.curso());
 					asignaturas.add(asignaturaId);
 				}
 		);
 		matricula.setAsignaturas(asignaturas);
 
 		return ResponseEntity.ok(matriculaService.save(matricula));
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<?> updateMatricula( @RequestBody MatriculaDTOEntrada dto){
+		//Logger logger = Logger.getLogger("logger");
+		//Logger logger = Logger.getLogger(Globals.LOGGER);
+		//logger.info("Llamada al find all get /api/alumnos");
+		Matricula matricula = new Matricula();
+		matricula.setId(dto.id());
+		matricula.setAnio(dto.anio());
+
+		Alumno alumno = new Alumno();
+		alumno.setDni(dto.alumnoDni());
+		matricula.setAlumno(alumno);
+
+		List<Asignatura> asignaturas = new ArrayList<>();
+		dto.idsAsignaturas().forEach(
+				id -> {
+					Asignatura asignaturaId = new Asignatura();
+					asignaturaId.setId(id);
+					asignaturas.add(asignaturaId);
+				}
+		);
+		matricula.setAsignaturas(asignaturas);
+
+		return ResponseEntity.ok(matriculaService.update(matricula));
 	}
 
 	@DeleteMapping("/delete/{id}")

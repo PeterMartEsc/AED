@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.pme.institutosec.security;
 
+import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ public class AuthService {
 		usuario.setNombre(username);
 		usuario.setPassword(passwordEncoder.encode(password));
 		usuario.setCorreo(email);
-		usuario.setRol("ROLE_USER");
+		//usuario.setRol("ROLE_USER");
+		usuario.setRol("USER");
 		
 		Usuario saved = usuarioRepository.save(usuario);
 		

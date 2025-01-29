@@ -1,6 +1,8 @@
 package es.iespuertodelacruz.pme.institutosec.entity;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Asignatura implements Serializable {
 					joinColumns={ @JoinColumn(name="idasignatura") }, 
 					inverseJoinColumns={ @JoinColumn(name="idmatricula") 
 				})
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Matricula> matriculas;
 
 	public Asignatura() {
