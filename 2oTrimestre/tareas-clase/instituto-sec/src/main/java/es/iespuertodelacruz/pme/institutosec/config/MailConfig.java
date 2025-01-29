@@ -1,6 +1,4 @@
-package es.iespuertodelacruz.jc.apiprueba202425.config;
-
-import java.util.Properties;
+package es.iespuertodelacruz.pme.institutosec.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.util.Properties;
+
 @Configuration
-public class MailConfig{
+public class MailConfig {
 
 	@Value("${mail.from}") private String mailfrom;
 	@Value("${mail.password}") private String mailpassword;

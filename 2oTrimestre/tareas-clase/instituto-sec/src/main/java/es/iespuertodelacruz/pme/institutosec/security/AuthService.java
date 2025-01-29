@@ -3,7 +3,11 @@ package es.iespuertodelacruz.pme.institutosec.security;
 import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.UUID;
 
 
 @Service
@@ -25,50 +29,38 @@ public class AuthService {
 		usuario.setNombre(username);
 		usuario.setPassword(passwordEncoder.encode(password));
 		usuario.setCorreo(email);
-		//usuario.setRol("ROLE_USER");
-		usuario.setRol("USER");
-		
+		usuario.setRol("user");
+
+		//TODO: set token del correo
+		String tokenVerifCorreo = UUID.randomUUID().toString();
+		usuario.setTokenVerificacion(tokenVerifCorreo);
+
+		Date fechaActual = new Date();
+		usuario.setFechaCreacion(fechaActual);
+
 		Usuario saved = usuarioRepository.save(usuario);
 		
 		if( saved != null) {
-			String generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
-			return generateToken;
+			String generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
+			return generatedToken;
 		}else {
 			return null;
 		}
 	}    
     
-    
-    
-	public String register(String username, String password) {
-		Usuario usuario = new Usuario();
-		usuario.setNombre(username);
-		usuario.setPassword(passwordEncoder.encode(password));
-		usuario.setRol("ROLE_USER");
-		
-		Usuario saved = usuarioRepository.save(usuario);
-		
-		if( saved != null) {
-			String generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
-			return generateToken;
-		}else {
-			return null;
-		}
-	}
+
 
 	public String authenticate(String username, String password)  {
-		String generateToken = null;
+		String generatedToken = null;
 		Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
-
 
 		if (usuario != null) {
 			if (passwordEncoder.matches(password, usuario.getPassword())) {
-				generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
+				generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
 			}
 		}
-		
 
-		return generateToken;
+		return generatedToken;
 	}
 }
 

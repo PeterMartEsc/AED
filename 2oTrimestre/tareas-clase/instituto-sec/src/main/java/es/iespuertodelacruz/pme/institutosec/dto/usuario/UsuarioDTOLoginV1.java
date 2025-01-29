@@ -1,9 +1,8 @@
 package es.iespuertodelacruz.pme.institutosec.dto.usuario;
 
-public record UsuarioDTORegisterV1(
+public record UsuarioDTOLoginV1(
         //int id,
         String nombre,
-        String correo,
         String password
 ) {
 }

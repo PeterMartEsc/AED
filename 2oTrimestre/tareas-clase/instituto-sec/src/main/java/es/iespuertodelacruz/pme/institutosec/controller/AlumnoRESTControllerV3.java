@@ -10,13 +10,13 @@ import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOSalidaV3;
 import es.iespuertodelacruz.pme.institutosec.service.AlumnoService;
 
 @RestController
-@RequestMapping("/api/v3/alumnos")
+@RequestMapping("/api/v3")
 @CrossOrigin
 public class AlumnoRESTControllerV3 {
 	
 	@Autowired AlumnoService alumnoService;
 	
-	@GetMapping("/")
+	@GetMapping("/alumnos")
 	public ResponseEntity<?> findAllAlumnos(){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);

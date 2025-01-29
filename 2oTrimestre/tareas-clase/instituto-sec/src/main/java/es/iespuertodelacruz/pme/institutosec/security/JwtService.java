@@ -1,27 +1,22 @@
-package es.iespuertodelacruz.jc.apiprueba202425.security;
+package es.iespuertodelacruz.pme.institutosec.security;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-
-
-
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.Claim;
-
 @Service
 public class JwtService {
 	
     //@Value("${jwt.secret}")
-    private String secret="ungransecreto";
+    private String secret="BleachEstaIncreiblementeInfravaloradoNoCreesSi";
 
     //@Value("${jwt.expiration}")
-    private long expiration=9876543210L;
+    private long expiration=9876543210L; //Aprox 3 meses //86400 24h
 
     public String generateToken(String username, String rol) {
         return JWT.create()

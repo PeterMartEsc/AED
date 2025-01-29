@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/v3/usuarios")
+@RequestMapping("/api/v3")
 @CrossOrigin
 public class UsuarioRESTControllerV3 {
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping("/")
+    @GetMapping("/usuarios")
     public ResponseEntity<?> findAllUsuarios(){
         //Logger logger = Logger.getLogger("logger");
         //Logger logger = Logger.getLogger(Globals.LOGGER);

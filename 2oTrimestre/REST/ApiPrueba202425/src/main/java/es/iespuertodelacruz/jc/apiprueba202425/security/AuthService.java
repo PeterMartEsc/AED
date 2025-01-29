@@ -33,16 +33,15 @@ public class AuthService {
 		Usuario saved = usuarioRepository.save(usuario);
 		
 		if( saved != null) {
-			String generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
-			return generateToken;
+			String generateJwtToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
+			return generateJwtToken;
 		}else {
 			return null;
 		}
 	}    
     
-    
-    
-	public String register(String username, String password) {
+
+	/*public String register(String username, String password) {
 		Usuario usuario = new Usuario();
 		usuario.setNombre(username);
 		usuario.setPassword(passwordEncoder.encode(password));
@@ -51,26 +50,26 @@ public class AuthService {
 		Usuario saved = usuarioRepository.save(usuario);
 		
 		if( saved != null) {
-			String generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
-			return generateToken;
+			String generateJwtToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
+			return generateJwtToken;
 		}else {
 			return null;
 		}
-	}
+	}*/
 
 	public String authenticate(String username, String password)  {
-		String generateToken = null;
+		String generateJwtToken = null;
 		Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
 
 
 		if (usuario != null) {
 			if (passwordEncoder.matches(password, usuario.getPassword())) {
-				generateToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
+				generateJwtToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
 			}
 		}
 		
 
-		return generateToken;
+		return generateJwtToken;
 	}
 }
 
