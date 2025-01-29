@@ -22,4 +22,14 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 			nativeQuery = true
 	)
 	int deleteByIdNotVoid(@Param("idMatricula") Integer idMatricula);
+
+	@Modifying
+	@Query(
+			value="INSERT INTO asignatura_matricula (idmatricula,idasignatura) " +
+					"VALUES ( :idMatricula, :idAsignatura);",
+			nativeQuery = true
+	)
+	int createRelationAsignaturaMatricula(
+			@Param("idMatricula") Integer idMatricula,
+			@Param("idAsignatura") Integer idAsignatura);
 }

@@ -47,9 +47,12 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 		if(alumno == null) {
 			throw new RuntimeException("No existe el alumno");
 		}
+		matricula.setAlumno(alumno);
 
-		List<Asignatura> asignaturas = new ArrayList<Asignatura>();
+		//Se guarda la matrícula
+		Matricula matriculaSaved = matriculaRepository.save(matricula);
 
+		List<Asignatura> asignaturas = new ArrayList<>();
 		//Si la matrícula tiene una lista de asignaturas no nula y mayor que 0 (no está vacia)
 		if(matricula.getAsignaturas() != null && !matricula.getAsignaturas().isEmpty()){
 			
@@ -62,20 +65,24 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 								throw new RuntimeException("No existe la asignatura");
 							}
 							//Si no es null, la añade a la lista de asignaturas
-							asignaturas.add(asignatura);
+							asignaturas.add(asignaturaNotNull);
 							// Accede a la lista de asignaturas de la asignatura actual
 							// y le añade la matricula, ya que se ha creado una relación
-							//asignatura.getMatriculas().add(matricula);
+							try{
+								int i = matriculaRepository.createRelationAsignaturaMatricula(matriculaSaved.getId(), asignaturaNotNull.getId());
+							} catch (NullPointerException e){
+								throw new NullPointerException("La modificación en tabla intermedia falló " + e);
 							}
+							//asignaturaNotNull.getMatriculas().add(matricula);
+					}
 			);
 			
 			//matricula.getAsignaturas().clear;
-			matricula.setAsignaturas(asignaturas);
+			//matricula.setAsignaturas(asignaturas);
 		}
 		//alumno.getMatriculas().add(matricula); //????
 
-		//Se guarda la matrícula
-		return matriculaRepository.save(matricula);
+		return matriculaSaved;
 	}
 
 	@Override
@@ -87,6 +94,10 @@ public class MatriculaService implements IServiceGeneric<Matricula, Integer> {
 
 			if (matricula == null){
 				throw new RuntimeException("No existe la matricula " +object);
+			}
+
+			if(object.getAnio() != 0){
+				matricula.setAnio(object.getAnio());
 			}
 
 			if(object.getAlumno() != null){

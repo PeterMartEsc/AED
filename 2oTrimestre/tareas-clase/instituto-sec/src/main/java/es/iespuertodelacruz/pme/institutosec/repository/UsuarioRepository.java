@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, String> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     /*@Modifying //Consulta que modifica la bbdd
     //"DELETE FROM Alumno a WHERE a.dni = :dni" Usa las entities JQL
@@ -20,9 +20,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     @Modifying //Consulta que modifica la bbdd
     //"DELETE FROM Alumno a WHERE a.dni = :dni" Usa las entities JQL
     @Query(
-            value="DELETE FROM usuarios WHERE dni = :dni",
+            value="DELETE FROM usuarios WHERE id = :id",
             nativeQuery = true
     ) //Native Query
-    int deleteUsuarioBydDni(@Param("dni") String dni);
+    int deleteByIdNotVoid(@Param("id") Integer id);
 
 }

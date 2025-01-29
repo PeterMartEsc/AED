@@ -1,6 +1,9 @@
 package es.iespuertodelacruz.pme.institutosec.controller;
 
-import es.iespuertodelacruz.pme.institutosec.dto.*;
+import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOEntradaV3;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.matricula.MatriculaDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.matricula.MatriculaDTOSalida;
 import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
 import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
 import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
@@ -16,9 +19,9 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/matriculas")
+@RequestMapping("/api/v3/matriculas")
 @CrossOrigin
-public class MatriculaRESTController {
+public class MatriculaRESTControllerV3 {
 	
 	@Autowired MatriculaService matriculaService;
 
@@ -36,7 +39,7 @@ public class MatriculaRESTController {
 							matricula.getAnio(),
 							//Crea un nuevo AlumnoDTOEntrada,
 							// por que es el que no muestra la lista de matriculas asociada
-							new AlumnoDTOEntrada(
+							new AlumnoDTOEntradaV3(
 									matricula.getAlumno().getDni(),
 									matricula.getAlumno().getNombre(),
 									matricula.getAlumno().getApellidos(),
@@ -71,7 +74,7 @@ public class MatriculaRESTController {
 										matricula.getAnio(),
 										//Crea un nuevo AlumnoDTOEntrada,
 										// por que es el que no muestra la lista de matriculas asociada
-										new AlumnoDTOEntrada(
+										new AlumnoDTOEntradaV3(
 												matricula.getAlumno().getDni(),
 												matricula.getAlumno().getNombre(),
 												matricula.getAlumno().getApellidos(),

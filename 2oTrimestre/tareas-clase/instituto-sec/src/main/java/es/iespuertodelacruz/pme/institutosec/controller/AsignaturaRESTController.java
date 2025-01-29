@@ -1,9 +1,7 @@
 package es.iespuertodelacruz.pme.institutosec.controller;
 
-import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOEntrada;
-import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOEntrada;
-import es.iespuertodelacruz.pme.institutosec.dto.AsignaturaDTOSalida;
-import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOSalida;
 import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
 import es.iespuertodelacruz.pme.institutosec.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;

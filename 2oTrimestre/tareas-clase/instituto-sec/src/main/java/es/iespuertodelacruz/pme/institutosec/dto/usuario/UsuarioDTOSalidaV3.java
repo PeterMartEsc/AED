@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutosec.dto;
+package es.iespuertodelacruz.pme.institutosec.dto.usuario;
 
 import java.util.Date;
 

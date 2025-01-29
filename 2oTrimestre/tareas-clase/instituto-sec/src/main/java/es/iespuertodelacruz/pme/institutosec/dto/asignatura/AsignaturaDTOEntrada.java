@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutosec.dto;
+package es.iespuertodelacruz.pme.institutosec.dto.asignatura;
 
 public record AsignaturaDTOEntrada(
         int id,

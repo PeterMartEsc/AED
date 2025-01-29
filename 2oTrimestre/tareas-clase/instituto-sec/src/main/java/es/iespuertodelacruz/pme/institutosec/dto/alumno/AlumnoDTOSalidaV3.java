@@ -1,11 +1,11 @@
-package es.iespuertodelacruz.pme.institutosec.dto;
+package es.iespuertodelacruz.pme.institutosec.dto.alumno;
 
 import java.util.Date;
 import java.util.List;
 
 import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
 
-public record AlumnoDTOSalida(
+public record AlumnoDTOSalidaV3(
         String dni,
         String nombre,
         String apellidos,

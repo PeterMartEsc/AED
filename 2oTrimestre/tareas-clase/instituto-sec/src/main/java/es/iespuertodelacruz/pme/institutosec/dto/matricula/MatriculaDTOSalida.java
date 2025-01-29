@@ -1,13 +1,14 @@
-package es.iespuertodelacruz.pme.institutosec.dto;
+package es.iespuertodelacruz.pme.institutosec.dto.matricula;
 
-import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOEntradaV3;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOEntrada;
 
 import java.util.List;
 
 public record MatriculaDTOSalida(
     int id,
     int anio,
-    AlumnoDTOEntrada alumno,
+    AlumnoDTOEntradaV3 alumno,
     List<AsignaturaDTOEntrada> asignaturas
 ) {
 }

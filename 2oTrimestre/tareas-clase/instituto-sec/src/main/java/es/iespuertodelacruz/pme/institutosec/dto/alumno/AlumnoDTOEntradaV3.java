@@ -1,8 +1,8 @@
-package es.iespuertodelacruz.pme.institutosec.dto;
+package es.iespuertodelacruz.pme.institutosec.dto.alumno;
 
 import java.util.Date;
 
-public record AlumnoDTOEntrada(
+public record AlumnoDTOEntradaV3(
         String dni,
         String nombre,
         String apellidos,

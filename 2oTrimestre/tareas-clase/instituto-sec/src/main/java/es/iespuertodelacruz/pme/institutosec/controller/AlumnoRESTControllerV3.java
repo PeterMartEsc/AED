@@ -1,18 +1,18 @@
 package es.iespuertodelacruz.pme.institutosec.controller;
 
-import es.iespuertodelacruz.pme.institutosec.dto.AlumnoDTOEntrada;
+import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOEntradaV3;
 import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import es.iespuertodelacruz.pme.institutosec.dto.AlumnoDTOSalida;
+import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOSalidaV3;
 import es.iespuertodelacruz.pme.institutosec.service.AlumnoService;
 
 @RestController
-@RequestMapping("/api/alumnos")
+@RequestMapping("/api/v3/alumnos")
 @CrossOrigin
-public class AlumnoRESTController {
+public class AlumnoRESTControllerV3 {
 	
 	@Autowired AlumnoService alumnoService;
 	
@@ -24,7 +24,7 @@ public class AlumnoRESTController {
 
 		return ResponseEntity.ok(alumnoService.findAll()
 			.stream()
-			.map(alumno -> new AlumnoDTOSalida(
+			.map(alumno -> new AlumnoDTOSalidaV3(
 							alumno.getDni(), 
 							alumno.getNombre(), 
 							alumno.getApellidos(), 
@@ -43,7 +43,7 @@ public class AlumnoRESTController {
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
 		Alumno alumno = alumnoService.findById(dni);
-		AlumnoDTOSalida dto = new AlumnoDTOSalida(
+		AlumnoDTOSalidaV3 dto = new AlumnoDTOSalidaV3(
 						alumno.getDni(),
 						alumno.getNombre(),
 						alumno.getApellidos(),
@@ -55,7 +55,7 @@ public class AlumnoRESTController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<?> createAlumno(@RequestBody AlumnoDTOEntrada dto){
+	public ResponseEntity<?> createAlumno(@RequestBody AlumnoDTOEntradaV3 dto){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
@@ -69,7 +69,7 @@ public class AlumnoRESTController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<?> updateAlumno(/*@PathVariable("dni") String dni,*/ @RequestBody AlumnoDTOEntrada dto){
+	public ResponseEntity<?> updateAlumno(/*@PathVariable("dni") String dni,*/ @RequestBody AlumnoDTOEntradaV3 dto){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
