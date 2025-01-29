@@ -1,14 +1,17 @@
 package es.iespuertodelacruz.pme.institutosec.controller;
 
 import es.iespuertodelacruz.pme.institutosec.dto.*;
+import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
+import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
 import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import es.iespuertodelacruz.pme.institutosec.entity.Matricula;
 import es.iespuertodelacruz.pme.institutosec.service.MatriculaService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -89,10 +92,35 @@ public class MatriculaRESTController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	/*@PostMapping
-	public ResponseEntity<?> save(@RequestBody Matricula dto){
-		return ResponseEntity.ok(matriculaService.save(dto));
-	}*/
+	@PostMapping
+	public ResponseEntity<?> save(@RequestBody MatriculaDTOEntrada dto){
+
+		Matricula matricula = new Matricula();
+		matricula.setId(dto.id());
+		matricula.setAnio(dto.anio());
+
+		Alumno alumno = new Alumno();
+		alumno.setDni(dto.alumnoDni());
+		//alumno.setNombre(dto.alumno().nombre());
+		//alumno.setApellidos(dto.alumno().apellidos());
+		//alumno.setFechanacimiento(dto.alumno().fechaNacimiento());
+		//alumno.setImagen(dto.alumno().imagen());
+		matricula.setAlumno(alumno);
+
+		List<Asignatura> asignaturas = new ArrayList<>();
+		dto.idsAsignaturas().forEach(
+				id -> {
+					Asignatura asignaturaId = new Asignatura();
+					asignaturaId.setId(id);
+					//asignaturaEspecifica.setNombre(asignatura.nombre());
+					//asignaturaEspecifica.setCurso(asignatura.curso());
+					asignaturas.add(asignaturaId);
+				}
+		);
+		matricula.setAsignaturas(asignaturas);
+
+		return ResponseEntity.ok(matriculaService.save(matricula));
+	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteMatricula(@PathVariable("id") Integer id){
