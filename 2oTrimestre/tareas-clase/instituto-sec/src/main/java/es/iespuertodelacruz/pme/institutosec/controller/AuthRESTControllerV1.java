@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class AuthRESTControllerV1 {
-
 
     @Autowired
     private MailService mailService;
@@ -28,7 +27,6 @@ public class AuthRESTControllerV1 {
         mailService.send(senders, "usuario creado", token);
         //return ResponseEntity.ok(token);
         return token;
-
     }
 
     @PostMapping("/login")

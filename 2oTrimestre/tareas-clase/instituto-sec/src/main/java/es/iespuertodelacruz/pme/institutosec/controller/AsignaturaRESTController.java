@@ -9,14 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v3/asignaturas")
 @CrossOrigin
 public class AsignaturaRESTController {
 
     @Autowired
     AsignaturaService asignaturaService;
 
-    @GetMapping("/asignaturas")
+    @GetMapping("/")
     public ResponseEntity<?> findAllAsignaturas(){
         //Logger logger = Logger.getLogger("logger");
         //Logger logger = Logger.getLogger(Globals.LOGGER);

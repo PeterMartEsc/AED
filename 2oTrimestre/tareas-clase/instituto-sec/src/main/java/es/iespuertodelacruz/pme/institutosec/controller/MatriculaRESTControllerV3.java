@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/v3")
+@RequestMapping("/api/v3/matriculas")
 @CrossOrigin
 public class MatriculaRESTControllerV3 {
 	
 	@Autowired MatriculaService matriculaService;
 
-	@GetMapping("/matriculas")
+	@GetMapping("/")
 	public ResponseEntity<?> findAllMatriculas(){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);

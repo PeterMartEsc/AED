@@ -1,11 +1,11 @@
-package es.iespuertodelacruz.jc.apiprueba202425.security;
+package es.iespuertodelacruz.pme.institutosec.security;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,19 +16,11 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.Claim;
-
-import es.iespuertodelacruz.jc.apiprueba202425.repositories.UsuarioRepository;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-
-
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -46,18 +38,23 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-    	
-    	
-    	String path = request.getRequestURI();
+
+		String path = request.getRequestURI();
         
     	
     	//rutas permitidas sin estar autenticado
-    	String rutasPermitidas[]= { "/swagger-ui.html", 
+    	/*String rutasPermitidas[]= { "/swagger-ui.html",
     	        					"/swagger-ui/", "/v2/", 
     	        					"configuration/",	"/swagger", 
     	        					"/webjars/", "/api/login", 
     	        					"/api/register", "/v3/",
-    	        					"/websocket", "/index.html", "/api/v1"};
+    	        					"/websocket", "/index.html", "/api/v1"};*/
+		String rutasPermitidas[]= { "/swagger-ui.html",
+									"/swagger-ui/**",
+									"/swagger-resources/**", "/webjars/**",
+									"/api/v1/register", "/api/v1/login",
+									/*"/v2/", "/v3/", */"/v3/api-docs/**",
+									"/websocket", "/index.html", "/api/v1"};
     	
     	//String rutasPermitidas[] = {};
     			
@@ -124,7 +121,7 @@ public class JwtFilter extends OncePerRequestFilter {
         		SecurityContextHolder.getContext().setAuthentication(authToken);
         		
 
-        			
+
         		filterChain.doFilter(request, response);
 
             } catch (JWTVerificationException e) {
