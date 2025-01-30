@@ -17,6 +17,10 @@ Alumno no tiene por que tener matriculas, matricula necesita alumno para existir
 
 V1: solo login register
 
-V2: Get All Get by Id (solo muestra a el mismo)
+V2: Get All Get by Id (solo muestra nombre y apellidos)
 
-V3: Admin (modificar, crear, mostrar todos)
+V3: Admin (modificar, crear, mostrar, todo)
+
+Como hago para que compruebe si el usuario está verificado? Mando ese dato en el jwt supongo
+
+Falta adaptar el resto de controllers a v2

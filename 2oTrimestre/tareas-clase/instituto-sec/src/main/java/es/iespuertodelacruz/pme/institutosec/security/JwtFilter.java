@@ -27,7 +27,7 @@ import java.util.Map;
 public class JwtFilter extends OncePerRequestFilter {
 	
 	public static final String authHeader="Authorization";
-	public static final String authHeaderTokenPrefix="Bearer ";
+	public static final String authHeaderTokenPrefix="Bearer "; //ESPACIO NECESARIO!!
 
     @Autowired
     private JwtService jwtTokenManager;
@@ -55,9 +55,7 @@ public class JwtFilter extends OncePerRequestFilter {
 									"/api/v1/register", "/api/v1/login",
 									/*"/v2/", "/v3/", */"/v3/api-docs/**",
 									"/websocket", "/index.html", "/api/v1"};
-    	
-    	//String rutasPermitidas[] = {};
-    			
+
         
     	for (String ruta : rutasPermitidas) {
             if (path.startsWith(ruta)) {
