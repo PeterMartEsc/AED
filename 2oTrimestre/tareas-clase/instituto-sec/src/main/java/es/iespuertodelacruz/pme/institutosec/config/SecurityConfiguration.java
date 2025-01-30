@@ -36,20 +36,22 @@ public class SecurityConfiguration {
 					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
 					.requestMatchers(
-					"/", "/swagger-ui.html", 
-					"/swagger-ui/**", "/v2/**", 
-					"/configuration/**",	"/swagger*/**", 
-					"/webjars/**", "/api/v1/login",
-					"/api/v1/register", "/v3/**",
-					"/websocket*/**", "/index.html", "/api/v1/**"
+					"/",  "/index.html",
+					"/swagger-ui/**", "/swagger-ui.html",
+					"/v3/api-docs/**", "/swagger-resources/**",
+					"/configuration/**", "/swagger*/**",
+					"/api/v1/login/", "/api/v1/register/",
+					"/v2/**", "/v3/**", "/webjars/**",
+					"/websocket*/**", "/api/v1/**"
 					).permitAll()
-					
+						//.requestMatchers("/api/v2/alumnos").hasAnyRole("USER", "ADMIN")
+					//.requestMatchers("/api/v2/**").hasAnyRole("USER", "ADMIN")
 					.requestMatchers("/api/v3/**").hasRole("ADMIN")
 					.anyRequest().authenticated()
 				)
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
+		//System.out.println("hollllllllllllllllllllllllllllllllllllllllllllllllllllllllllla");
 		return http.getOrBuild();
 	}
 }

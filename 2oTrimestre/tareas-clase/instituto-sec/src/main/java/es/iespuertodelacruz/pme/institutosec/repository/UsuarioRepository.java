@@ -20,7 +20,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     int deleteByIdNotVoid(@Param("id") Integer id);
 
     @Query(
-            value="SELECT * FROM usuario WHERE nombre = :nombre",
+            value="SELECT * FROM usuarios WHERE nombre = :nombre",
             nativeQuery = true
     ) //Native Query
     Optional<Usuario> findByNombre(@Param("nombre") String nombre);

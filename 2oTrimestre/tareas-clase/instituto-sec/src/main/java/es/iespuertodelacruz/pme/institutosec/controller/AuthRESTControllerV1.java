@@ -18,7 +18,7 @@ public class AuthRESTControllerV1 {
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public String register(@RequestBody UsuarioDTORegisterV1 userDto ) {
         //return "recibe: "+u.nombre + " "+ u.password;
         String token = authService.register(userDto.nombre(), userDto.password(), userDto.correo());
@@ -29,11 +29,11 @@ public class AuthRESTControllerV1 {
         return token;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/")
     public String login(@RequestBody UsuarioDTOLoginV1 userLogin ) {
         //return "recibe: "+u.nombre + " "+ u.password;
         String token = authService.authenticate(userLogin.nombre(), userLogin.password());
-
+        //System.out.println(token);
         if ( token == null ) {
             throw new RuntimeException("Credenciales inválidas");
         }

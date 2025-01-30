@@ -4,6 +4,7 @@ import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOEntradaV3;
 import es.iespuertodelacruz.pme.institutosec.entity.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOSalidaV3;
@@ -16,12 +17,13 @@ public class AlumnoRESTControllerV3 {
 	
 	@Autowired AlumnoService alumnoService;
 	
-	@GetMapping("/")
+	@GetMapping
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> findAllAlumnos(){
 		//Logger logger = Logger.getLogger("logger");
 		//Logger logger = Logger.getLogger(Globals.LOGGER);
 		//logger.info("Llamada al find all get /api/alumnos");
-
+		System.out.println("holaaaaaa estoy aqui");
 		return ResponseEntity.ok(alumnoService.findAll()
 			.stream()
 			.map(alumno -> new AlumnoDTOSalidaV3(

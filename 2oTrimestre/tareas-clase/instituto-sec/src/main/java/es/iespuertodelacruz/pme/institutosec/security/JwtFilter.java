@@ -38,7 +38,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
+		//System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		String path = request.getRequestURI();
         
     	
@@ -49,22 +49,25 @@ public class JwtFilter extends OncePerRequestFilter {
     	        					"/webjars/", "/api/login", 
     	        					"/api/register", "/v3/",
     	        					"/websocket", "/index.html", "/api/v1"};*/
-		String rutasPermitidas[]= { "/swagger-ui.html",
-									"/swagger-ui/**",
-									"/swagger-resources/**", "/webjars/**",
-									"/api/v1/register", "/api/v1/login",
-									/*"/v2/", "/v3/", */"/v3/api-docs/**",
-									"/websocket", "/index.html", "/api/v1"};
+		String rutasPermitidas[]= { /*"/",*/  "/index.html",
+									"/swagger-ui/", "/swagger-ui.html",
+									"/v3/api-docs/", "/swagger-resources/",
+									"/configuration/", "/swagger/",
+									"/api/v1/login/", "/api/v1/register/",
+									"/v2/", "/v3/", "/webjars/",
+									"/websocket/", "/api/v1/"};
 
-        
+		System.out.println("estamos en el filtro!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     	for (String ruta : rutasPermitidas) {
             if (path.startsWith(ruta)) {
-                // Permitir la solicitud sin autenticación 
-                filterChain.doFilter(request, response);
+				System.out.println(ruta +" aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                // Permitir la solicitud sin autenticación
+				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				filterChain.doFilter(request, response);
                 return;
             }
         }
-    	
+		System.out.println(path+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     	//el token viene en un header Authorization
         String header = request.getHeader(authHeader);
         
@@ -79,8 +82,8 @@ public class JwtFilter extends OncePerRequestFilter {
             	final String nombreusuario=mapInfoToken.get("username");
             
             	final String rol = mapInfoToken.get("role");
-            	
 
+				//System.out.println("HEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
             	//UserDetails en Spring Security es un interfaz basado en Principal de java
             	//y es la forma que tiene Spring de mantener la información de usuario "autenticado"
             	//en el contexto de seguridad. Nos permite guardar la información de username
@@ -93,7 +96,7 @@ public class JwtFilter extends OncePerRequestFilter {
 					public Collection<? extends GrantedAuthority> getAuthorities() {
 					    List<GrantedAuthority> authorities = new ArrayList<>();
 					
-					    authorities.add(new SimpleGrantedAuthority(rol));
+					    authorities.add(new SimpleGrantedAuthority(/*"ROLE_" + */rol));
 					    return authorities;
 					}
 
@@ -123,6 +126,10 @@ public class JwtFilter extends OncePerRequestFilter {
         		filterChain.doFilter(request, response);
 
             } catch (JWTVerificationException e) {
+				//System.out.println("respuesta no es valida");
+//				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//				response.getWriter().write("Token inválido o expirado");
+//				response.getWriter().flush();
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }

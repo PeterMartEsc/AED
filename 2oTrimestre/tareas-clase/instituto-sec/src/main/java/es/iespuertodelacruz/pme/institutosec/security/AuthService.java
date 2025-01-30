@@ -29,7 +29,7 @@ public class AuthService {
 		usuario.setNombre(username);
 		usuario.setPassword(passwordEncoder.encode(password));
 		usuario.setCorreo(email);
-		usuario.setRol("user");
+		usuario.setRol("ROLE_USER");
 
 		//TODO: set token del correo
 		String tokenVerifCorreo = UUID.randomUUID().toString();
@@ -53,7 +53,7 @@ public class AuthService {
 	public String authenticate(String username, String password)  {
 		String generatedToken = null;
 		Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
-
+		//System.out.println(usuario.getRol());
 		if (usuario != null) {
 			if (passwordEncoder.matches(password, usuario.getPassword())) {
 				generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());

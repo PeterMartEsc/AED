@@ -3,6 +3,7 @@ package es.iespuertodelacruz.pme.institutosec.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,11 +13,11 @@ import java.util.Map;
 @Service
 public class JwtService {
 	
-    //@Value("${jwt.secret}")
-    private String secret="BleachEstaIncreiblementeInfravaloradoNoCreesSi";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    //@Value("${jwt.expiration}")
-    private long expiration=9876543210L; //Aprox 3 meses //86400 24h
+    @Value("${jwt.expiration}")
+    private long expiration; //Aprox 3 meses //86400 24h
 
     public String generateToken(String username, String rol) {
         return JWT.create()
