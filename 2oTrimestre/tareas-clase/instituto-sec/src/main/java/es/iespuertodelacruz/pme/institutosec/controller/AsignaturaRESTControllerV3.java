@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v3/asignaturas")
 @CrossOrigin
-public class AsignaturaRESTController {
+public class AsignaturaRESTControllerV3 {
 
     @Autowired
     AsignaturaService asignaturaService;

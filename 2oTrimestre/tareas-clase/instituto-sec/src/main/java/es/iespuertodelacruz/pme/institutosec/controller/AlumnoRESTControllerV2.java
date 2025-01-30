@@ -44,40 +44,4 @@ public class AlumnoRESTControllerV2 {
 						);
 		return ResponseEntity.ok(dto);
 	}
-
-	/*@PostMapping("/create")
-	public ResponseEntity<?> createAlumno(@RequestBody AlumnoDTOEntrada dto){
-		//Logger logger = Logger.getLogger("logger");
-		//Logger logger = Logger.getLogger(Globals.LOGGER);
-		//logger.info("Llamada al find all get /api/alumnos");
-		Alumno alumno = new Alumno();
-		alumno.setDni(dto.dni());
-		alumno.setNombre(dto.nombre());
-		alumno.setApellidos(dto.apellidos());
-		alumno.setFechanacimiento(dto.fechaNacimiento());
-		alumno.setImagen(dto.imagen());
-		return ResponseEntity.ok(alumnoService.save(alumno));
-	}*/
-
-	/*@PutMapping("/update")
-	public ResponseEntity<?> updateAlumno(*//*@PathVariable("dni") String dni,*//* @RequestBody AlumnoDTOEntrada dto){
-		//Logger logger = Logger.getLogger("logger");
-		//Logger logger = Logger.getLogger(Globals.LOGGER);
-		//logger.info("Llamada al find all get /api/alumnos");
-		Alumno alumno = new Alumno();
-		alumno.setDni(dto.dni());
-		alumno.setNombre(dto.nombre());
-		alumno.setApellidos(dto.apellidos());
-		alumno.setFechanacimiento(dto.fechaNacimiento());
-		alumno.setImagen(dto.imagen());
-		return ResponseEntity.ok(alumnoService.update(alumno));
-	}
-
-	@DeleteMapping("/delete/{dni}")
-	public ResponseEntity<?> deleteAlumno(@PathVariable("dni") String dni){
-		//Logger logger = Logger.getLogger("logger");
-		//Logger logger = Logger.getLogger(Globals.LOGGER);
-		//logger.info("Llamada al find all get /api/alumnos");
-		return ResponseEntity.ok(alumnoService.deleteById(dni));
-	}*/
 }

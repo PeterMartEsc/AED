@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v3/asignaturas")
+@RequestMapping("/api/v2/asignaturas")
 @CrossOrigin
-public class AsignaturaRESTControllerV3 {
+public class AsignaturaRESTControllerV2 {
 
     @Autowired
     AsignaturaService asignaturaService;
@@ -46,39 +46,5 @@ public class AsignaturaRESTControllerV3 {
                 asignatura.getCurso()
         );
         return ResponseEntity.ok(dto);
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<?> createAsignatura(@RequestBody AsignaturaDTOEntrada dto){
-        //Logger logger = Logger.getLogger("logger");
-        //Logger logger = Logger.getLogger(Globals.LOGGER);
-        //logger.info("Llamada al find all get /api/alumnos");
-        Asignatura asignatura = new Asignatura();
-        asignatura.setId(dto.id());
-        asignatura.setNombre(dto.nombre());
-        asignatura.setCurso(dto.curso());
-        
-        return ResponseEntity.ok(asignaturaService.save(asignatura));
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<?> updateAsignatura( @RequestBody AsignaturaDTOEntrada dto){
-        //Logger logger = Logger.getLogger("logger");
-        //Logger logger = Logger.getLogger(Globals.LOGGER);
-        //logger.info("Llamada al find all get /api/alumnos");
-        Asignatura asignatura = new Asignatura();
-        asignatura.setId(dto.id());
-        asignatura.setNombre(dto.nombre());
-        asignatura.setCurso(dto.curso());
-
-        return ResponseEntity.ok(asignaturaService.update(asignatura));
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteAsignatura(@PathVariable("id") Integer id){
-        //Logger logger = Logger.getLogger("logger");
-        //Logger logger = Logger.getLogger(Globals.LOGGER);
-        //logger.info("Llamada al find all get /api/alumnos");
-        return ResponseEntity.ok(asignaturaService.deleteById(id));
     }
 }
