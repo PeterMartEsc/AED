@@ -67,7 +67,7 @@ public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
     @Transactional
     public boolean update(Usuario object) {
 
-        if(object.getId() != 0){
+        if(/*object != null &&*/ object.getId() != 0){
 
             Usuario usuario = usuarioRepository.findById(object.getId()).orElse(null);
             if(usuario == null){
