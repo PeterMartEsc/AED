@@ -1,12 +1,24 @@
 
-V1: solo login register
+V1{
+     - login
+     - register
+}
 
-V2: Get All Get by Id (solo muestra nombre y apellidos)
+V2{
+    - Get ALl alumnos (nombre, apellidos)
+    - Get All asignaturas (nombre, curso)
+}
 
-V3: Admin (modificar, crear, mostrar, todo)
+
+V3{
+    - Admin
+    - modificar
+    - crear
+    - Get All
+    - todo)
+}
 
 Como hago para que compruebe si el usuario está verificado? Mando ese dato en el jwt supongo
-
 
 200 sin response: recursos están, usuario no autenticado
 
@@ -16,11 +28,7 @@ Como hago para que compruebe si el usuario está verificado? Mando ese dato en e
 
 - APP REACT
 
-- UPDATE USUARIO ??
+- Verificacion por enlace correo (tiene securizada la ruta, no funca)
 
-- COMPROBAR TODAS LAS RUTAS CORRECTAMENTE
-
-- Verificacion por enlace correo
-
-- TESTs
+- TESTs (faltan de matriculas y usuarios)
 

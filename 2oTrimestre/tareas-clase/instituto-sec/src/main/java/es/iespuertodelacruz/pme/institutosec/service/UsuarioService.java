@@ -8,11 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     //@Transactional
@@ -43,8 +48,17 @@ public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
             throw new RuntimeException("El usuario debe tener correo");
         }
 
-        //usuario.setRol("user"); //usuariosetRol("admin");
-        usuario.setTokenVerificacion("token_ejemplo");
+        if(usuario.getRol() == null){
+            throw new RuntimeException("El usuario debe tener un rol asignado");
+        }
+
+        String tokenVerifCorreo = UUID.randomUUID().toString();
+        usuario.setTokenVerificacion(tokenVerifCorreo);
+
+        if(usuario.getVerificado() == 0){
+            String senders[] = {"apps.akameterindustries@gmail.com", usuario.getCorreo()};
+            mailService.send(senders, "Usuario creado: "+usuario.getNombre(), tokenVerifCorreo);
+        }
 
         return usuarioRepository.save(usuario);
     }
@@ -52,7 +66,46 @@ public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
     @Override
     @Transactional
     public boolean update(Usuario object) {
-        return false;
+
+        if(object.getId() != 0){
+
+            Usuario usuario = usuarioRepository.findById(object.getId()).orElse(null);
+            if(usuario == null){
+                throw new RuntimeException("No existe el usuario " +object);
+            }
+
+            if(object.getNombre() != null){
+                usuario.setNombre(object.getNombre());
+            }
+
+            if(object.getCorreo() != null){
+                usuario.setCorreo(object.getCorreo());
+            }
+
+            if(object.getPassword() != null){
+                usuario.setPassword(object.getPassword());
+            }
+
+            if(object.getRol() != null){
+                usuario.setRol(object.getRol());
+            }
+
+            if(object.getVerificado() != 0){
+                usuario.setVerificado(object.getVerificado());
+
+                if(usuario.getVerificado() == 0){
+                    String senders[] = {"apps.akameterindustries@gmail.com", usuario.getCorreo()};
+                    mailService.send(senders, "Usuario ACTUALIZADO: "+usuario.getNombre(), usuario.getTokenVerificacion());
+                }
+            }
+
+            usuarioRepository.save(usuario);
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     @Override

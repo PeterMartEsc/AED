@@ -7,7 +7,7 @@ public record UsuarioDTOSalidaV3(
         String nombre,
         String correo,
         String rol,
-        byte verificado,
+        int verificado,
         String tokenVerificacion,
         Date fechaCreacion
 

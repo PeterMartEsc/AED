@@ -2,6 +2,7 @@ package es.iespuertodelacruz.pme.institutosec.security;
 
 import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
+import es.iespuertodelacruz.pme.institutosec.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private MailService mailService;
+
     
 	public String register(String username, String password, String email) {
 		Usuario usuario = new Usuario();
@@ -41,6 +45,9 @@ public class AuthService {
 		Usuario saved = usuarioRepository.save(usuario);
 		
 		if( saved != null) {
+			String senders[] = {"apps.akameterindustries@gmail.com", email};
+			mailService.send(senders, "usuario creado: "+usuario.getNombre(),
+					"http://localhost:8080/confirmacion?correo="+usuario.getCorreo()+"&token="+tokenVerifCorreo);
 			String generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
 			return generatedToken;
 		}else {
@@ -53,9 +60,11 @@ public class AuthService {
 	public String authenticate(String username, String password)  {
 		String generatedToken = null;
 		Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
-		//System.out.println(usuario.getRol());
+		System.out.println(usuario.getNombre());
 		if (usuario != null) {
+			System.out.println("no es nulo");
 			if (passwordEncoder.matches(password, usuario.getPassword())) {
+				System.out.println("tiene contraseña");
 				generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
 			}
 		}

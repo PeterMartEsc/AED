@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
 	private String rol;
 
 	@Column(nullable=false)
-	private byte verificado;
+	private int verificado;
 
 	@Column(name="token_verificacion", nullable=false)
 	private String tokenVerificacion;
@@ -100,11 +100,11 @@ public class Usuario implements Serializable {
 		this.tokenVerificacion = tokenVerificacion;
 	}
 
-	public byte getVerificado() {
+	public int getVerificado() {
 		return this.verificado;
 	}
 
-	public void setVerificado(byte verificado) {
+	public void setVerificado(int verificado) {
 		this.verificado = verificado;
 	}
 

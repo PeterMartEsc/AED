@@ -1,7 +1,9 @@
-package es.iespuertodelacruz.pme.institutosec.controller;
+package es.iespuertodelacruz.pme.institutosec.controller.v3;
 
 import es.iespuertodelacruz.pme.institutosec.dto.usuario.UsuarioDTOEntradaV3;
+import es.iespuertodelacruz.pme.institutosec.dto.usuario.UsuarioDTOEntradaV3;
 import es.iespuertodelacruz.pme.institutosec.dto.usuario.UsuarioDTOSalidaV3;
+import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
 import es.iespuertodelacruz.pme.institutosec.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,16 +66,29 @@ public class UsuarioRESTControllerV3 {
         //Logger logger = Logger.getLogger(Globals.LOGGER);
         //logger.info("Llamada al find all get /api/usuarios");
         Usuario usuario = new Usuario();
-        //usuario.setId(dto.id());
         usuario.setNombre(dto.nombre());
         usuario.setCorreo(dto.correo());
         usuario.setPassword(dto.password());
         usuario.setRol(dto.rol());
-        //usuario.setVerificado(0);
-        //usuario.setTokenVerificacion();
+        usuario.setVerificado(dto.verificado());
         Date fechaActual = new Date();
         usuario.setFechaCreacion(fechaActual);
         return ResponseEntity.ok(usuarioService.save(usuario));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUsuario(/*@PathVariable("dni") String dni,*/ @RequestBody UsuarioDTOEntradaV3 dto){
+        //Logger logger = Logger.getLogger("logger");
+        //Logger logger = Logger.getLogger(Globals.LOGGER);
+        //logger.info("Llamada al find all get /api/usuarios");
+        Usuario usuario = new Usuario();
+        usuario.setId(dto.id());
+        usuario.setNombre(dto.nombre());
+        usuario.setCorreo(dto.correo());
+        usuario.setPassword(dto.password());
+        usuario.setRol(dto.rol());
+        usuario.setVerificado(dto.verificado());
+        return ResponseEntity.ok(usuarioService.update(usuario));
     }
 
     @DeleteMapping("/delete/{id}")

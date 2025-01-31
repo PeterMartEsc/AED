@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.institutosec.controller;
+package es.iespuertodelacruz.pme.institutosec.controller.v3;
 
 import es.iespuertodelacruz.pme.institutosec.dto.alumno.AlumnoDTOEntradaV3;
 import es.iespuertodelacruz.pme.institutosec.entity.Alumno;

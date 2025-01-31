@@ -1,7 +1,8 @@
-package es.iespuertodelacruz.pme.institutosec.controller;
+package es.iespuertodelacruz.pme.institutosec.controller.v3;
 
 import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOEntrada;
-import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOSalida;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOSalidaV2;
+import es.iespuertodelacruz.pme.institutosec.dto.asignatura.AsignaturaDTOSalidaV3;
 import es.iespuertodelacruz.pme.institutosec.entity.Asignatura;
 import es.iespuertodelacruz.pme.institutosec.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class AsignaturaRESTControllerV3 {
 
         return ResponseEntity.ok(asignaturaService.findAll()
                         .stream()
-                        .map(asignatura -> new AsignaturaDTOSalida(
+                        .map(asignatura -> new AsignaturaDTOSalidaV3(
                                         asignatura.getId(),
                                         asignatura.getNombre(),
                                         asignatura.getCurso()
@@ -40,7 +41,7 @@ public class AsignaturaRESTControllerV3 {
         //Logger logger = Logger.getLogger(Globals.LOGGER);
         //logger.info("Llamada al find all get /api/asignaturas");
         Asignatura asignatura = asignaturaService.findById(id);
-        AsignaturaDTOSalida dto = new AsignaturaDTOSalida(
+        AsignaturaDTOSalidaV3 dto = new AsignaturaDTOSalidaV3(
                 asignatura.getId(),
                 asignatura.getNombre(),
                 asignatura.getCurso()
