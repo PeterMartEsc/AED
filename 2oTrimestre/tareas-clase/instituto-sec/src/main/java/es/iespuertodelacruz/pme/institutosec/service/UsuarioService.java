@@ -57,7 +57,8 @@ public class UsuarioService implements IServiceGeneric<Usuario, Integer> {
 
         if(usuario.getVerificado() == 0){
             String senders[] = {"apps.akameterindustries@gmail.com", usuario.getCorreo()};
-            mailService.send(senders, "Usuario creado: "+usuario.getNombre(), tokenVerifCorreo);
+            mailService.send(senders, "Usuario creado: "+usuario.getNombre(),
+                    "http://localhost:8080/api/v1/confirmacion/?correo="+usuario.getCorreo()+"&token="+tokenVerifCorreo);
         }
 
         return usuarioRepository.save(usuario);

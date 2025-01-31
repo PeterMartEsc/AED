@@ -26,8 +26,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Optional<Usuario> findByNombre(@Param("nombre") String nombre);
 
     @Query(
-            value="SELECT * FROM usuarios WHERE correo = :correo",
-            nativeQuery = true
+            value="SELECT u FROM Usuario as u WHERE u.correo = :correo",
+            nativeQuery = false
     ) //Native Query
     Optional<Usuario> findByCorreo(@Param("correo") String correo);
 

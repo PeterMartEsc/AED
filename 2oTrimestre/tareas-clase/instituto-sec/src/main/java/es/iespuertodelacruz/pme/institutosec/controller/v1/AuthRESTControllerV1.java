@@ -47,6 +47,7 @@ public class AuthRESTControllerV1 {
     public ResponseEntity<?> confirmation (@RequestParam String correo, @RequestParam String token){
 
         Usuario authUsuario = usuarioRepository.findByCorreo(correo).orElse(null);
+
         System.out.println("Estoy con el usuario "+authUsuario);
         if(authUsuario != null) {
             String tokenDB = authUsuario.getTokenVerificacion();

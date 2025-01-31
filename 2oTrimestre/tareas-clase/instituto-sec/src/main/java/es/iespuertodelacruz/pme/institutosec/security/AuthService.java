@@ -47,7 +47,7 @@ public class AuthService {
 		if( saved != null) {
 			String senders[] = {"apps.akameterindustries@gmail.com", email};
 			mailService.send(senders, "usuario creado: "+usuario.getNombre(),
-					"http://localhost:8080/api/v1/confirmacion?correo="+usuario.getCorreo()+"&token="+tokenVerifCorreo);
+					"http://localhost:8080/api/v1/confirmacion/?correo="+usuario.getCorreo()+"&token="+tokenVerifCorreo);
 			String generatedToken = jwtService.generateToken(usuario.getNombre(), usuario.getRol());
 			return generatedToken;
 		}else {
