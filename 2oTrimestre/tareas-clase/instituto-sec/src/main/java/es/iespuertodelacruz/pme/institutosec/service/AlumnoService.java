@@ -52,10 +52,9 @@ public class AlumnoService implements IServiceGeneric<Alumno, String> {
 			throw new RuntimeException("El alumno ha de tener fecha de nacimiento");
 		}
 
-		if(object.getImagen() == null){
+		/*if(object.getImagen() == null){
 			throw new RuntimeException("El alumno ha de tener una foto");
-			// TODO: foto por defecto
-		}
+		}*/
 
 		return alumnoRepository.save(object);
 	}

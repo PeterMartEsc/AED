@@ -28,7 +28,5 @@ Como hago para que compruebe si el usuario está verificado? Mando ese dato en e
 
 - APP REACT
 
-- Verificacion por enlace correo (tiene securizada la ruta, no funca)
-
-- TESTs (faltan de matriculas y usuarios)
+- Imagen subida?
 
