@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary;
+package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.document;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

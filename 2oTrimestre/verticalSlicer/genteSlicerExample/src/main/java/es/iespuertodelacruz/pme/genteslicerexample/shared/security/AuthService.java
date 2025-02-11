@@ -1,8 +1,5 @@
 package es.iespuertodelacruz.pme.genteslicerexample.shared.security;
 
-import es.iespuertodelacruz.pme.institutosec.entity.Usuario;
-import es.iespuertodelacruz.pme.institutosec.repository.UsuarioRepository;
-import es.iespuertodelacruz.pme.institutosec.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,11 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.UUID;
 
-
 @Service
 public class AuthService {
 	
-	
+	/*
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -70,6 +66,6 @@ public class AuthService {
 		}
 
 		return generatedToken;
-	}
+	}*/
 }
 

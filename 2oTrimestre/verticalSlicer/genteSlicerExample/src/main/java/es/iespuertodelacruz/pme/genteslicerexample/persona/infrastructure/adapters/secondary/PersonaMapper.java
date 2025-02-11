@@ -1,8 +1,8 @@
 package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary;
 
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.Persona;
+import es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.entity.PersonaEntity;
 
-public class PersonaEntityMapper {
+public class PersonaMapper {
 	
 	public PersonaEntity toPersistence(Persona p) {
 		return new PersonaEntity();

@@ -23,7 +23,7 @@ public class PersonaRESTController {
         //Persona saved = personaService.crear(p.getNombre(), p.getEdad());
         Persona saved = personaService(p);
 
-        Persona savedDTO = new PersonaDTO(saved.getId(), saved.getNombre(), saved.getEdad());
+        PersonaDTO savedDTO = new PersonaDTO(saved.getId(), saved.getNombre(), saved.getEdad());
         return ResponseEntity.ok(savedDTO);
     }
 

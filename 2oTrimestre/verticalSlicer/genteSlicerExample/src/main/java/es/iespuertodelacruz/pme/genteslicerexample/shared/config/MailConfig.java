@@ -3,8 +3,7 @@ package es.iespuertodelacruz.pme.genteslicerexample.shared.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 
 import java.util.Properties;
 
@@ -14,7 +13,7 @@ public class MailConfig {
 	@Value("${mail.from}") private String mailfrom;
 	@Value("${mail.password}") private String mailpassword;
 	
-	@Bean
+	/*@Bean
 	public JavaMailSender getJavaMailSender(){
 
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
@@ -31,5 +30,5 @@ public class MailConfig {
 		props.put("mail.smtp.starttls.enable", "true");
 
 		return sender;
-	}
+	}*/
 }

@@ -1,14 +1,14 @@
 package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.document;
 
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.Persona;
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.secondary.IPersonaRepository;
+import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.secondary.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class PersonaDocumentService implements IPersonaRepository {
+public class ProductoDocumentService implements IProductoRepository {
 
-    @Autowired IPersonaDocumentRepository personaDocumentRepository;
+    @Autowired
+    es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.document.IProductoDocumentRepository personaDocumentRepository;
 
     @Override
     public Persona save(Persona persona) {

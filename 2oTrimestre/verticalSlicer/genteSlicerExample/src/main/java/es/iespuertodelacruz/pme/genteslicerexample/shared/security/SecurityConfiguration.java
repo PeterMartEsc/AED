@@ -1,6 +1,6 @@
 package es.iespuertodelacruz.pme.genteslicerexample.shared.security;
 
-import es.iespuertodelacruz.pme.institutosec.security.JwtFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,14 +1,14 @@
-package es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.primary;
+package es.iespuertodelacruz.pme.genteslicerexample.producto.domain.port.primary;
+
+import es.iespuertodelacruz.pme.genteslicerexample.producto.domain.Producto;
 
 import java.util.List;
 
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.Persona;
+public interface IProductoService {
 
-public interface IPersonaService {
-
-	List<Persona> getAll();
+	List<Producto> getAll();
 
 	//No puede saber de fuera así que atributos
-	Persona crearPersona(String nombre, int edad, Integer id);
+	Producto crearProducto(String nombre, int stock, float precio);
 
 }

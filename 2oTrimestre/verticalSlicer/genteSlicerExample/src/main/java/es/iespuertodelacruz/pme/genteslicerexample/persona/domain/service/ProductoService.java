@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.Persona;
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.primary.IPersonaService;
-import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.secondary.IPersonaRepository;
+import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.primary.IProductoService;
+import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.port.secondary.IProductoRepository;
+import org.springframework.stereotype.Service;
 
-public class PersonaService implements IPersonaService{
+@Service
+public class ProductoService implements IProductoService {
 
-	@Autowired IPersonaRepository personaRepository;
+	@Autowired
+	IProductoRepository personaRepository;
 	
 	@Override
 	public List<Persona> getAll() {
