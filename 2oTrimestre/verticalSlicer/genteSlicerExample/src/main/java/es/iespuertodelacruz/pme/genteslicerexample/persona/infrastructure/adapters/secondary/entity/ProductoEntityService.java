@@ -1,7 +1,9 @@
-package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary;
+package es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import es.iespuertodelacruz.pme.genteslicerexample.persona.infrastructure.adapters.secondary.PersonaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import es.iespuertodelacruz.pme.genteslicerexample.persona.domain.Persona;
@@ -13,16 +15,16 @@ public class PersonaEntityService implements IPersonaRepository{
 	
 	@Override
 	public Persona save(Persona persona) {
-		PersonaEntityMapper mapper = new PersonaEntityMapper();
+		PersonaMapper mapper = new PersonaMapper();
 		PersonaEntity savedEntity = personaEntityRepository.save(mapper.toPersistence(persona));
 		return mapper.toDomain(savedEntity);
 	}
 
 	@Override
 	public List<Persona> all() {
-		PersonaEntityMapper mapper = new PersonaEntityMapper();
+		PersonaMapper mapper = new PersonaMapper();
 		List<PersonaEntity> peAll = personaEntityRepository.findAll();
-		return mapper;
+		return new ArrayList<>();
 	}
 
 }
