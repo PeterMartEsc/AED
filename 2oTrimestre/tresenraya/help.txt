@@ -1,0 +1,14 @@
+Partidas Online
+
+- Buscar partida
+
+    - Lista Partidas
+
+        - Partida
+
+    - 
+
+- Crear partida
+
+
+Juega uno, juega otro, juegan alternandose, uno gana - fin
