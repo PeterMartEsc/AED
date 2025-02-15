@@ -1,16 +1,11 @@
 package es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapters.secondary.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
-import es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapters.secondary.ProductoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+@Service
+public class UsuarioEntityService /*implements IProductoRepository*/ {
 
-import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.port.secondary.IProductoRepository;
-
-public class ProductoEntityService implements IProductoRepository {
-
-	@Autowired IPersonaEntityRepository personaEntityRepository;
+	/*@Autowired IPersonaEntityRepository personaEntityRepository;
 	
 	@Override
 	public Persona save(Persona persona) {
@@ -24,6 +19,6 @@ public class ProductoEntityService implements IProductoRepository {
 		ProductoMapper mapper = new ProductoMapper();
 		List<PersonaEntity> peAll = personaEntityRepository.findAll();
 		return new ArrayList<>();
-	}
+	}*/
 
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Api InstitutoSec", version = "v1"))
+@OpenAPIDefinition(info = @Info(title = "Api TresEnRaya", version = "v1"))
 public class SwaggerConfig{
 
 	@Bean

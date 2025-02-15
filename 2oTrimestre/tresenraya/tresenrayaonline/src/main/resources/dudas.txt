@@ -1,0 +1,1 @@
+donde pongo las etiquetas de @Service, @Repository etc
