@@ -22,6 +22,9 @@ public class UsuarioEntity implements Serializable {
 	@Column(length=100, nullable=false)
 	private String correo;
 
+	@Column(length=45, nullable=false)
+	private String rol;
+
 	public UsuarioEntity() {
 	}
 
@@ -55,5 +58,13 @@ public class UsuarioEntity implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 }

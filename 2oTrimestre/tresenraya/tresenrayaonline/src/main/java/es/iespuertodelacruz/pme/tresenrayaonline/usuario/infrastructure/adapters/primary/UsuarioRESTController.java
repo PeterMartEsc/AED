@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapters.primary;
 
+import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.Usuario;
 import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.port.primary.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,14 @@ public class UsuarioRESTController {
 	@Autowired
 	IUsuarioService usuarioService;
 	
-	@PostMapping("/login")
+	@PostMapping("/login/")
 	public ResponseEntity<?> login(@RequestBody String nombre, @RequestBody String password){
 		return ResponseEntity.ok("ok");
 	}
 
-	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody String nombre, @RequestBody String password){
-		return ResponseEntity.ok("ok");
+	@PostMapping("/register/")
+	public ResponseEntity<?> register(@RequestBody Usuario usuario){
+		String token = usuarioService.registrar(usuario.getNombre(), usuario.getPassword(), usuario.getCorreo());
+		return ResponseEntity.ok(token);
 	}
 }

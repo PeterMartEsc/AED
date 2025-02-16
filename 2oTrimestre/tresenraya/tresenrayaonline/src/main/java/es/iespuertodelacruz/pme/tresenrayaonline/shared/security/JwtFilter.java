@@ -41,10 +41,10 @@ public class JwtFilter extends OncePerRequestFilter {
 		String path = request.getRequestURI();
 
 		//TODO: estamos dejando pasar todas las rutas
-		if(1 == 1){
+		/*if(1 == 1){
 			filterChain.doFilter(request, response);
 			return;
-		}
+		}*/
 
         
     	
@@ -56,27 +56,28 @@ public class JwtFilter extends OncePerRequestFilter {
     	        					"/api/register", "/v3/",
     	        					"/websocket", "/index.html", "/api/v1"};*/
 
-		String rutasPermitidas[]= { "/",  "/index.html",
+		String rutasPermitidas[]= { /*"/",*/  "/index.html",
 									"/swagger-ui/", "/swagger-ui.html",
 									"/v3/api-docs/", "/swagger-resources/",
 									"/configuration/", "/swagger/",
 
 									"/v2/", "/v3/", "/webjars/",
-									"/websocket/", "/api/v1/"};
+									"/websocket/", "/api/v1/auth/"};
 
 		if (path.equals("/api/v1/confirmacion") || path.startsWith("/api/v1/confirmacion?")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
-
+		System.out.println("no ha entrado");
     	for (String ruta : rutasPermitidas) {
             if (path.startsWith(ruta)) {
                 // Permitir la solicitud sin autenticación
+				//System.out.println("entra por acá");
 				filterChain.doFilter(request, response);
                 return;
             }
         }
-
+		System.out.println("entro?????????????????????????????????");
     	//el token viene en un header Authorization
         String header = request.getHeader(authHeader);
         
