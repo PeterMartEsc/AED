@@ -1,12 +1,11 @@
 package es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.port.secondary;
 
 import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.Usuario;
-import org.springframework.stereotype.Repository;
 
 
 public interface IUsuarioRepository {
 	
 	Usuario register(Usuario usuario);
 
-	String login(Usuario usuario);
+	Usuario login(Usuario usuario);
 }
