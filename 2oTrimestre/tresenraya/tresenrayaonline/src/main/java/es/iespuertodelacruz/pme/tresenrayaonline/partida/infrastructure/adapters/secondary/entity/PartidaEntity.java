@@ -5,6 +5,7 @@ import es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapters
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name="partidas")
@@ -16,13 +17,13 @@ public class PartidaEntity implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "jugador1", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_jugador1"))
+    @JoinColumn(name = "jugador1")/*, referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_jugador1"))*/
     private UsuarioEntity jugador1;
 
     @ManyToOne
-    @JoinColumn(name = "jugador2", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_jugador2"))
+    @JoinColumn(name = "jugador2")/*, referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_jugador2"))*/
     private UsuarioEntity jugador2;
 
     @Lob
@@ -30,13 +31,13 @@ public class PartidaEntity implements Serializable {
     private String contenido;
 
     @ManyToOne
-    @JoinColumn(name = "turno", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_turno"))
+    @JoinColumn(name = "turno")/*, referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_turno"))*/
     private UsuarioEntity turno;
 
     @ManyToOne
-    @JoinColumn(name = "ganador", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_ganador"))
+    @JoinColumn(name = "ganador")/*, referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_ganador"))*/
     private UsuarioEntity ganador;
 
 
@@ -89,5 +90,18 @@ public class PartidaEntity implements Serializable {
 
     public void setGanador(UsuarioEntity ganador) {
         this.ganador = ganador;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PartidaEntity that = (PartidaEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

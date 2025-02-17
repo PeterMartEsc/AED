@@ -2,12 +2,22 @@ package es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain;
 
 public class Usuario {
 
+    Integer id;
+
     String nombre;
     String password;
     String correo;
     String rol;
 
     public Usuario() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -41,4 +51,6 @@ public class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+
 }

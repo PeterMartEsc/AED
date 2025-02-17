@@ -2,7 +2,10 @@ package es.iespuertodelacruz.pme.tresenrayaonline.partida.domain;
 
 import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.Usuario;
 
+import java.util.Objects;
+
 public class Partida {
+    Integer id;
     Usuario jugador1;
     Usuario jugador2;
     String contenido;
@@ -10,6 +13,27 @@ public class Partida {
     Usuario ganador;
 
     public Partida() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Partida partida = (Partida) o;
+        return Objects.equals(id, partida.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Usuario getJugador1() {

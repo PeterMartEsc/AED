@@ -25,8 +25,15 @@ public class PartidaService implements IPartidaService {
 
         Usuario usuarioByName = usuarioRepository.findByNombre("Pedro");
 
+        /*if(usuarioByName == null){
+            System.out.println("Esto es nulo ");
+        } else {
+            System.out.println(usuarioByName.getNombre() + usuarioByName.getCorreo());
+        }*/
+
         Partida partida = new Partida();
         partida.setJugador1(usuarioByName);
+        System.out.println(partida.getJugador1().getNombre());
         // partida.setJugador2(null);
 
         String[][] contenido = {
@@ -80,7 +87,7 @@ public class PartidaService implements IPartidaService {
         Partida partidaJugada = partidaRepository.findById(idPartida);
         String signo = "";
 
-        if(partidaJugada.getTurno() == partidaJugada.getJugador1()) {
+        if(partidaJugada.getTurno().getNombre().equals(partidaJugada.getJugador1().getNombre())) {
             signo = "X";
         } else {
             signo = "0";
@@ -109,12 +116,16 @@ public class PartidaService implements IPartidaService {
         }
 
         partidaJugada.setContenido(contenidoString);
-        partidaJugada.setTurno(partidaJugada.getTurno() == partidaJugada.getJugador1() ?
+        partidaJugada.setTurno(partidaJugada.getTurno().getNombre().equals(partidaJugada.getJugador1().getNombre()) ?
                 partidaJugada.getJugador2() : partidaJugada.getJugador1());
 
         Partida partidaActualizada = partidaRepository.savePartida(partidaJugada);
 
-        return false;
+        if(partidaActualizada != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean comprobarGanador(String[][] contenidoJson){
@@ -123,16 +134,16 @@ public class PartidaService implements IPartidaService {
             if (!contenidoJson[i][0].equals(" ") && contenidoJson[i][0].equals(contenidoJson[i][1]) && contenidoJson[i][1].equals(contenidoJson[i][2])) {
                 return true;
             }
-            if (contenidoJson[0][i].equals(" ") && contenidoJson[0][i].equals(contenidoJson[1][i]) && contenidoJson[1][i].equals(contenidoJson[2][i])) {
+            if (!contenidoJson[0][i].equals(" ") && contenidoJson[0][i].equals(contenidoJson[1][i]) && contenidoJson[1][i].equals(contenidoJson[2][i])) {
                 return true;
             }
         }
 
         // Revisa las diagonales
-        if (contenidoJson[0][0].equals(" ") && contenidoJson[0][0].equals(contenidoJson[1][1])  && contenidoJson[1][1].equals(contenidoJson[2][2]) ) {
+        if (!contenidoJson[0][0].equals(" ") && contenidoJson[0][0].equals(contenidoJson[1][1])  && contenidoJson[1][1].equals(contenidoJson[2][2]) ) {
             return true;
         }
-        if (contenidoJson[0][2].equals(" ") && contenidoJson[0][2].equals(contenidoJson[1][1])  && contenidoJson[1][1].equals(contenidoJson[2][0]) ) {
+        if (!contenidoJson[0][2].equals(" ") && contenidoJson[0][2].equals(contenidoJson[1][1])  && contenidoJson[1][1].equals(contenidoJson[2][0]) ) {
             return true;
         }
 

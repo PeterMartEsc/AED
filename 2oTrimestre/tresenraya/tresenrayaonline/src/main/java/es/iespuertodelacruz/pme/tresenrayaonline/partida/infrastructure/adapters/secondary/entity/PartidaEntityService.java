@@ -19,7 +19,13 @@ public class PartidaEntityService implements IPartidaRepository {
     public Partida savePartida(Partida partida) {
 
         PartidaEntity entity = PartidaMapper.INSTANCE.partidaToEntity(partida);
-        PartidaEntity savedEntity = partidaEntityRepository.save(entity);
+        PartidaEntity savedEntity;
+        try{
+            savedEntity = partidaEntityRepository.save(entity);
+        } catch (Error e){
+            throw new RuntimeException("Error "+e);
+        }
+
         Partida partidaNotEntity = PartidaMapper.INSTANCE.entityToPartida(savedEntity);
 
         return partidaNotEntity;

@@ -48,19 +48,6 @@ public class UsuarioEntityService implements IUsuarioRepository {
 
         return usuario;
     }
-	
-	/*@Override
-	public Persona save(Persona persona) {
-		ProductoMapper mapper = new ProductoMapper();
-		PersonaEntity savedEntityEntity = personaEntityRepository.save(mapper.toPersistence(persona));
-		return mapper.toDomain(savedEntityEntity);
-	}
 
-	@Override
-	public List<Persona> all() {
-		ProductoMapper mapper = new ProductoMapper();
-		List<PersonaEntity> peAll = personaEntityRepository.findAll();
-		return new ArrayList<>();
-	}*/
 
 }
