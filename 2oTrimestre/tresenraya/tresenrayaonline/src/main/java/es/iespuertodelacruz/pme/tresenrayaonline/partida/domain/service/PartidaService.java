@@ -23,12 +23,10 @@ public class PartidaService implements IPartidaService {
     @Override
     public boolean crearPartida(String creadorNombre) {
 
-        Usuario usuarioByName = usuarioRepository.findByNombre(creadorNombre);
-        System.out.println(usuarioByName.getNombre());
+        Usuario usuarioByName = usuarioRepository.findByNombre("Pedro");
 
         Partida partida = new Partida();
         partida.setJugador1(usuarioByName);
-
         // partida.setJugador2(null);
 
         String[][] contenido = {
@@ -36,7 +34,6 @@ public class PartidaService implements IPartidaService {
                 {" ", " ", " "},
                 {" ", " ", " "}
         };
-
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString;
 
@@ -47,11 +44,9 @@ public class PartidaService implements IPartidaService {
         }
 
         partida.setContenido(jsonString);
-        // partida.setTurno(null);
-        // partida.setGanador(null);
-
         Partida partidaSaved = partidaRepository.savePartida(partida);
-        System.out.println(partidaSaved.getJugador1() +" "+ partidaSaved.getJugador2());
+
+
         if(partidaSaved != null){
             return true;
         } else {

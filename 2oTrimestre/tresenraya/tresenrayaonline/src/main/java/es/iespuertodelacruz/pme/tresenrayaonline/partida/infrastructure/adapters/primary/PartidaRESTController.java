@@ -1,10 +1,9 @@
 package es.iespuertodelacruz.pme.tresenrayaonline.partida.infrastructure.adapters.primary;
 
+import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.dto.CrearPartidaDto;
 import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.dto.RealizarJugadaDto;
 import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.dto.UnirsePartidaDto;
 import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.port.primary.IPartidaService;
-import es.iespuertodelacruz.pme.tresenrayaonline.partida.infrastructure.adapters.secondary.entity.IPartidaEntityRepository;
-import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.dto.LoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +17,9 @@ public class PartidaRESTController {
     IPartidaService partidaService;
 
     @PostMapping("/crear")
-    public ResponseEntity<?> crearPartida(@RequestBody String creador){
+    public ResponseEntity<?> crearPartida(@RequestBody CrearPartidaDto dto){
 
-        boolean creada = partidaService.crearPartida(creador);
+        boolean creada = partidaService.crearPartida(dto.nombreCreador());
 
         if(creada){
             return ResponseEntity.ok("Partida creada correctamente");

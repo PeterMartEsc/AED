@@ -5,6 +5,7 @@ import es.iespuertodelacruz.pme.tresenrayaonline.usuario.domain.port.secondary.I
 import es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapters.secondary.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsuarioEntityService implements IUsuarioRepository {
@@ -13,6 +14,7 @@ public class UsuarioEntityService implements IUsuarioRepository {
     IUsuarioEntityRepository usuarioEntityRepository;
 
     @Override
+    @Transactional
     public Usuario register(Usuario usuario) {
         //Map to usuarioEntity
         UsuarioEntity entity = UsuarioMapper.INSTANCE.usuarioToEntity(usuario);
@@ -36,8 +38,12 @@ public class UsuarioEntityService implements IUsuarioRepository {
     }
 
     @Override
+    @Transactional
     public Usuario findByNombre(String nombre) {
         UsuarioEntity entity = usuarioEntityRepository.findByNombre(nombre);
+        /*if(entity == null){
+            System.out.println("El usuario entity tmb es nulo "+nombre);
+        }*/
         Usuario usuario = UsuarioMapper.INSTANCE.entityToUsuario(entity);
 
         return usuario;

@@ -5,6 +5,7 @@ import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.port.secondary.I
 import es.iespuertodelacruz.pme.tresenrayaonline.partida.infrastructure.adapters.PartidaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -14,6 +15,7 @@ public class PartidaEntityService implements IPartidaRepository {
     IPartidaEntityRepository partidaEntityRepository;
 
     @Override
+    @Transactional
     public Partida savePartida(Partida partida) {
 
         PartidaEntity entity = PartidaMapper.INSTANCE.partidaToEntity(partida);

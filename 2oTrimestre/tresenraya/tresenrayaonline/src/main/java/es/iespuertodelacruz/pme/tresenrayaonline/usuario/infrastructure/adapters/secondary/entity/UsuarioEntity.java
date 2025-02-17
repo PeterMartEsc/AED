@@ -3,6 +3,8 @@ package es.iespuertodelacruz.pme.tresenrayaonline.usuario.infrastructure.adapter
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @Entity
 @Table(name="usuarios")
