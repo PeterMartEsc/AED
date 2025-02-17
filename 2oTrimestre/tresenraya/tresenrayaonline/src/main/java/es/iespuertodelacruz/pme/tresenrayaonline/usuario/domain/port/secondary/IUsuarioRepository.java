@@ -8,4 +8,6 @@ public interface IUsuarioRepository {
 	Usuario register(Usuario usuario);
 
 	Usuario login(Usuario usuario);
+
+	Usuario findByNombre(String nombre);
 }

@@ -34,6 +34,14 @@ public class UsuarioEntityService implements IUsuarioRepository {
 
         return usuarioNotEntity;
     }
+
+    @Override
+    public Usuario findByNombre(String nombre) {
+        UsuarioEntity entity = usuarioEntityRepository.findByNombre(nombre);
+        Usuario usuario = UsuarioMapper.INSTANCE.entityToUsuario(entity);
+
+        return usuario;
+    }
 	
 	/*@Override
 	public Persona save(Persona persona) {
