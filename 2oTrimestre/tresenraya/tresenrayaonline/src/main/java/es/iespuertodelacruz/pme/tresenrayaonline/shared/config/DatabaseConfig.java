@@ -20,7 +20,7 @@ public class DatabaseConfig {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/tresenraya?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
         dataSource.setUsername("root");
-        dataSource.setPassword("1q2w3e4r");
+        dataSource.setPassword("");
         return dataSource;
     }
     @Bean

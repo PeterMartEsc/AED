@@ -3,6 +3,7 @@ package es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import es.iespuertodelacruz.pme.tresenrayaonline.partida.domain.Partida;
@@ -21,9 +22,9 @@ public class PartidaService implements IPartidaService {
     @Autowired IUsuarioRepository usuarioRepository;
 
     @Override
-    public boolean crearPartida(String creadorNombre) {
+    public Partida crearPartida(String creadorNombre) {
 
-        Usuario usuarioByName = usuarioRepository.findByNombre("Pedro");
+        Usuario usuarioByName = usuarioRepository.findByNombre(creadorNombre);
 
         /*if(usuarioByName == null){
             System.out.println("Esto es nulo ");
@@ -33,7 +34,7 @@ public class PartidaService implements IPartidaService {
 
         Partida partida = new Partida();
         partida.setJugador1(usuarioByName);
-        System.out.println(partida.getJugador1().getNombre());
+        //System.out.println(partida.getJugador1().getNombre());
         // partida.setJugador2(null);
 
         String[][] contenido = {
@@ -53,12 +54,7 @@ public class PartidaService implements IPartidaService {
         partida.setContenido(jsonString);
         Partida partidaSaved = partidaRepository.savePartida(partida);
 
-
-        if(partidaSaved != null){
-            return true;
-        } else {
-            return false;
-        }
+        return partidaSaved;
 
     }
 
@@ -84,6 +80,7 @@ public class PartidaService implements IPartidaService {
 
     @Override
     public boolean realizarMovimiento(int idPartida, int posicionX, int posicionY) {
+        //System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEY "+idPartida);
         Partida partidaJugada = partidaRepository.findById(idPartida);
         String signo = "";
 
@@ -126,6 +123,16 @@ public class PartidaService implements IPartidaService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Partida buscarPartidaById(int id) {
+        return partidaRepository.findById(id);
+    }
+
+    @Override
+    public List<Partida> obtenerPartidas() {
+        return partidaRepository.findAll();
     }
 
     private boolean comprobarGanador(String[][] contenidoJson){

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 public class PartidaEntityService implements IPartidaRepository {
@@ -43,5 +46,20 @@ public class PartidaEntityService implements IPartidaRepository {
         Partida partidaNotEntity = PartidaMapper.INSTANCE.entityToPartida(partidaEntity);
 
         return partidaNotEntity;
+    }
+
+    @Override
+    public List<Partida> findAll() {
+
+        List<PartidaEntity> entities = partidaEntityRepository.findAll();
+
+        List<Partida> partidasNotEntity = new ArrayList<>();
+
+        for(PartidaEntity entity : entities){
+            Partida partidaNotEntity = PartidaMapper.INSTANCE.entityToPartida(entity);
+            partidasNotEntity.add(partidaNotEntity);
+        }
+
+        return partidasNotEntity;
     }
 }

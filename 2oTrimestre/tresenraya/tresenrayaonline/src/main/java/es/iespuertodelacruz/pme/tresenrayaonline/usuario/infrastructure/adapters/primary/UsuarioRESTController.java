@@ -16,14 +16,14 @@ public class UsuarioRESTController {
 	@Autowired
 	IUsuarioService usuarioService;
 	
-	@PostMapping("/login/")
+	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDto dto){
 		String token = usuarioService.logear(dto.nombre(), dto.password());
 
 		return ResponseEntity.ok(token);
 	}
 
-	@PostMapping("/register/")
+	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody RegisterDto dto){
 
 		String token = usuarioService.registrar(dto.nombre(), dto.password(), dto.correo());
